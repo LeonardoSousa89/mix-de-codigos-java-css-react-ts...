@@ -1,0 +1,2439 @@
+		========================================
+		flash-cards para fixar durante a semana:
+		========================================
+
+
+	*leia os códigos e interprete o ( algoritmo ) implicíto em cada código*
+
+java: (stream)
+
+
+List <String> names = Arrays.asList("Carol", "Bianca","Renata","Rebecca");
+		
+Stream<String> st4 = names.stream().filter(e -> e.charAt(0) == 'R');
+
+System.out.println(Arrays.toString(st4.toArray()));
+
+================================================================================
+java: (predicado:lambda)
+
+
+List<People> people = new ArrayList<>();
+		
+	people.add(new People("Helena Boham Carter", "Brooklyn, NY", 53));
+	people.add(new People("Tim Burton", "Brooklyn, NY", 62));
+	people.add(new People("Joahny Depp", "San Francisco, CA", 63));
+	people.add(new People("Keanu Reeves", "5th Avenue,NY", 59));
+	
+
+	people.removeIf(a -> a.getAge() <= 60);
+		
+	for(People person: people) {
+	   System.out.println(person);
+	}
+================================================================================
+java: (jdbc connection)
+classe principal 
+
+
+
+''___________________________________________________________________________
+package Programa:
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import Banco.BaseDeDados;
+import Banco.Excecao;
+public class Aplicacao {
+
+	public static void main(String[] args) {
+		
+		Connection conexao = BaseDeDados.abraConexao();
+		ResultSet rs =null;
+		Statement st = null;
+		
+		try {
+			
+			conexao = BaseDeDados.abraConexao();
+			
+			st = conexao.createStatement();
+			rs = st.executeQuery("SELECT * FROM client");
+			
+			while(rs.next()) {
+				System.out.println(rs.getString("name") + "," + 
+
+rs.getString("email"));
+			}
+			
+		}catch(SQLException e) {
+			throw new Excecao(e.getMessage());
+		}finally {
+			BaseDeDados.closeRs(rs);
+			BaseDeDados.closeSt(st);
+		}
+		
+	}
+}
+____________________________________________________________________________''
+
+
+classe de configuração:
+
+''___________________________________________________________________________
+
+
+package Banco;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+public class BaseDeDados {
+
+	private static Connection conexao = null;
+	
+	public static Connection abraConexao() {
+	    try {
+		Properties propriedade = propriedades();
+		String rede = propriedade.getProperty("dburl");
+		conexao = DriverManager.getConnection(rede, propriedade);
+			}catch(SQLException e) {
+				throw new Excecao(e.getMessage());
+				}
+				return conexao;
+			}
+		
+	
+		public static void fechaConexao() {
+			try {
+				if(conexao != null) {
+					conexao.close();
+					}
+				}catch(SQLException e) {
+					throw new Excecao(e.getMessage());
+				}
+			}
+	
+	
+		public static Properties propriedades() {
+			try {
+				FileInputStream dados = new FileInputStream
+
+("db.properties");
+				Properties propriedade = new Properties();
+					propriedade.load(dados);
+					return propriedade;
+				}catch(IOException e) {
+					throw new Excecao(e.getMessage());
+				}
+			}
+			
+		public static void closeRs(ResultSet rs) {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException e) {
+					throw new Excecao(e.getMessage());
+					}
+				}	
+			}
+			
+		public static void closeSt(Statement st) {
+				if(st != null) {
+					try {
+					st.close();
+				}catch(SQLException e) {
+					throw new Excecao(e.getMessage());
+					}
+				}	
+			}
+			
+			
+			
+	}
+______________________________________________________________________________''
+=================================================================================
+html/css/js: (jquery)
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+    $('button').on('click',function(){
+        let div = $('div').append('<ul>clicou</ul>')
+    })
+    
+    $('input').on('mousemove',function(){
+        let span = $('span').append('<p>passou o mouse</p>')
+    })
+    $(document).ready(function(){
+        $('#el').hide(1000).show(4000)
+        
+        /*kidding*/
+        $('#el').on('mouseup',function(){
+            $(this).append('<p>passed</p>')
+        })
+    })
+</script>
+=================================================================================
+html/css/js: (node-express)
+
+  
+const port = 3002
+
+const { uuid } = require('uuidv4')
+
+const express = require('express')
+const app = express()
+
+app.use(express.json())
+app.use(express.urlencoded({
+    extended:true
+}))
+
+
+
+
+/**valores a receber */
+const projects = []
+
+
+
+
+app.get('/projects',(request,response)=>{
+    /**valores obtidos*/
+   return response.json(projects)
+})
+
+
+
+app.post('/projects',(request,response)=>{
+  /**desestruturação de valores obtidos no corpo da requisição*/  
+  const {title, owner} = request.body
+
+  /**id criado automaticamente para cada objeto no corpo da requisição*/
+  const id = uuid()
+
+  /**dados  para inserção no corpo da requisição*/  
+  const project = {
+      id,
+      title,
+      owner
+  }
+  /**obs*  como
+   * a chave e os valores 
+   * são os mesmos, não há
+   * necessidade de replicar os nomes 
+   */
+
+  /*adição dos dados obtidos no corpo da requisição dentro do array*/  
+  projects.push(project)
+
+  /**retorno da resposta como json */
+  return response.json(project)
+})
+
+
+
+
+app.put('/projects/:id',(request,response)=>{
+    /*id obtido como parametro no corpo da requisição*/
+   const { id } = request.params
+   
+   /**desestruturação de valores obtidos no corpo da requisição*/  
+   const {  title, owner  } = request.body
+   
+   /**metodo de comparação de objetos pelo id*/
+   const projectIndex = projects.findIndex(project => project.id === id)
+   if(projectIndex < 0){
+       return response.status(400).json({ error:'project not found' })
+   }
+   
+   /**objeto a ser modificado*/
+   const project ={
+            id,
+            title,
+            owner
+   }
+
+   /**posição do objeto a partir da consulta, a ser modificado*/
+   projects[projectIndex] = project
+
+   /**retorno do objeto alterado */
+   return response.json(project)
+})
+
+
+
+
+
+app.delete('/projects/:id',(request,response)=>{
+   /**id a ser encontrado como parametro */
+   const { id } = request.params
+   
+
+    /**metodo de comparação de objetos pelo id*/
+    const projectIndex = projects.findIndex(project => project.id === id)
+    if(projectIndex < 0){
+    return response.status(400).json({ error:'project not found' })
+    }
+
+    /**metodo de exclusão pelo indice no array */
+    projects.splice(projectIndex , 1)
+    return response.status(204).json([])
+})
+
+
+
+
+
+app.listen(port,() =>{
+    console.log(`online into port: ${port}`)
+}) 
+
+=================================================================================
+html/css/js: (React)
+
+
+                  === src/components/db ===
+
+const VAREJO = '_VAREJO'
+
+  export default class {
+
+    naTabela = () => {
+        const varejos = localStorage.getItem(VAREJO)
+        return JSON.parse(varejos)
+    }
+
+    salvar = (varejo) =>  {
+          let varejos = localStorage.getItem(VAREJO)
+          if(!varejos){
+            varejos = []
+          }else{
+            varejos = JSON.parse(varejos)
+          }
+
+          varejos.push(varejo)
+          localStorage.setItem(VAREJO, JSON.stringify(varejos))
+    }
+  }
+
+
+
+
+		    === src/components/consulta ===
+
+
+import React , {Component} from 'react'
+import Db from './db'
+
+export default class consulta extends Component{
+        constructor(){
+          super()
+          this.Banco = new Db()
+        }
+
+        state = {
+          varejo : []
+        }
+
+        componentDidMount = () =>{
+          const varejo = this.Banco.naTabela()
+          this.setState({
+                varejo
+          })
+          }
+
+          render(){
+              return(
+                  <React.Fragment>
+                        <h2>Pedidos</h2>
+                        <table border="2px">
+                            <thead>
+                                <tr>
+                                    <th>nome</th>
+                                    <th>idade</th>
+                                    <th>pedido</th>
+                                    <th>preço</th>
+                                    <th>quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {
+                                this.state.varejo.map(  (e, index)=>{
+                                    return(
+                                         <tr key={index}>
+                                            <th>{e.nome}</th>
+                                            <th>{e.idade}</th>
+                                            <th>{e.pedido}</th>
+                                            <th>{e.preço}</th>
+                                            <th>{e.quantidade}</th>
+                                    </tr>
+                                    )})
+                              }
+                            </tbody>
+                        </table>
+                  </React.Fragment>
+              )      
+          }
+}
+
+
+
+
+
+
+			 	=== src/App ===
+
+import React ,{Component} from 'react'
+
+import DB from '../src/components/db' 
+import Tabela from '../src/components/consulta' 
+
+
+export default class App extends Component{
+    constructor(){
+      super()
+      this.Banco = new DB()
+    }
+    
+    state = {
+      nome : '',
+      idade : 0,
+      pedido : [],
+      preco: 0,
+      quantidade : [],
+      
+    }
+
+    limpar = () =>  {
+    this.setState({
+      nome : '',
+      idade : 0,
+      preco: 0   
+      })
+    }
+
+    enviar = (e) =>  {
+      let valor = e.target.value
+      let name  = e.target.name
+      this.setState({
+        [name] : valor
+      })
+    }
+
+    requisicao = () =>  {
+      let salvar = {
+        nome : this.state.nome,
+        idade : this.state.idade,
+        pedido : this.state.pedido,
+        preco: this.state.preco,
+        quantidade : this.state.quantidade,
+      }
+      this.Banco.salvar(salvar)
+    }
+
+      render(){
+          return(
+              <div>
+              <h2>Bob's&copy;</h2>
+                  <form>
+                      <label>nome: *</label>
+                      <input 
+                        name="nome"
+                        type="text"
+                        placeholder="Gentival Andrade"
+                        value={this.state.nome}
+                        onChange={this.enviar}/>
+                      <br/>
+
+                      <label>idade: *</label>
+                      <input 
+                        name="idade"
+                        type="number"
+                        value={this.state.idade}
+                        onChange={this.enviar}/>
+                      <br/>
+
+                      <label>pedido: *</label>
+                      <select
+                        name="pedido"
+                        value={this.state.pedido}
+                        onChange={this.enviar}>
+                          <option>pizza</option>
+                          <option>hamburguer</option>
+                          <option>misto</option>
+                          <option>torta</option>
+                          <option>cachorro-quente</option>
+                          <option>refrigerante</option>
+                          <option>suco</option>
+                      </select>
+                      <br/>
+                      <br/>
+                            <br/>
+
+                      <label>preço: *</label>
+                      <input 
+                        name="preco"
+                        type="number"
+                        value={this.state.preco}
+                        onChange={this.enviar}/>
+                      <br/>
+                        <br/>
+                          <br/>
+
+                      <label>quantidade: *</label>
+                      <select
+                        name="quantidade"
+                        value={this.state.quantidade}
+                        onChange={this.enviar}>
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                          <option>10</option>
+                      </select>
+                      <br/>
+                      <br/>
+                       <button onClick={this.requisicao}>salvar</button>
+                       <button onClick={this.limpar}>limpar</button>
+                  </form>
+
+                      <br/>
+                      <br/>
+                      <br/>
+                      <Tabela/>
+              </div>
+          )
+      }
+}
+================================================================================
+html/css/js: (animacao-css)
+
+css
+''_____________________________________________________________________________
+body{
+ 
+    animation: grade 25s ease infinite;
+    background: linear-gradient(97deg, red 20%, gold 50%,blue 15%,pink 15%) no-repeat;
+    background-size: 650% 650%;
+ 
+}
+.title{
+    color: white;
+    font-size: 7vh;
+    font-family: fantasy;
+    display: flex;
+    justify-content: center;
+    margin-top: 15vh;
+}
+#st{
+    color:goldenrod;
+}
+
+@keyframes grade{
+
+    0%{
+        background-position: 0 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0 50%;
+    }
+}
+_______________________________________________________________________________''
+
+html
+''_____________________________________________________________________________
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Animation&copy;</title>
+    <link rel="stylesheet" href="./anima.css">
+</head>
+<body>
+    <div class="conteiner">
+        <h1 class="title">
+            Animation Studies<b id="st">&copy;</b>
+        </h1>
+    </div>
+</body>
+</html>
+_______________________________________________________________________________''
+
+================================================================================
+html/css/js: (React-firebase)
+
+
+
+''_____________________________________________________________________________
+import React,{Component} from 'react'
+import firebase from 'firebase'
+
+import './Crud.css'
+
+
+
+
+
+export default class Crud extends Component {
+
+
+
+
+
+    constructor(props){
+      super(props)
+
+          this.state = {
+            token: '...carregando',
+            name: '...nome aqui',
+            age: 12,
+            novoInput:'',
+            tokenInput: '',
+            nameInput:'',
+            ageInput:'',
+            tokenInputAltered: '',
+            nameInputAltered:'',
+            ageInputAltered:'',
+            tokenInputAltered2: '',
+            nameInputAltered2:'',
+            ageInputAltered2:'',
+            novoInputDelete:'',
+            tokenInputDelete:'',
+            nameInputDelete:'',
+            ageInputDelete:'',
+            tokenInputCad:'',
+            nameInputCad:'',
+            ageInputCad:'',
+            sexInputCad:''
+          }
+
+        
+          // Your web app's Firebase configuration
+          let firebaseConfig = {
+            apiKey: "AIzaSyB-Lygv2OoqG2-zGf4U7OcqqLSDX4Mjlow",
+            authDomain: "crud-react-bdfde.firebaseapp.com",
+            projectId: "crud-react-bdfde",
+            storageBucket: "crud-react-bdfde.appspot.com",
+            messagingSenderId: "951291156549",
+            appId: "1:951291156549:web:2709a4893006ff254beb2c"
+          }; 
+
+          this.altera = this.altera.bind(this);
+          this.alteraCondicionado = this.alteraCondicionado.bind(this);
+          this.alteraCondicionado2 = this.alteraCondicionado2.bind(this);
+          //this.inseriNovo = this.inseriNovo.bind(this);
+          this.limpaAlteraCondicionado2 =  this.limpaAlteraCondicionado2.bind(this);
+          this. deleteElementToken = this.deleteElementToken.bind(this);
+          this. limpaDeleteElement = this. limpaDeleteElement.bind(this);
+          this.cadastro = this.cadastro.bind(this); 
+          this.limpaCadastro = this.limpaCadastro.bind(this);
+
+
+          //initialize firebase  
+            if(!firebase.apps.length){
+              firebase.initializeApp(firebaseConfig);
+          }     
+
+
+
+
+
+
+
+
+       
+         /**  olheiro  em tempo real*/
+         /*
+         
+          firebase.database().ref('token').on('value', (snapshot)  =>{
+            let state = this.state
+            state.token = snapshot.val()
+            this.setState(state)
+          })
+         
+         */
+
+           
+         /**  olheiro  de uma única mudança */
+          firebase.database().ref('token').once('value').then((snapshot)=>{
+            let state = this.state;
+            state.token = snapshot.val();
+            this.setState(state);
+          })
+
+         /*
+          firebase.database().ref('usuarios').on('value',(snapshot)=>{
+            let state = this.state
+            state.name = snapshot.val()
+            this.setState(state)
+          })
+          firebase.database().ref('usuarios').on('value',(snapshot)=>{
+            let state = this.state
+            state.age = snapshot.val()
+            this.setState(state)
+          })
+        */    
+    }
+ 
+
+
+
+    altera = (e) =>{
+        firebase.database().ref('token').set(this.state.tokenInput);
+        firebase.database().ref('name').set(this.state.nameInput);
+        firebase.database().ref('age').set(this.state.ageInput);
+        
+        e.preventDefault();
+    }
+
+
+
+
+
+    alteraCondicionado = (e) =>{
+      firebase.database().ref('usuarios').child(1).child('token').set
+
+(this.state.tokenInputAltered);
+      firebase.database().ref('usuarios').child(1).child('name').set
+
+(this.state.nameInputAltered);
+      firebase.database().ref('usuarios').child(1).child('age').set
+
+(this.state.ageInputAltered);
+
+      e.preventDefault();
+    }
+
+
+
+
+
+   limpaAlteraCondicionado = () =>{
+
+   }
+
+
+
+
+
+
+    alteraCondicionado2 = (e) =>{
+      firebase.database().ref('clientes').child(1).child('token').set
+
+(this.state.tokenInputAltered2);
+      firebase.database().ref('clientes').child(1).child('name').set
+
+(this.state.nameInputAltered2);
+      firebase.database().ref('clientes').child(1).child('age').set
+
+(this.state.ageInputAltered2);
+      firebase.database().ref('clientes').child(1).child('sex').set(this.state.novoInput);
+
+      e.preventDefault();
+    }
+
+
+
+
+
+    limpaAlteraCondicionado2 = (e) => {
+      this.setState({
+        novoInput:'',
+        tokenInputAltered2: '',
+        nameInputAltered2:'',
+        ageInputAltered2:'',
+      })
+      e.preventDefault();
+    }
+
+
+
+
+
+    deleteElementToken = (e) =>   {
+      firebase.database().ref('clientes2').child(4).child('token').remove();
+
+      e.preventDefault();
+    }
+    deleteElementName = (e) =>{
+        firebase.database().ref('clientes2').child(4).child('name').remove();
+
+        e.preventDefault();
+    }
+    deleteElementAge = (e) => {
+      firebase.database().ref('clientes2').child('4').child('age').remove();
+
+      e.preventDefault();
+    }
+    deleteElementNovoInput = (e) =>{
+      firebase.database().ref('clientes2').child('4').child('sex').remove();
+
+      e.preventDefault();
+    }
+
+
+
+
+
+
+
+    limpaDeleteElement = (e) =>{
+      this.setState({
+        novoInputDelete:'',
+        tokenInputDelete: '',
+        nameInputDelete:'',
+        ageInputDelete:'',
+      })
+
+      e.preventDefault();
+    } 
+
+
+
+
+
+    cadastro = (e) => {
+      let cadastro = firebase.database().ref('cadastro');
+      let chave = cadastro.push().key;
+
+      cadastro.child(chave).set({
+        token:this.state.tokenInputCad,
+        name:this.state.nameInputCad,
+        age:this.state.ageInputCad,
+        sex:this.state.ageInputCad
+      });
+
+      e.preventDefault();
+    }
+
+    limpaCadastro = (e) =>{
+      this.setState({
+        tokenInputCad:'',
+        nameInputCad:'',
+        ageInputCad:'',
+        sexInputCad:''
+      })
+
+      e.preventDefault();
+    }
+
+
+
+    render(){
+
+      
+        const { token, name , age,  
+          tokenInput,
+          nameInput,
+          ageInput,
+          tokenInputAltered,
+          nameInputAltered,
+          ageInputAltered ,
+          tokenInputAltered2,
+          nameInputAltered2,
+          ageInputAltered2,
+          tokenInputDelete,
+          nameInputDelete,
+          ageInputDelete,
+          tokenInputCad,
+          nameInputCad,
+          ageInputCad,
+          sexInputCad
+         } = this.state;
+        
+        
+
+
+
+        return (
+
+
+
+          <div className="crud">
+
+              <h1>Exercicio de CRUD em REACT.JS&copy; + FIREBASE&trade;</h1>
+              <h1> inseri e altera </h1>
+
+            <form onSubmit={this.altera}>
+                <input 
+                 placeholder="token"
+                  type="text"
+                  value={this.state.tokenInput}
+                  onChange={(e) => this.setState({tokenInput: e.target.value})}
+                 />
+                  
+                  <input 
+                  placeholder="nome"
+                  type="text"
+                  value={this.state.nameInput}
+                  onChange={(e) => this.setState({nameInput: e.target.value})}
+                 />
+
+                 <input 
+                  placeholder="idade"
+                  type="number"
+                  value={this.state.ageInput}
+                  onChange={(e) => this.setState({ageInput: e.target.value})}
+                 />
+
+                 <button type="submit">altera</button>
+            </form>
+
+            <h3>token:  { tokenInput }</h3>
+            <h3>nome:   { nameInput}</h3>
+            <h3>idade:  { ageInput }</h3>
+            <hr/>
+
+
+
+
+
+
+
+
+
+
+
+              
+            <h1>inseri e altera condicionado + inseri novo atributo </h1>
+
+            <form onSubmit={this.alteraCondicionado}>
+                <input 
+                  placeholder="token"
+                  type="text"
+                  value={this.state.tokenInputAltered}
+                  onChange={(e) => this.setState({tokenInputAltered: e.target.value})}
+                 />
+                  
+                  <input 
+                  placeholder="nome"
+                  type="text"
+                  value={this.state.nameInputAltered}
+                  onChange={(e) => this.setState({nameInputAltered: e.target.value})}
+                 />
+
+                 <input 
+                  placeholder="idade"
+                  type="number"
+                  value={this.state.ageInputAltered}
+                  onChange={(e) => this.setState({ageInputAltered: e.target.value})}
+                 />
+
+                 <button type="submit">altera condicionado</button>
+            </form>
+
+            <h3>token:  { tokenInputAltered }</h3>
+            <h3>nome:   { nameInputAltered }</h3>
+            <h3>idade:  { ageInputAltered  }</h3>
+          
+            <hr/>
+          
+
+
+
+
+
+
+
+
+
+          
+            <h1>inseri e altera condicionado2</h1>
+
+          <form onSubmit={this.alteraCondicionado2}>
+              <input 
+                placeholder="token"
+                type="text"
+                value={this.state.tokenInputAltered2}
+                onChange={(e) => this.setState({tokenInputAltered2: e.target.value})}
+              />
+                
+                <input 
+                placeholder="nome"
+                type="text"
+                value={this.state.nameInputAltered2}
+                onChange={(e) => this.setState({nameInputAltered2: e.target.value})}
+              />
+
+              <input 
+                placeholder="idade"
+                type="number"
+                value={this.state.ageInputAltered2}
+                onChange={(e) => this.setState({ageInputAltered2: e.target.value})}
+              />
+
+              <input 
+                  placeholder="sexo"
+                  type="text"
+                  value={this.state.novoInput}
+                  onChange={(e) => this.setState({novoInput: e.target.value})}
+                 />
+              
+              <button type="submit">altera condicionado</button>
+          </form>
+
+          <button onClick={this.limpaAlteraCondicionado2}>limpar</button>
+
+          <h3>token:  { tokenInputAltered2 }</h3>
+          <h3>nome:   { nameInputAltered2 }</h3>
+          <h3>idade:  { ageInputAltered2  }</h3>
+
+          <hr/>
+
+
+
+
+
+
+
+
+
+          <h1>delete</h1>
+
+            <form
+            className="flex">
+                <input 
+                  placeholder="será deletado o elemento token 'se houver'"
+                  type="text"
+                  value={this.state.tokenInputDelete}
+                  onChange={(e) => this.setState({tokenInputDelete: e.target.value})}
+                />
+                <button onClick={this.deleteElementToken}>deletar</button>
+                  
+                  <input 
+                  placeholder="será deletado o elemento name"
+                  type="text"
+                  value={this.state.nameInputDelete}
+                  onChange={(e) => this.setState({nameInputDelete: e.target.value})}
+                />
+                 <button onClick={this.deleteElementName}>deletar</button>
+
+                <input 
+                  placeholder="será deletado o elemento age"
+                  type="number"
+                  value={this.state.ageInputDelete}
+                  onChange={(e) => this.setState({ageInputDelete: e.target.value})}
+                />
+                 <button onClick={this.deleteElementAge}>deletar</button>
+
+                <input 
+                    placeholder="será deletado o elemento sex 'se houver'"
+                    type="text"
+                    value={this.state.novoInputDelete}
+                    onChange={(e) => this.setState({novoInputDelete: e.target.value})}
+                  />
+                   <button onClick={this.deleteElementNovoInput}>deletar</button>
+                
+                   <button onClick={this.limpaDeleteElement}>limpar</button>
+              </form>
+
+              <h3>token:  { tokenInputDelete }</h3>
+              <h3>nome:   { nameInputDelete }</h3>
+              <h3>idade:  { ageInputDelete  }</h3>
+              <hr/>
+
+
+
+
+
+              <h1>Cadastro</h1>
+
+              <form onSubmit={this.cadastro}
+              className="flex">
+                  <input 
+                    placeholder="token"
+                    type="text"
+                    value={this.state.tokenInputCad}
+                    onChange={(e) => this.setState({tokenInputCad: e.target.value})}
+                  />
+
+                    <input 
+                    placeholder="nome"
+                    type="text"
+                    value={this.state.nameInputCad}
+                    onChange={(e) => this.setState({nameInputCad: e.target.value})}
+                  />
+
+                  <input 
+                    placeholder="idade"
+                    type="number"
+                    value={this.state.ageInputCad}
+                    onChange={(e) => this.setState({ageInputCad: e.target.value})}
+                  />
+
+                  <input 
+                      placeholder="sex"
+                      type="text"
+                      value={this.state.sexInputCad}
+                      onChange={(e) => this.setState({sexInputCad: e.target.value})}
+                    />
+                    <button type="submit">cadastrar</button>
+                </form>
+
+                <button className="flex" onClick={this.limpaCadastro}>limpar</button>
+               
+
+                <h3>token:  { tokenInputCad }</h3>
+                <h3>nome:   { nameInputCad }</h3>
+                <h3>idade:  { ageInputCad  }</h3>
+                <h3>sex:    { sexInputCad  }</h3>
+
+
+
+          </div>
+       );
+   }
+}
+______________________________________________________________________________''
+html/css/js: (React-firebase)
+
+
+
+import React,{Component} from 'react'
+import firebase from 'firebase'
+
+import './App.css'
+
+
+
+export default class App extends Component {
+
+    constructor(props){
+      super(props)
+
+        this.state = {
+          token: '...carregando',
+          name: '...nome aqui',
+          age: 12
+        }
+
+        
+        let firebaseConfig = {
+           apiKey: "myApiKey",
+           authDomain: "myAuthDomain",
+           databaseURL: "https://teste-de-conexao-57a31-default-rtdb.firebaseio.com/",
+           storageBucket: "myStorageBocket",
+           messagingSenderId: "idhere"   
+          };  
+
+
+          //initialize firebase  
+          if(!firebase.apps.length){
+            firebase.initializeApp(firebaseConfig)
+         }     
+
+       
+         /**  olheiro  em tempo real*/
+         /*
+         
+         firebase.database().ref('token').on('value', (snapshot)  =>{
+           let state = this.state
+           state.token = snapshot.val()
+           this.setState(state)
+         })
+         
+         */
+
+           
+         /**  olheiro  de uma única mudança */
+         firebase.database().ref('token').once('value').then((snapshot)=>{
+          let state = this.state
+          state.token = snapshot.val()
+          this.setState(state)
+         })
+
+         firebase.database().ref('usuarios').child(2).on('value',(snapshot)=>{
+           let state = this.state
+           state.name = snapshot.val().name
+           this.setState(state)
+         })
+
+         firebase.database().ref('usuarios').child(2).on('value',(snapshot)=>{
+          let state = this.state
+          state.age = snapshot.val().age
+          this.setState(state)
+        })
+    }
+
+
+
+    render(){
+
+      
+      const { name , age} = this.state 
+      
+      
+
+
+
+      return (
+        <div className="App">
+
+          <h1>token:  { this.state.token }</h1>
+          <h1>nome:   { name }</h1>
+          <h1>idade:  { age }</h1>
+
+        </div>
+      );
+    }
+}
+
+========================================================================================
+SQL:  (mySql)
+
+
+CREATE DATABASE company;
+
+USE company;
+
+drop database company;
+
+CREATE TABLE IF NOT EXISTS client(
+    idclient INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    age INT(100) NOT NULL,
+    sex VARCHAR(10) NOT NULL,
+    adress VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS corporation(
+    idcorporation INT PRIMARY KEY AUTO_INCREMENT,
+    status VARCHAR(15) NOT NULL,
+    company_adress VARCHAR(50) NOT NULL,
+    type VARCHAR(15) NOT NULL,
+    id_client INT,
+    FOREIGN KEY(id_client) REFERENCES client(idclient)
+);
+
+
+INSERT INTO client VALUES(NULL,'Leonardo dos Santos',32,'male','Salvador-BA','(71)98547-
+
+6895');
+INSERT INTO client VALUES(NULL,'Erica Sousa',32,'female','Lauro de freitas-BA','(73)98567
+
+-7895');
+INSERT INTO client VALUES(NULL,'Amauri Araújo dos Santos',33,'male','Salvador-BA','(71)
+
+99947-6890');
+INSERT INTO client VALUES(NULL,'Leonel Arantes',27,'male','Morunbi-SP','(84)94567-6895');
+INSERT INTO client VALUES(NULL,'Lorena dos Santos',22,'female','Salvador-BA','(71)90047-
+
+6895');
+INSERT INTO client VALUES(NULL,'Rebeca de Almeida',31,'female','Salvador-BA','(71)98117-
+
+6895');
+INSERT INTO client VALUES(NULL,'Rael yijad',11,'male','','');
+
+
+
+INSERT INTO corporation VALUES(NULL,'paid','Avenida Gal Costa, Salvador-BA','medium',2);
+INSERT INTO corporation VALUES(NULL,'pendding','Avenida Joana Angélica, Salvador-
+
+BA','small',1);
+INSERT INTO corporation VALUES(NULL,'paid','Avenida Paulista, São Paulo-SP','big',3);
+INSERT INTO corporation VALUES(NULL,'paid','Botafogo,Rio de Janeiro, Rio de Janeiro-
+
+RJ','big',4);
+INSERT INTO corporation VALUES(NULL,'pendding','Caxias do Sul, Santa Catarina-
+
+SC','small',6);
+INSERT INTO corporation VALUES(NULL,'pendding','Avenida Dorival Caymi, Salvador-
+
+BA','medium',5);
+
+
+SELECT * FROM  client;
+SELECT * FROM corporation;
+
+
+
+SELECT c.name, c.sex, c.adress, r.status, r.type
+FROM client c
+INNER JOIN corporation r
+ON  idclient = id_client;
+
+
+
+
+CREATE VIEW search AS 
+select name, age, sex from client;
+
+SELECT * FROM search;
+
+
+
+DELETE FROM client WHERE name='Rael yijad';
+
+UPDATE client SET name='Reamond Drummond' WHERE name='Rael yijad';
+
+
+
+DELIMITER $$
+CREATE PROCEDURE selected()
+BEGIN
+   SELECT   c.name, 
+	    c.age, 
+	    c.sex, 
+            c.adress, 
+            c.phone, 
+            r.status, 
+            r.company_adress,
+            r.type
+	FROM client c
+    INNER JOIN corporation r
+    ON idclient = id_client;
+END $$
+DELIMITER ;
+
+
+CALL selected(); 
+
+=========================================================================================
+html/css/js:  (service-express-fetch)
+css/frontend
+
+
+''_______________________________________________________________________________________
+
+body{
+   background-color: black;
+   color: white;
+
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+
+   font-family: Arial, Helvetica, sans-serif;
+
+   margin: 10px  50px;
+
+}
+body :first-child{
+   background-color: darkblue;
+}
+body h1{
+   background-color: darkgreen;
+}
+body h3{
+   background-color: darkgreen;
+}
+body h4{
+   background-color: darkblue;
+   margin-bottom: -15px;
+}
+body h5{
+   background-color: green;
+}
+_______________________________________________________________________________________''
+
+html/frontend
+
+''______________________________________________________________________________________
+
+  
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>CIA&reg;</title>
+    <link rel="stylesheet" href="arqv.css"></link>
+</head>
+<body>
+    <h1 class="icon">&#10061; Dados do Servidor</h1>
+    <script src="./arqv.js"></script>
+</body>
+</html>
+_______________________________________________________________________________________''
+
+java/frontend
+
+''______________________________________________________________________________________
+
+  
+/**titulos */
+ let titulo = document.createElement('h3')
+ titulo.append('DADOS')
+
+ let registros = document.createElement('h4')
+ registros.append('registros do banco de dados. ')
+
+ document.body.append(titulo)
+ document.body.append(registros)
+
+
+/**chamada em fetch1  nomes*/
+{   
+    url = '../backend/exp.json'
+    fetch(url)
+        .then(res => res.json())
+        .then(resp =>{
+        const resposta = resp.map(requisicao =>{
+        return requisicao.nome
+    })
+        let titulo = document.createElement('h5')
+        titulo.append('somente nomes:')
+
+        document.body.append(titulo)
+
+        /** no body*/
+        document.body.append(resposta)
+        /** console*/
+        let respondido = document.body.append(resposta)
+        console.log(respondido)
+    })
+}
+    
+ /**chamada em fetch2  cargo*/
+{
+    url = '../backend/exp.json'
+    fetch(url).then(res => res.json()).then(resposta => {
+        let el = resposta.map(venha => venha.cargo)
+        let paragrafo = document.createElement('p')
+        paragrafo.append(el) 
+
+        let titulo = document.createElement('h5')
+        titulo.append('somente cargos:')
+
+        document.body.append(titulo)
+         /** no body*/
+        document.body.append(paragrafo)
+         /** console*/
+        console.log(el)   
+    })
+
+}
+
+ /**chamada em fetch3  nome e cargo*/
+{
+    url = '../backend/exp.json'
+    fetch(url)
+        .then(resp => resp.json())
+        .then(resposta =>{
+            let arrayPercorrido = resposta.map(percorreu =>{
+                let nome  = percorreu.nome
+                let cargo = percorreu.cargo
+                
+                return ('nome:' + nome + ','+ 'cargo:' + cargo)
+            })
+            let titulo = document.createElement('h5')
+            titulo.append('nomes e cargos:')
+    
+            document.body.append(titulo)
+             /** no body*/
+            document.body.append(arrayPercorrido)
+            /**no console */
+            console.log(arrayPercorrido)
+        })
+
+}_______________________________________________________________________________________''
+
+banco mock/json/backend
+
+''______________________________________________________________________________________
+
+[
+
+    {
+        "nome":"Leonardo Mendes",
+        "cargo":"CEO"
+    },{
+        "nome":"Ana Maria",
+        "cargo":"Gerente de projetos"
+    },{
+        "nome":"Lourival Aguiar",
+        "cargo":"Executivo de vendas"
+    },{
+        "nome":"Tatiana Aguiar",
+        "cargo":"Gerente de relações internacionais"
+    },{
+        "nome":"Leonel Sousa",
+        "cargo":"Gerente financeiro"
+    }
+
+]
+________________________________________________________________________________________''
+=========================================================================================
+html/css/js:  
+javascript
+
+''_______________________________________________________________________________________
+                        
+
+onSend = () =>  {
+        //levantamento dos dados/variáveis
+        let  name = document.getElementById('name').value 
+        let  email = document.getElementById('email').value 
+        let  buy = document.getElementById('buy').value 
+        let  price = document.getElementById('price').value 
+        let  quantity = document.getElementById('quantity').value 
+        let  adress = document.getElementById('adress').value 
+        
+        //total(price,quantity)
+        let section = document.getElementById('section').value
+        let date = document.getElementById('date').value 
+
+
+        data = {
+            name:name,
+            email:email,
+            buy:buy,
+            price:price,
+            quantity:quantity,
+            adress:adress,
+            section:section,
+            date:date
+            // total:total
+        }
+
+
+        //processamento dos dados e envio ao storage
+        const FORMULARY = '_FORMULARY'
+
+        let formularies = localStorage.getItem(FORMULARY)
+        if(!formularies){
+            formularies = []
+        }else{
+            formularies = JSON.parse(formularies)
+        }
+
+        formularies.push(data)
+        localStorage.setItem(FORMULARY,JSON.stringify(formularies))
+
+		  }
+
+
+
+
+
+onClear = () => {
+
+        
+        //levantamento de dados/criação de variáveis
+        let  name = document.getElementById('name')
+        let  email = document.getElementById('email')
+        let  buy = document.getElementById('buy')
+        let  price = document.getElementById('price')
+        let  quantity = document.getElementById('quantity')
+        let  adress = document.getElementById('adress')
+        let section = document.getElementById('section')
+        let date = document.getElementById('date') 
+
+
+        //processamento das variáveis/mudança de comportamento
+        name.value     = ''
+        email.value    = ''
+        buy.value      = ''
+        price.value    = ''
+        quantity.value = ''
+        adress.value   = ''
+        section.value  = ''
+        date.value     = '' 
+
+	            }
+
+
+
+
+mult = () => {
+	price = document.getElementById('price')
+	quantity = document.getElementById('quantity') 
+	multiplying = price.value * quantity.value
+		
+	console.log(multiplying)  
+ 
+		    }
+
+
+
+
+
+showTotalTestComParametros = () =>{
+        let total = document.getElementById('total')
+        total.value = testeComParametros2()
+        console.log(total.value)       
+                   
+		   }
+                        
+
+
+
+
+	
+document.addEventListener('change', ( ) =>{
+                                           
+        document.onchange = showTotalTestComParametros()
+        document.onratechange = mult()            
+                    
+		  })
+_______________________________________________________________________________________''
+
+css
+
+''______________________________________________________________________________________
+
+body{
+    background:rgba(0,0,0,0.2);
+}
+#content{
+    display: flex;
+    flex-direction: column;
+}
+#header{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: flex-end;
+    text-align: end;
+}
+#action{
+    background: rgba(0,0,0,0.1);
+    width: 100%; 
+    font-family: Arial, Helvetica, sans-serif;
+}
+#title{
+    background: rgba(0,0,0,0.2);
+    padding: 12px;
+    border-radius: 6px;
+    text-shadow: 2px 2px 2px whitesmoke;
+}
+#central{
+    margin: 50px 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,    
+
+ Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+#titleForm{
+    text-decoration: underline;
+}
+#name,#email,#buy,#price,#quantity,#adress{
+    height: 20px;
+    width: 360px;
+    outline: none;
+    border: solid 1px rgba(0,0,0,0.3);
+    padding: 5px;
+    margin-top: 3px;
+}
+#total{
+    outline: none;
+    border: solid 1px rgba(0,0,0,0.3);
+}
+#section{
+    height: 30px;
+    width: 460px;
+    outline: none;
+    border: solid 1px rgba(0,0,0,0.3);
+    padding: 5px;
+    margin-top: 21px;
+}
+#date{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,    
+
+   Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#send,#clear{
+    height: 30px;
+    width: 90px;
+    margin-top: 15px;
+    margin-left: 74%;
+}
+#send{
+    background: linear-gradient(105deg,  #98fb98 45%, #00ff7f 55%);
+    border-radius: 6px;
+    outline:none;
+    color: rgba(0,0,0,0.7);
+
+}
+#clear{
+    background: linear-gradient(105deg,  #b22222 45%, #a52a2a 55%);
+    border-radius: 6px;
+    outline:none;
+    color: whitesmoke;
+}
+_______________________________________________________________________________________''
+
+html
+
+''______________________________________________________________________________________
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Action&trade;</title>
+    <link rel="stylesheet" href="action.css">
+</head>
+<body>
+    <div id="content">
+
+        <div id="header">
+            <header id="action">
+                <h1 id="title">
+                    Action
+                </h1>
+            </header>
+        </div>
+
+        <div id="central">
+            <h3 id="titleForm">Formulary</h3>
+
+            <form >
+                <input id="name" type="text" placeholder="name *"/>
+                <input id="email" type="email" placeholder="email *" />
+                <input id="buy" type="text" placeholder="product *" />
+                <input id="price" type="number" placeholder="price *" />
+                <input id="quantity" type="number" placeholder="quantity *" />
+                <input id="adress" type="adress" placeholder="adress *" />
+                <input id="total" type="number" placeholder="total: "/>
+                <select id="section">
+                    <option>
+                        sex *
+                    </option>
+                    <option>
+                        male
+                    </option>
+                    <option>
+                        female
+                    </option>
+                    <option>
+                        ...
+                    </option>
+                </select>
+                <input id="date" type="date"/>
+            </form>
+            <button id="send"  type="submit" onClick="onSend(event)">send</button>
+            <button id="clear" type="submit" onClick="onClear(event)">clear</button>
+        </div>
+    </div>
+   
+    <script src="/action.js"></script>
+</body>
+</html>
+_______________________________________________________________________________________''
+html/css/js: (knex-tables-typescript)
+tabela sem relacionamento
+''______________________________________________________________________________________
+import Knex from 'knex'
+
+export async function up(Knex: Knex) {
+    return Knex.schema.createTable('locations',table =>{
+            table.increments('id').primary()
+            table.string('name').notNullable()
+            table.string('image').notNullable()
+            table.string('email').notNullable()
+            table.string('whatsapp').notNullable()
+            table.string('latitude').notNullable()
+            table.string('longitude').notNullable()
+            table.string('city').notNullable()
+            table.string('uf').notNullable()
+    })
+}
+
+
+
+export async function down(Knex: Knex) {
+    return Knex.schema.dropTable('locations')
+}
+________________________________________________________________________________________''
+
+tabela com relacionamento
+
+''______________________________________________________________________________________
+
+import Knex from 'knex'
+
+export async function up(Knex: Knex){
+    return Knex.schema.createTable('location_items', table =>{
+            table.increments('id').primary()
+            table.string('location_id')
+                 .notNullable()
+                 .references('id')
+                 .inTable('locations')
+    })
+}
+
+
+
+export async function down(Knex: Knex){
+    return Knex.schema.dropTableIfExists('location_items')
+}
+_______________________________________________________________________________________''
+
+=========================================================================================
+html/css/js  (javascript)
+
+
+
+this.actress =[{
+    name:'Juliane Moore'
+},{
+    name:'Bryce Dallas Howard'
+},{
+    name:'Michelle Monaghan'
+},{
+    name:'Meg Ryan'
+},{
+    name:'Demi moore'
+}]
+
+
+let warner = () =>{
+    let production  = this.actress.map(name =>{
+        return name
+    })
+    console.log(production)
+}
+warner()
+
+
+
+
+
+
+this.hollywood = {
+    name:'Sarah Jessica Parker',
+    age:47,
+    city:'California'
+}
+
+
+named = () => {
+    const {  name, age  } =  this.hollywood
+    console.log('name:'+ name  + ',' + 'age:' + age)
+}
+named()
+
+
+
+
+
+this.artist = []
+
+this.artist.push({name:'Jessica Biel'})
+this.artist.push({name:'Jennifer Garner'})
+this.artist.push({name:'Scarlett Johansson'})
+this.artist.push({name:'Monica Belucci'})
+this.artist.push({name:'Milla Jovovich'})
+this.artist.push({name:'Jodie Foster'})
+console.log(this.artist)
+this.artist.splice(2,1)
+console.log(this.artist)
+
+
+
+
+
+
+universal = () =>{
+    let artistsWithIndex = [{...this.artist}]
+    let artistsNoIndex = [...this.artist]
+    console.log(artistsWithIndex,artistsNoIndex)
+}
+universal()
+==========================================================================================
+
+=================
+python:
+
+
+
+print('=======================') 
+print('|                     |')
+print('|WELCOME TO THE SYSTEM|')
+print('|                     |') 
+print('=======================') 
+
+#loading = "Carregando..."
+
+loading = 'loading...'
+print(loading)
+print()
+
+count = 'counting time'
+print(count, '/')
+
+
+def msg():
+    return 'welcome again'
+    
+    
+print(msg())
+
+print()
+print('calculation data:')
+tax = (5/100)
+salary = 942.35
+time   = 30
+
+print('tax: 5%' )
+print('salary:',salary,'R$')
+print('time/month:', time)
+
+print()
+total = (tax * salary * time)
+print('total:',total,'R$  in this case')
+
+def salary_calculation(tax,salary,time):
+    tax_value = (tax/100)
+    return 'total:',tax_value * salary * time
+    
+print('enter with your salary, tax and time to count below:')
+print(salary_calculation(9,2145.36,27))
+
+
+name = input('Now enter with your name:\n')
+job  = input('Enter with your job: \n')
+timeToJobIn = input('time to work: \n')
+
+print('name:',name)
+print('name:',job)
+print('name:',timeToJobIn)
+
+places = ['Valéria, Salvador-BA','Barris, Salvador-BA','Stella Mares, Salvador-BA','Imbuí, 
+
+Salvador-BA']
+print(places)
+
+print()
+print('choose one place above')
+print()
+choice_1 = 'Valéria, Salvador-BA'
+choice_2 = 'Barris, Salvador-BA'
+choice_3 = 'Stella Mares, Salvador-BA'
+choice_4 = 'Imbuí, Salvador-BA'
+    
+def choices(choice):
+    if(choice == choice_1):
+       return 'downtown choose is:',choice_1
+    elif(choice == choice_2):
+       return 'downtown choose is:',choice_2
+    elif(choice == choice_3):
+        return 'downtown choose is:',choice_3
+    elif(choice == choice_4):
+       return 'downtown choose is:',choice_4
+        
+        
+print(choices(choice_4))
+
+==========================================================================================
+
+===========================
+htm/css/js:	(react)
+
+
+hooks/useState
+''________________________________________________________________________________________
+
+________________________
+
+import React, { useState } from "react";
+
+function Counter() {
+  const [ counter, setCounter ] = useState(0);
+
+  const handleDecrease = () => {
+    if(counter < 1){
+      return setCounter(0)
+    }else{
+      return setCounter(counter -1)
+    }
+  };
+
+  const handleIncrease = () => {
+     return setCounter(counter +1)
+  };
+
+  return (
+    <div>
+      <button onClick={handleIncrease}>Incrementar</button>
+      <h2>contador:{counter}</h2>
+      <button onClick={handleDecrease}>Decrementar</button>
+    </div>
+  );
+}
+export default Counter;
+__________________________________________________________________________________________
+
+__________________''  
+==========================================================================================
+
+===================
+html/css/js:  (typescript)
+
+
+console.log
+
+('=================================================================================')
+console.log('                       HOLLYWOOD in typescript ')
+console.log
+
+('=================================================================================')
+
+function direction() :String  {
+    const director :String = 'James woods'
+            
+    return  director
+}
+
+console.log( direction())
+
+console.log
+
+('=================================================================================')
+
+const actress :any = [{
+    name: 'Jessica Chanstain',
+    movie:'x-men dark phoenix'
+},{
+    name: 'Carrie Ane Moss',
+    movie:'matrix'
+},{
+    name: 'Bryce dallas Howard',
+    movie:'Jurassic World'
+},{
+    name: 'Monica Belucci',
+    movie:'matrix reloaded'
+},{
+    name:'Jennifer Connely',
+    movie:'a brightness mind'
+},{
+    name:'Kate Winslet',
+    movie:'titanic'
+}]
+
+console.log(actress)
+
+console.log
+
+('=================================================================================')
+
+const numbers :any = [1,2,54,78,9]
+console.log(numbers[3])
+
+console.log
+
+('=================================================================================')
+
+const studios :any =[{
+    studio:'warner',
+    country: 'USA'
+},{
+    studio:'universal',
+    country: 'USA'
+},{
+    studio:'disney',
+    country: 'USA'
+},{
+    studio: 'fox',
+    country: 'USA'    
+},{
+    studio:'touchstone',
+    country: 'USA'
+}]
+
+const mapStudios = () => studios.map(studio =>  studio.studio)
+console.log(mapStudios())
+
+console.log
+
+('=================================================================================')
+
+const movieHero  = {
+    movie:'spider-man 2',
+    year :2004,
+    director:'Sam Raimi',
+    starring:'Tobey maguire',
+    co_starring:'Kirsten Dunrst'
+}
+
+const {  movie, year, starring  } = movieHero
+console.log('movie:' + movie + ',' + 'year:' + year +  ',' + 'starring:' + starring + '.')
+
+console.log
+
+('=================================================================================')
+
+class Production {
+    private name :String = 'Cristopher Nolan'
+    private job  :String = 'batman the dark knight'
+}
+
+const prod = new Production()
+console.log(prod)
+
+console.log
+
+('=================================================================================')
+
+function calculationProductionLowValueMovie (valueProductionMovie, taxProduction, 
+
+peopleMovieProduction) :void {
+    const totalValueMovieProduction :any = (valueProductionMovie * peopleMovieProduction * 
+
+ (taxProduction/100))
+    
+    console.log(totalValueMovieProduction)
+}
+
+calculationProductionLowValueMovie(1000,3,100)
+
+console.log
+
+('=================================================================================')
+
+
+
+console.log
+
+('=================================================================================')
+
+==========================================================================================
+C:
+
+
+#include <stdio.h>
+int main(void){
+    
+    printf("================================= \n");
+    printf("    Logic exercise with C  \n");
+    printf("================================= \n");
+    
+    int numero = 1;
+    int numero_2 = 3;
+    int total = numero + numero_2;
+
+    printf("número 1: %d \n",numero);
+    printf("número 1: %d \n",numero_2);
+    printf("soma: %d \n", total);
+    
+    printf("================================= \n");
+    
+    int max = 3;
+    int min = 0;
+    
+    while(min < max){
+        min++;
+        printf("%d \n",min);
+    }
+    printf("================================= \n");
+    
+   int number1 = 3;
+    
+    for(int number2 = 0; number2 < number1; number2++){
+        printf("%d \n", number2);
+    }
+
+    printf("================================= \n");
+    
+     char veryOrNotVery = 'y';
+     char resp = 'y';
+     if(resp == veryOrNotVery){
+         printf("true \n");
+     }else{
+         printf("false \n ");
+     }
+    
+    printf("================================= \n");
+    
+    char terminator = 'y';
+    char war        = 'n';
+    
+    while(war == terminator){
+        printf("bang bang!\n");
+          printf("splash!\n");
+            printf("pow!\n");
+    }
+    
+    printf("================================= \n");
+    
+   return 0;
+}
+
+==========================================================================================
+htm/css/js:	(react,firebase)
+
+
+
+import React,{Component} from 'react'
+
+import firebase from '../Database/firebase'
+
+import Footer from '../Footer/Footer'
+
+import './Tabelas.css'
+
+export default class Tabela1 extends Component{
+
+
+
+    constructor(props){
+        super(props)
+
+        this.state = {
+            valores : [],
+            nome:'',
+            numero:''
+        }
+
+        this.revisao = this.revisao.bind(this)
+        this.lista = this.lista.bind(this)
+    }
+
+
+
+
+    revisao = () =>{
+
+           /**recebendo elemento da database */
+           firebase.database().ref('lista1').child('contato2').on('value',(snapshot)=>{
+            let numero = this.state
+            numero = snapshot.val().numero
+            this.setState({numero})
+        })
+	 /**recebendo elemento da database */
+        firebase.database().ref('lista1').child('contato2').on('value',(snapshot)=>{
+            let nome = this.state
+            nome = snapshot.val().nome
+            this.setState({nome})
+        })
+    }
+  
+
+
+
+
+	/*retornando um array de dados da database */
+    lista = () =>{
+        firebase.database().ref('lista1').on('value', (snapshot)    =>{
+            let valores = this.state
+            valores.valores = []
+
+            snapshot.forEach((dados)=>{
+              valores.valores.push({
+                    id:dados.val().id,
+                    nome:dados.val().nome,
+                    numero:dados.val().numero,
+                    parceiros:dados.val().parceiros,
+                    status:dados.val().status,
+                    visita:dados.val().visita,
+                    observacao:dados.val().observacao
+                }) 
+            })
+            this.setState(valores)
+        })
+    }
+	
+	
+
+	/*cadastrando dados no database*/
+cadastro = (e) => {
+      let cadastro = firebase.database().ref('cadastro');
+      let chave = cadastro.push().key;
+
+      cadastro.child(chave).set({
+        token:this.state.tokenInputCad,
+        name:this.state.nameInputCad,
+        age:this.state.ageInputCad,
+        sex:this.state.ageInputCad
+      });
+
+      e.preventDefault();
+    }
+
+    componentDidMount = () =>{
+         /**revisão */
+         console.log(this.revisao())
+          /**revisão */
+         this.lista()
+    }
+
+   
+
+    render(){
+        //const {nome,numero} = this.state
+        
+        return(
+            <div classsName="tabela1">
+                {/**revisão */}
+                {/**                                     
+                <div classsName="revisao">
+                    <h5 classsName="rev">nome   :  {nome}  </h5>
+                    <h5 classsName="rev">numero :  {numero}</h5>
+                </div>
+                */}
+                <div classsName="Tabela-1" border="1px">
+                    <h2 classsName="lista1">Lista 1</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>id</td>
+                                <td>nome</td>
+                                <td>número</td>
+                                <td>status</td>
+                                <td>parceiros(s)</td>
+                                <td>visita</td>
+                                <td>observação</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.valores.map((valor,indice)=>{
+                                    return(
+                                        <tr key={indice}>
+                                             <td>{valor.id}</td>
+                                             <td>{valor.nome}</td>
+                                             <td>{valor.numero}</td>
+                                             <td>{valor.status}</td>
+                                             <td>{valor.parceiros}</td>
+                                             <td>{valor.visita}</td>
+                                             <td>{valor.observacao}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+                    <Footer/>
+                </div>
+            </div>
+        )
+    }
+}
+
+=========================================================================================
+html/css/js: (css-grid)
+
+
+
+css
+''_______________________________________________________________________________________
+header{
+	grid-area:cabeca;
+	border:solid 2px green;
+}
+main{
+	grid-area:principal;
+	border:solid 2px green;
+}
+nav{
+	grid-area:nave;
+	border:solid 2px green;
+}
+footer{
+	grid-area:pe;
+	border:solid 2px green;
+}
+body{
+	height:95vh;
+	display:grid;
+	grid-template-columns:1fr 200px;
+	grid-template-rows:0.5fr  1fr;
+	grid-template-areas:
+		'cabeca    nave'
+		'principal nave'
+		'pe        nave'
+	;
+}
+_______________________________________________________________________________________''
+
+html
+
+''_____________________________________________________________________________________
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="grid.css">
+    <title>Grid&copy;</title>
+</head>
+<body>
+    
+    <main>Main</main>
+	<header>Header</header>
+	<nav>Navegation</nav>
+	<footer>Footer</footer>
+</body>
+</html>
+______________________________________________________________________________________''
+
+
+=========================================================================================
+html/css/js: (Vue)
+
+
+
+		IDE: https://jsfiddle.net/chrisvfritz/50wL7mdz/
+''_________________________________________________________________________________________
+arquivo html:
+
+
+
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <p>{{ message }}</p>
+  <h1>{{name}}</h1>
+  <a v-bind:href="url">
+      udemy
+  </a>
+  <p v-text="texto"></p>
+  <input placeholder="escreva aqui" type="text" v-model:value="digito" />
+  <br/>
+  <textarea> 
+    {{digito}}
+  </textarea>
+</div>
+
+
+
+
+
+
+_______________________________________________________________________________________''
+arquivo js:
+
+
+''_____________________________________________________________________________________
+
+new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue.js!',
+    name:'Leonard',
+    url:'https://www.udemy.com',
+    texto:"Revisão Vue",
+    digito:''
+  },
+  methods:{
+  		some(){
+      		
+      }
+  }
+})
+__________________________________________________________________________________________''
