@@ -35,3 +35,20 @@ pathping [Ip adress]
 
 Ex: pathping 192.168.150.7
 ===========================================================
+
+attrib 
+
+mostra pastas ocultas
+
+attrib -s -h [caminho]
+Ex:
+attrib -s -h g:\Users\dev\java
+attrib -s -h g:\Users\dev\desktop\java
+
+
+oculta pastas 
+
+attrib +s +h [caminho]
+Ex:
+attrib +s +h g:\Users\dev\java
+attrib +s +h g:\Users\dev\desktop\java
