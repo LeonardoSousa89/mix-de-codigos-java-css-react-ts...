@@ -1,3 +1,4 @@
+
 netsh -h
 combos de comando:
 
@@ -14,7 +15,7 @@ defini o endereço IP
 netsh interface ipv4 set adress name="nome-da-conexão" [static ou dhcp] [ip mask gateway]
 
 Ex:
-netsh interface ipv4 set adress name="conexão local" static 192.168.0.15  255.255.255.0  192.168.100.1
+netsh interface ipv4 set adress name="conexão local" static 192.168.150.15  255.255.255.0  192.168.150.1
 
 
 
@@ -24,7 +25,7 @@ defini o endereço DNS
 netsh interface ipv4 set dnsserver name="nome-da-conexão"  static [endereço-IP] *router ou gateway padrão
 
 Ex:
-netsh interface ipv4 set dnsserver name="conexão local"  static 192.168.100.1
+netsh interface ipv4 set dnsserver name="conexão local"  static 192.168.150.1
 ===========================================================
 
 arp -h
@@ -32,5 +33,5 @@ arp -h
 ==========================================================
 pathping [Ip adress]
 
-Ex: pathping 192.168.100.7
+Ex: pathping 192.168.150.7
 ===========================================================
