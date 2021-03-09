@@ -2387,9 +2387,8 @@ ________________________________________________________________________________
 html/css/js: (Vue)
 
 
-
-		IDE: https://jsfiddle.net/chrisvfritz/50wL7mdz/
-''_________________________________________________________________________________________
+IDE: https://jsfiddle.net/chrisvfritz/50wL7mdz/
+''_______________________________________________________________________________________
 arquivo html:
 
 
@@ -2408,8 +2407,73 @@ arquivo html:
   <textarea> 
     {{digito}}
   </textarea>
+  <br/>
+  <br/>
+  <br/>
+  
+  <input v-model="valor"/>
+  <div v-if="valor == 1">
+      <h5>{{verdade}}</h5>
+  </div>
+  
+  <div v-if="valor == 0">
+      <h5>{{falso}}</h5>
+  </div>
+  
+   <br/>
+   <br/>
+   <br/>
+    
+   <div v-for="contador in contagem">
+   <p>{{contador}}</p>
+   </div>
+   
+     <div v-for="(produto, index) in produtos">
+     <p>   {{index}}  -  
+           {{produto.item}} -
+           {{produto.preco}}
+     </p>
+   </div>
+   
+   <div>
+     <input  v-model="escrito"/>
+     <button @click="some()">press</button>
+   </div>
+     
+     <br />
+     
+    <!-- formulário versão 1 -->
+    <form>
+     <input  v-model="valorDigitado"/>
+     <button @click="formulario('name', $event)">press</button>
+   </form>
+     
+      <br />
+   
+      <!-- formulário versão 2 -->
+    <form v-on:submit="formulario2('name', $event)">
+     <input  v-model="valorDigitado2"/>
+     <button type="submit">press</button>
+   </form>
+   
+     <br />
+       <br />
+     
+       
+        <!-- formulário versão 3 -->
+      <form v-on:submit.prevent="formulario3('name', $event)">
+     <input  v-model="valorDigitado3"/>
+   </form>
+   
+   <br />
+   
+   
+     <!-- formulário versão 4 -->
+   <!-- o elemento KEYUP não depende do elemento .enter (este é um valor incremental) -->
+   <input  v-model="valorDigitado4"
+   v-on:keyup.enter="formulario4('name', $event)"/>
+   
 </div>
-
 
 
 
@@ -2428,12 +2492,603 @@ new Vue({
     name:'Leonard',
     url:'https://www.udemy.com',
     texto:"Revisão Vue",
-    digito:''
+    digito:'',
+    verdade:'true',
+    falso:'false',
+    valor:'',
+    valorDigitado:'',
+    valorDigitado2:'',
+     valorDigitado3:'',
+     valorDigitado4:'',
+    escrito:'',
+    contagem:[	1, 2, 3, '...' ],
+    produtos: [
+    {item:'arroz', preco:2.65},
+    {item:'açúcar', preco:1.79},
+    {item:'pão limiar', preco:4.25}]
   },
   methods:{
   		some(){
-      		
+      		console.log(this.escrito)
+      }, 
+      formulario(nome,event){
+      	this.valorDigitado = nome
+        event.preventDefault()
+        console.log(event)
+      },
+      formulario2(nome,event){
+      	this.valorDigitado2 = nome
+        event.preventDefault()
+        console.log(this.valorDigitado2 + '2')
+      },
+      formulario3(nome,event){
+      	this.valorDigitado3 = nome
+        console.log(this.valorDigitado3 + '3')
+      },
+      formulario4(nome,event){
+      	this.valorDigitado4 = nome
+        console.log(this.valorDigitado4 + '4')
       }
   }
 })
+________________________________________________________________________________________''
+
+
+=========================================================================================
+html/css/js: (Vue)
+
+
+html
+''_____________________________________________________________________________________
+
+
+<div id="application">
+  <p>{{ message }}</p>
+  
+  <form>
+       <input placeholder="write your name here"
+       v-model="name"/>
+       <input  placeholder="write your age here"
+       v-model="age"/>
+       <input  placeholder="write your sex here"
+       v-model="sex"/>
+       <button @click="valor(event)">
+           send      
+       </button>
+  </form>
+ 
+</div>
+
+________________________________________________________________________________________''
+
+
+script
+
+''_____________________________________________________________________________________
+
+
+new Vue({
+  el: '#application',
+  data: {
+    message: 'Hello Vue.js!',
+    name:'',
+    age:'',
+    sex:''
+  },
+  methods:{
+  	valor(event){
+    		console.log(this.name,this.age,this.sex)
+        e.preventDefault()
+    }
+  }
+})
+________________________________________________________________________________________''
+
+=========================================================================================
+html/css/js: (Vue)
+
+
+html
+''_____________________________________________________________________________________
+
+<div id="app">
+  <p v-for="veiculos in carros">
+     montadora: {{veiculos.fabri}} ,
+	 modelo: {{veiculos.modelo}}
+  </p>
+</div>
+
+________________________________________________________________________________________''
+
+js
+
+''_____________________________________________________________________________________
+
+
+new Vue({
+  el: '#app',
+  data: {
+   	carros : [{fabri:'Wolksvagen',modelo:'gol'},
+    					{fabri:'range rover',modelo:'velar'},
+              {fabri:'lamborghini',modelo:'aventador'}]
+  },
+})
+
+________________________________________________________________________________________''
+
+
+==========================================================================================
+html/css/js: (jquery)
+
+html
+
+''_____________________________________________________________________________________
+
+ <!DOCTYPE HTML>
+ <html>
+ <head>
+    <link rel="stylesheet" href="bootstrap.css">
+   </head>
+ <body>
+    <ul>list
+        <li><a href="https://www.google.com" target="blank">list1</a></li>
+        <li><a href="https://www.facebook.com" target="blank">list2</a></li>
+        <li><a href="https://www.jquery.com" target="blank">list3</a></li>
+    </ul>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" ntegrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="./bootstrap.js"></script>
+ </body>
+ </html>
 __________________________________________________________________________________________''
+
+
+css
+
+''_____________________________________________________________________________________
+
+body{
+    background:whitesmoke;
+}
+ul{
+    cursor:pointer;
+}
+__________________________________________________________________________________________''
+
+
+javascript
+
+''_____________________________________________________________________________________
+
+$('ul').on('click',function(){  $('li').toggle('1000')})
+__________________________________________________________________________________________''
+
+
+
+==========================================================================================
+html/css/js: (jquery)
+
+html
+
+''_____________________________________________________________________________________
+
+ <!DOCTYPE HTML>
+ <html>
+ <head>
+    <link rel="stylesheet" href="bootstrap.css">
+   </head>
+ <body>
+    <ul>list
+        <li><a href="https://www.google.com" target="blank">list1</a></li>
+        <li><a href="https://www.facebook.com" target="blank">list2</a></li>
+        <li><a href="https://www.jquery.com" target="blank">list3</a></li>
+    </ul>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" ntegrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="./bootstrap.js"></script>
+ </body>
+ </html>
+__________________________________________________________________________________________''
+
+
+css
+
+''_____________________________________________________________________________________
+
+body{
+    background:whitesmoke;
+}
+ul{
+    cursor:pointer;
+}
+__________________________________________________________________________________________''
+
+
+javascript
+
+''_____________________________________________________________________________________
+
+$('ul').on('click',function(){  $('li').toggle('1000')})
+__________________________________________________________________________________________''
+
+
+
+==========================================================================================
+html/css/js: (bootstrap)
+
+
+
+html(Main page)
+
+''_____________________________________________________________________________________
+
+	
+<!DOCTYPE HTML>
+ <html>
+ <head>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+ </head>
+ <body>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navigation&trade;</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+             <a class="nav-link" href="../simple-bootstrap/pages/firstPage.html">First Page</a>
+             <a class="nav-link" href="../simple-bootstrap/pages/secondPage.html">Second Page</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+   
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+      <div class="card-header">Main Page</div>
+      <div class="card-body">
+        <h5 class="card-title">This is Main page&copy;</h5>
+      </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+ </body>
+ </html>
+	
+__________________________________________________________________________________________''
+
+
+
+html(first page)
+
+''_____________________________________________________________________________________
+
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <div class="container-fluid">
+       <a class="navbar-brand" href="#">Navigation&trade;</a>
+       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+         <div class="navbar-nav">
+             <a class="nav-link" href="../bootstrap.html">Main Page</a>
+             <a class="nav-link" href="./secondPage.html">Second Page</a>
+         </div>
+       </div>
+     </div>
+   </nav>
+   
+   <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+    <div class="card-header">Page 1</div>
+    <div class="card-body">
+      <h5 class="card-title">This is first page&copy;</h5>
+    </div>
+  </div>
+   
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+   <script src="./bootstrap.js"></script>
+</body>
+</html>
+
+	
+__________________________________________________________________________________________''
+
+
+
+html(second page)
+
+''_____________________________________________________________________________________
+
+	
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <div class="container-fluid">
+       <a class="navbar-brand" href="#">Navigation&trade;</a>
+       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+         <div class="navbar-nav">
+             <a class="nav-link" href="../bootstrap.html">Main Page</a>
+             <a class="nav-link" href="./firstPage.html">first Page</a>
+         </div>
+       </div>
+     </div>
+   </nav>
+  
+   <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+    <div class="card-header">Page 2</div>
+    <div class="card-body">
+      <h5 class="card-title">This is second page&copy;</h5>
+    </div>
+  </div>
+
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+   <script src="./bootstrap.js"></script>
+</body>
+</html>
+	
+__________________________________________________________________________________________''
+
+
+
+==========================================================================================
+
+html/css/js:  (bootstrap)
+
+
+ <!DOCTYPE HTML>
+ <html>
+ <head>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+ </head>
+ <body>
+
+  <nav class="navbar fixed-top navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Bootstrap&copy;</a>
+    </div>
+  </nav>
+
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="./assets/img1.jpg" class="d-block w-100">
+      </div>
+      <div class="carousel-item">
+        <img src="./assets/img2.png" class="d-block w-100">
+      </div>
+      <div class="carousel-item">
+        <img src="./assets/img3.jpg" class="d-block w-100">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+ </body>
+ </html>
+ 
+==========================================================================================
+
+html/css/js:  (vue)
+
+
+
+App.vue
+
+''_____________________________________________________________________________________
+
+<template>
+  <div class="app">
+    <!-- Componente de Revisão Vue -->
+    <Teste />
+    <!-- Componente de Revisão Vue --->
+  </div>
+</template>
+
+<script>
+import Teste from './components/teste'
+
+export default {
+  name: 'App',
+  components: {
+     Teste
+  }
+}
+</script>
+
+<style>
+.app {
+  
+}
+</style>
+
+_________________________________________________________________________________________''
+
+
+
+
+
+teste.vue
+
+''_____________________________________________________________________________________
+
+	
+<!-- Revisão Vue-->
+
+<template>
+    <div class="teste">
+        <h1>
+           {{name }}
+        </h1>
+    <!---->
+        <p>{{outroNome}}</p>
+        <input 
+        placeholder="nome"
+        v-model="nome"
+        v-on:keyup.enter="digitou(event)"/>
+
+
+        <form class="form-teste">
+            <input  type="text"
+            placeholder="cargo"
+            v-model="cargo">
+             <input type="text"
+             placeholder="telefone"
+             v-model="telefone">
+              <input type="text"
+              placeholder="sexo"
+              v-model="sexo">
+              <button @click="form(event)">enviar</button>
+        </form>
+
+
+          <form class="novo-form-teste">
+            <input  type="text"
+            placeholder="opniao"
+            v-model="opnei">
+            <button @click="opne(event)">enviar</button>
+        </form>
+
+        <table class="tb-teste"   
+           >
+            <thead>
+                <tr>
+                    <td class="td-teste">item</td>
+                    <td class="td-teste">preço</td>
+                </tr>
+            </thead>
+           <tbody  
+                v-for="mercadoria in produtos" 
+                v-bind:key="mercadoria">
+                    
+                <td class="td-teste-request">{{mercadoria.item}}</td>
+                <td class="td-teste-request">{{mercadoria.preco}}</td>  
+           </tbody>
+        </table>
+
+    </div>
+</template>
+
+
+<script>
+export default {
+    name:'Teste',
+    data: function(){
+        return{
+            name:'bicho',
+            outroNome:'bicho2',
+            nome:'',
+            cargo:'',
+            telefone:'',
+            sexo:'',
+            opnei:'',
+            produtos: [
+                {item:'arroz',preco:3.22},
+                {item:'açúcar',preco:1.77},
+                {item:'sal',preco:0.89}]
+        }
+    },methods: {
+        /** */
+        digitou(nome){
+            nome = this.nome
+            console.log(nome) 
+        },
+        form(){
+           let cargo = this.cargo
+           let telefone = this.telefone
+           let sexo = this.sexo
+
+           console.log(cargo,telefone,sexo)
+        },
+        opne(){
+            let opniao = this.opnei
+            let body = document.querySelector('body')
+
+            let paragraph = document.createElement('p')
+            paragraph.append(opniao)
+            
+            body.appendChild(paragraph)
+        },
+        mounted(){
+             document.onclick = addEventListener('click',(e) =>{
+                 e.preventDefault()
+             }) 
+        },
+        updated(){
+         
+        }
+    },
+}
+</script>
+
+
+<style>
+    .teste{
+
+    }
+    .form-teste{
+        display: flex;
+        flex-direction: column;
+
+        margin: 10px 0;
+    }
+    .tb-teste{
+        margin: 30px 0;
+        border: solid 1px rgba(0,0,0,0.3);  
+
+        width: 100%;
+
+    }
+    .tb-teste .td-teste{
+          background: black;
+          color: white;
+
+          padding: 10px;  
+
+          font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    .tb-teste .td-teste-request{
+          background: whitesmoke;
+
+          padding: 10px;  
+
+          font-family: Georgia, 'Times New Roman', Times, serif;
+  
+    }
+   
+</style>
+
+<!-- Revisão Vue-->
+	
+________________________________________________________________________________________''
