@@ -3253,4 +3253,646 @@ curl http:localhost:3001
 
 só funciona em teminal linux
 */
-________________________________________________________________________________________''
+__________________________________________________________________________________________''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+java    (spring-boot)
+
+
+
+application.properties
+''_____________________________________________________________________________________
+spring.profiles.active=prod
+
+spring.jpa.open-in-view=false
+__________________________________________________________________________________________''
+
+
+
+application-dev.properties
+''_____________________________________________________________________________________
+#spring.jpa.properties.javax.persistence.schema-generation.create-source=metadata
+#spring.jpa.properties.javax.persistence.schema-generation.scripts.action=create
+#spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target=create.sql
+#spring.jpa.properties.hibernate.hbm2ddl.delimiter=;
+
+#os códigos acima geram os códigos de script sql
+#devem ser liberado apenas em momentos de necessidade de geração deste código
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/dsdeliver
+spring.datasource.username=postgres
+spring.datasource.password=123456
+
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+spring.jpa.hibernate.ddl-auto=none  
+__________________________________________________________________________________________''
+
+
+
+application-test.properties
+''_____________________________________________________________________________________
+ spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.username=sa
+spring.datasource.password=
+
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+__________________________________________________________________________________________''
+
+
+
+system.properties
+''_____________________________________________________________________________________
+java.runtime.version=11
+__________________________________________________________________________________________''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ProductDTO.java
+''_____________________________________________________________________________________
+package com.devsuperior.dsdeliver.dto;
+
+import java.io.Serializable;
+
+import com.devsuperior.dsdeliver.entities.Product;
+
+public class ProductDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private Long id;
+	private String name;
+	private double price;
+	private String description;
+	private String imageUri;
+	public ProductDTO() {
+		
+	}
+	public ProductDTO(Long id,
+					  String name,
+					  double price, 
+					  String description, 
+					  String imageUri) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.imageUri = imageUri;
+	}
+	public ProductDTO(Product entity) {
+		id = entity.getId();
+		name = entity.getName();
+		price = entity.getPrice();
+		description = entity.getDescription();
+		imageUri = entity.getImageUri();
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getImageUri() {
+		return imageUri;
+	}
+	public void setImageUri(String imageUri) {
+		this.imageUri = imageUri;
+	}
+}
+
+__________________________________________________________________________________________''
+
+OrderDTO.java (relação com a classe product)
+''_____________________________________________________________________________________
+package com.devsuperior.dsdeliver.dto;
+
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.devsuperior.dsdeliver.entities.Order;
+import com.devsuperior.dsdeliver.entities.OrderStatus;
+
+public class OrderDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	private Long id;
+	private String address;
+	private double latitude;
+	private double longitude;
+	private Instant moment;
+	private OrderStatus status;
+	private List <ProductDTO> products = new ArrayList<>();
+	public OrderDTO() {
+		
+	}
+	public OrderDTO(Long id, 
+					String address, 
+					double latitude, 
+					double longitude, 
+					Instant moment, 
+					OrderStatus status) {
+	this.id = id;
+	this.address = address;
+	this.latitude = latitude;
+	this.longitude = longitude;
+	this.moment = moment;
+	this.status = status;
+	}
+	public OrderDTO(Order entity) {
+	id = entity.getId();
+	address = entity.getAddress();
+	latitude = entity.getLatitude();
+	longitude = entity.getLongitude();
+	moment = entity.getMoment();
+	status = entity.getStatus();
+	products = entity.getProducts()
+					 .stream()
+					 .map(x -> new ProductDTO(x))
+					 .collect(Collectors.toList());
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public Instant getMoment() {
+		return moment;
+	}
+	public void setMoment(Instant moment) {
+		this.moment = moment;
+	}
+	public OrderStatus getStatus() {
+		return status;
+	}
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}
+	public List<ProductDTO> getProducts() {
+		return products;
+	}
+}
+
+__________________________________________________________________________________________''
+
+
+OrderController.java
+
+''_____________________________________________________________________________________
+package com.devsuperior.dsdeliver.controllers;
+
+import java.net.URI;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.devsuperior.dsdeliver.dto.OrderDTO;
+import com.devsuperior.dsdeliver.services.OrderService;
+
+@RestController
+@RequestMapping(value = "/orders")
+public class OrderController {
+	
+	@Autowired
+	private OrderService service;
+	
+	@GetMapping
+	public ResponseEntity<List<OrderDTO>> findAll(){
+		List<OrderDTO> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+		}
+	@PostMapping
+	public ResponseEntity<OrderDTO> insert(@RequestBody OrderDTO dto){
+		dto = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder
+						.fromCurrentRequest()
+						.path("/{id}")
+						.buildAndExpand(dto.getId())
+						.toUri();
+		return ResponseEntity.created(uri).body(dto);
+	}
+	@PutMapping("/{id}/delivered")
+	public ResponseEntity<OrderDTO> setDelivered(@PathVariable Long id){
+		OrderDTO dto = service.setDelivered(id);
+		return ResponseEntity.ok().body(dto);
+	}
+}
+
+__________________________________________________________________________________________''
+
+
+ProductController.java
+
+''_____________________________________________________________________________________
+package com.devsuperior.dsdeliver.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.devsuperior.dsdeliver.dto.ProductDTO;
+import com.devsuperior.dsdeliver.services.ProductService;
+
+@RestController
+@RequestMapping(value = "/products")
+public class ProductController {
+	
+	@Autowired
+	private ProductService service;
+	
+	@GetMapping
+	public ResponseEntity<List<ProductDTO>> findAll(){
+		List<ProductDTO> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+		}
+	}
+
+__________________________________________________________________________________________''
+
+
+OrderDTO.java
+''_____________________________________________________________________________________
+package com.devsuperior.dsdeliver.dto;
+
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.devsuperior.dsdeliver.entities.Order;
+import com.devsuperior.dsdeliver.entities.OrderStatus;
+
+public class OrderDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	private Long id;
+	private String address;
+	private double latitude;
+	private double longitude;
+	private Instant moment;
+	private OrderStatus status;
+	private List <ProductDTO> products = new ArrayList<>();
+	public OrderDTO() {
+		
+	}
+	public OrderDTO(Long id, 
+					String address, 
+					double latitude, 
+					double longitude, 
+					Instant moment, 
+					OrderStatus status) {
+	this.id = id;
+	this.address = address;
+	this.latitude = latitude;
+	this.longitude = longitude;
+	this.moment = moment;
+	this.status = status;
+	}
+	public OrderDTO(Order entity) {
+	id = entity.getId();
+	address = entity.getAddress();
+	latitude = entity.getLatitude();
+	longitude = entity.getLongitude();
+	moment = entity.getMoment();
+	status = entity.getStatus();
+	products = entity.getProducts()
+					 .stream()
+					 .map(x -> new ProductDTO(x))
+					 .collect(Collectors.toList());
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public Instant getMoment() {
+		return moment;
+	}
+	public void setMoment(Instant moment) {
+		this.moment = moment;
+	}
+	public OrderStatus getStatus() {
+		return status;
+	}
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}
+	public List<ProductDTO> getProducts() {
+		return products;
+	}
+}
+
+__________________________________________________________________________________________''
+
+
+
+ProductDTO.java
+''_____________________________________________________________________________________
+package com.devsuperior.dsdeliver.dto;
+
+import java.io.Serializable;
+
+import com.devsuperior.dsdeliver.entities.Product;
+
+public class ProductDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private Long id;
+	private String name;
+	private double price;
+	private String description;
+	private String imageUri;
+	public ProductDTO() {
+		
+	}
+	public ProductDTO(Long id,
+					  String name,
+					  double price, 
+					  String description, 
+					  String imageUri) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.imageUri = imageUri;
+	}
+	public ProductDTO(Product entity) {
+		id = entity.getId();
+		name = entity.getName();
+		price = entity.getPrice();
+		description = entity.getDescription();
+		imageUri = entity.getImageUri();
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getImageUri() {
+		return imageUri;
+	}
+	public void setImageUri(String imageUri) {
+		this.imageUri = imageUri;
+	}
+}
+
+__________________________________________________________________________________________''
+
+
+
+ProductRepository.java
+''_____________________________________________________________________________________
+package com.devsuperior.dsdeliver.repositories;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.devsuperior.dsdeliver.entities.Product;
+
+public interface ProductRepository extends JpaRepository<Product, Long>{
+	
+	List <Product> findAllByOrderByNameAsc();
+}
+
+__________________________________________________________________________________________''
+
+
+
+OrderRepository.java
+''_____________________________________________________________________________________
+package com.devsuperior.dsdeliver.repositories;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.devsuperior.dsdeliver.entities.Order;
+
+public interface OrderRepository extends JpaRepository<Order, Long>{
+	/*@Query("SELECT DISTINCT obj FROM Order obj JOIN FETCH obj.products"
+		     + 	"WHERE obj.status = 0 ORDER BY obj.moment ASC")*/
+	//List<Order> findOrdersWithProducts(); 
+}
+_________________________________________________''
+
+
+
+
+
+OrderService.java
+''_____________________________________________________________________________________
+package com.devsuperior.dsdeliver.services;
+
+import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.devsuperior.dsdeliver.dto.OrderDTO;
+import com.devsuperior.dsdeliver.dto.ProductDTO;
+import com.devsuperior.dsdeliver.entities.Order;
+import com.devsuperior.dsdeliver.entities.OrderStatus;
+import com.devsuperior.dsdeliver.entities.Product;
+import com.devsuperior.dsdeliver.repositories.OrderRepository;
+import com.devsuperior.dsdeliver.repositories.ProductRepository;
+
+
+@Service
+public class OrderService {
+	
+	@Autowired
+	private OrderRepository repository;
+	@Autowired
+	private ProductRepository productRepository;
+	@Transactional
+	public List<OrderDTO> findAll(){
+		List<Order> list = repository.findAll();
+		return list.stream()
+				   .map(x -> new OrderDTO(x))
+				   .collect(Collectors.toList());
+	}
+	@Transactional
+	public OrderDTO insert(OrderDTO dto) {
+		Order order = new Order(null,
+								dto.getAddress(),
+								dto.getLatitude(), 
+								dto.getLongitude(), 
+								Instant.now(),
+								OrderStatus.PENDING);
+		for(ProductDTO p : dto.getProducts()) {
+			Product product = productRepository.getOne(p.getId());
+			order.getProducts().add(product);
+		}
+		order = repository.save(order);	
+		return new OrderDTO(order);
+	}
+	@Transactional
+	public OrderDTO setDelivered(Long id) {
+		Order order = repository.getOne(id);
+		order.setStatus(OrderStatus.DELIVERED);
+		order = repository.save(order);
+		return new OrderDTO(order);
+	}
+}
+____________________________________________________''
+
+
+
+
+
+ProductService.java
+''_____________________________________________________________________________________
+package com.devsuperior.dsdeliver.services;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.Entity;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.devsuperior.dsdeliver.dto.ProductDTO;
+import com.devsuperior.dsdeliver.entities.Product;
+import com.devsuperior.dsdeliver.repositories.ProductRepository;
+
+@Service
+public class ProductService {
+	
+	@Autowired
+	private ProductRepository repository;
+	@Transactional /* não está aceitando o agumento (readOnly = true) */
+	public List<ProductDTO> findAll(){
+		List<Product> list = repository.findAllByOrderByNameAsc();
+		return list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
+	}
+}
+_______________________________________________________________________________________''
