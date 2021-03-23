@@ -3253,7 +3253,7 @@ curl http:localhost:3001
 
 só funciona em teminal linux
 */
-__________________________________________________________________________________________''
+________________________________________________________________________________________''
 
 
 
@@ -3274,7 +3274,7 @@ ________________________________________________________________________________
 
 
 
-java    (spring-boot)
+java:    (spring-boot)
 
 
 
@@ -3896,3 +3896,23 @@ public class ProductService {
 	}
 }
 _______________________________________________________________________________________''
+
+javascript:
+
+
+console.log('estrutura de dados')
+
+let list = []
+list.push(5)
+list.push(10,6,8)
+list.push(10)
+console.log(list)
+list.pop()
+console.log(list)
+list.splice(2, 1)
+console.log(list)
+console.log(list.length)
+let double = list.map(dob => dob * 2)
+console.log(double)
+let filtered = list.filter(e =>  e > 9 ? e : null)
+console.log(filtered)
