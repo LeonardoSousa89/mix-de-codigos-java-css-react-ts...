@@ -96,7 +96,8 @@ start /?
 ren /?
 echo /?
 cls /?
-
+edit /?
+regedit
 
 
 externos:
