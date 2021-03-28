@@ -3916,3 +3916,48 @@ let double = list.map(dob => dob * 2)
 console.log(double)
 let filtered = list.filter(e =>  e > 9 ? e : null)
 console.log(filtered)
+
+_______________________________________________________________________________________''
+
+
+
+console.log('                           reduce exercises')
+console.log('========================================================================')
+let reduced = []
+reduced.push(1,2,3,5,23,56,89)
+
+/*first param - callback(with two arguments), second param - initial value*/
+let sum = reduced.reduce((acumulator, values)=>{
+    return acumulator + values
+},0)
+console.log(sum)
+
+console.log('========================================================================')
+let new_reduced = []
+new_reduced.push(0.63,33,0.365,1,0,-3)
+
+let new_sum = new_reduced.reduce((acumulator, values)=>{
+    const filter = acumulator >= 1
+    return filter + values
+},0)
+console.log(new_sum)
+
+console.log('========================================================================')
+let reduced_never_stopped = []
+reduced_never_stopped.push(100,300,450,550,2,4,70,55,1000)
+
+let sum_never_stopped = reduced_never_stopped.reduce((acumulator, currentValues)=>{
+    const filter = acumulator > 100
+    return filter + currentValues
+},0)
+
+console.log(sum_never_stopped)
+console.log('========================================================================')
+let reduced_sum = []
+reduced_sum.push(1,2,3,4,5,6,7,8,9,0)
+
+let sum_again = reduced_sum.reduce((acumulator, currentValues)=>{
+    return acumulator + currentValues
+},0)
+
+console.log(sum_again)
