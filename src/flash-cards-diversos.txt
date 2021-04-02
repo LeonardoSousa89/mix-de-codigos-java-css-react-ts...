@@ -4003,3 +4003,13 @@ https://mvnrepository.com/artifact/org.springframework.boot
 https://projectlombok.org/
 
 https://projectlombok.org/all-versions
+
+https://junit.org/junit5/docs/current/user-guide/
+
+https://www.h2database.com/html/main.html
+
+https://start.spring.io/
+
+https://maven.apache.org/guides/
+
+https://docs.gradle.org/current/userguide/userguide.html
