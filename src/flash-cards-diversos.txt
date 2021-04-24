@@ -4024,7 +4024,29 @@ mercadoria = [
     console.log(totalAPagar.toFixed(3))
 
 
+console.log('========================================================================')	
+let calc = [23, 2]
+const operation = '/'
+oper = eval(`${calc[0]} ${operation} ${calc[1]}`)
+console.log(oper)
 
+console.log('========================================================================')	
+let calc = [23, 2]
+const operation = '+'
+oper = eval(`${calc[0]} ${operation} ${calc[1]}`)
+console.log(oper)
+
+console.log('========================================================================')	
+let calc = [23, 2]
+const operation = '-'
+oper = eval(`${calc[0]} ${operation} ${calc[1]}`)
+console.log(oper)
+
+console.log('========================================================================')	
+let calc = [23, 2]
+const operation = '*'
+oper = eval(`${calc[0]} ${operation} ${calc[1]}`)
+console.log(oper)
 
 ==========================================================================================
 
