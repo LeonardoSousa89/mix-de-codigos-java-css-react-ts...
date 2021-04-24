@@ -3961,11 +3961,67 @@ let sum_again = reduced_sum.reduce((acumulator, currentValues)=>{
 },0)
 
 console.log(sum_again)
+console.log('========================================================================')
+Array(3).fill().map(() => console.log('oi'))
+console.log('========================================================================')
+Array(3).fill().map(() =>{
+    
+	console.log('estude rapa!!')
+
+})
+console.log('========================================================================')
+Array(3).fill().map(() =>{
+    console.log('estudar rappa!!!')
+})
+console.log('========================================================================')
+produtos = [
+            {item:'pão limiar',preco:3.65},
+            {item:'açúcar',preco:0.99},
+            {item:'arroz',preco:3.25},
+            {item:'sal',preco:1.05}
+           ]
+console.log(produtos)  
+
+totalComprado = produtos.reduce((item,acumuloDeItem)=>{
+    item = item
+    acumulo = acumuloDeItem.preco
+    return  item +  acumulo
+    
+},0) 
+console.log('valor a pagar:' + totalComprado)
+console.log('========================================================================')
+console.log('carrinho de compras')
+produtos = [
+            {item:'pão limiar',preco:3.65,qtde:3},
+            {item:'açúcar',preco:0.99,qtde:6},
+            {item:'arroz',preco:3.25,qtde:1},
+            {item:'sal',preco:1.05,qtde:9}
+           ]
+console.log(produtos)  
 
 
-
-
-
+totalComprado = produtos.reduce((item,acumuloDeItem)=>{
+    item = item
+    acumulo = acumuloDeItem.preco *  acumuloDeItem.qtde
+    return  item +  acumulo
+    
+},0) 
+console.log('valor a pagar:' + totalComprado.toFixed(2) + 'R$')
+console.log('========================================================================')
+mercadoria = [
+        {item:'macarrão brandini',preco:0.99,qtde:3},
+        {item:'açúcar',preco:1.99,qtde:2},
+        {item:'sal',preco:0.97,qtde:1}
+    ]
+    
+    console.log(mercadoria)
+    
+    totalAPagar = mercadoria.reduce((item,acumulador)=>{
+        acumulo = acumulador.preco * acumulador.qtde
+        return  item + acumulo
+    },0)
+           
+    console.log(totalAPagar.toFixed(3))
 
 
 
