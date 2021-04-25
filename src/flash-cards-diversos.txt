@@ -4049,6 +4049,51 @@ oper = eval(`${calc[0]} ${operation} ${calc[1]}`)
 console.log(oper)
 
 ==========================================================================================
+				'sem quantidade'
+
+
+loja = new Promise(produtos =>{
+    return produtos([
+        {item:'arroz',preco:3.65},
+        {item:'pão limiar',preco:3.27},
+        {item:'açúcar demerara',preco:4.09},
+        {item:'arroz de cachorro pedigre',preco:13.27}
+        ])
+}).then(item => item.filter(compra => compra.preco < 3.99))//produtos comprados com valor abaixo de 3,99R$
+  .then(item => item.reduce((item,acumulador)=>{                //soma dos valores comprados
+      return item + acumulador.preco
+  },0))
+  .then(item => console.log('total a pagar:' + item + 'R$'))//resultado para pagamento
+  .catch(erro => console.log('erro:' + erro))
+  
+ 
+				'sem quantidade'
+
+
+
+ 
+ 				'com quantidade' 
+
+
+  loja = new Promise(produtos =>{
+    return produtos([
+        {item:'arroz',preco:3.65,qtde:3},
+        {item:'pão limiar',preco:3.27,qtde:2},
+        {item:'açúcar demerara',preco:4.09,qtde:5},
+        {item:'arroz de cachorro pedigre',preco:13.27,qtde:1}
+        ])
+}).then(item => item.filter(compra => compra.preco < 3.99))      //produtos comprados com valor abaixo de 3,99R$
+  .then(item => item.reduce((item,acumulador)=>{                //soma dos valores comprados
+        valorAPagar = acumulador.preco * acumulador.qtde
+        return item + valorAPagar
+  },0))
+  .then(item => console.log('total a pagar:' + item + 'R$'))    //resultado para pagamento
+  .catch(erro => console.log('erro:' + erro))
+
+				'com quantidade' 
+
+
+==========================================================================================
 
 =====================================================
 arquivo para configuração de rota spa em deploy React
