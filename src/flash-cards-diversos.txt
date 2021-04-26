@@ -4112,6 +4112,208 @@ loja = new Promise((mercearia)=>{
   .then(aPagar => console.log('total a pagar:' + aPagar.toFixed(2) + 'R$'))
   .catch(err => console.log('erro:' + err))
 
+========================================================================================= 
+faça um algoritmo de caixa de mercado, que a partir de um produto escolhido e sua quantidade selecionada mostre o total a pagar.
+-----------------------------------------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------
+pseudo algoritmo:
+
+-escolha o produto
+-insira o valor n da quantidade
+-multiplique o preço do(s) produto(s)pela quantidade
+-exiba o total ao usuário
+-fimalgoritmo
+------------------------------------------------------------ 
+ 
+ (javascript)
+ 
+  function loja(item,quantidade){
+    switch(item){
+        case 1:
+            var produto = 'arroz'
+            var preco = 3.49
+            var total = preco * quantidade 
+            return  'produto:' + produto + ',' + 'valor unitário:' + preco + ','+ 'quantidade:' + quantidade + ',' + 'total a pagar:' + total 
+            break
+        case 2:
+            var produto = 'açúcar demerara'
+            var preco = 5.94
+            var total = preco * quantidade 
+            return  'produto:' + produto + ',' + 'valor unitário:' + preco + ','+ 'quantidade:' + quantidade + ',' + 'total a pagar:' + total 
+            break
+        case 3:
+            var produto = 'sal do imalaia'
+            var preco = 9.07
+            var total = preco * quantidade 
+            return  'produto:' + produto + ',' + 'valor unitário:' + preco + ','+ 'quantidade:' + quantidade + ',' + 'total a pagar:' + total 
+            break
+        case 4:
+            var produto = 'leite ninho lt 1kg'
+            var preco = 22.37
+            var total = preco * quantidade 
+            return  'produto:' + produto + ',' + 'valor unitário:' + preco + ','+ 'quantidade:' + quantidade + ',' + 'total a pagar:' + total 
+            break
+        case 5:
+            var produto = 'gelatina dr. oetker'
+            var preco = 0.47
+            var total = preco * quantidade 
+            return  'produto:' + produto + ',' + 'valor unitário:' + preco + ','+ 'quantidade:' + quantidade + ',' + 'total a pagar:' + total 
+            break
+        default:
+            return 'produto não encontrado!'
+    }
+}
+
+console.log(loja(1,2))
+console.log(loja(3,3))
+console.log(loja(4,2))
+
+============================================================================================ 
+console.log('---------------------------------------matemática pura----------')
+console.log('url: https://www.inf.pucrs.br/~pinho/LaproI/Exercicios/SeqDecisao/lista1.htm')
+
+console.log('================================================================')
+console.log('exercicio 1')
+function geometria1(x1,x2,y1,y2){
+    //let p1 = (x1 +',' + x2) 
+    //let p2 = (y1  +',' + y2)
+    let d = Math.sqrt(Math.pow((x2 - x1),2) + Math.pow((y2 - y1),2))
+    return d
+}
+console.log(geometria1(4,-8,2,-3).toFixed(3))
+console.log('================================================================')
+console.log('exercicio 2')
+function geometria2(a,b,c){
+    let r =  Math.pow((a + b),2)
+    let s =  Math.pow((b + c),2)
+    const d = ((r + s) /2)
+    
+    if(a <= 0 || b <= 0|| c <= 0){
+        console.log('valores inválidos')
+    }else{
+       console.log('D =' + d)
+    }
+}
+geometria2(1,5,3)
+console.log('================================================================')
+console.log('exercicio 3')
+
+
+console.log('================================================================')
+console.log('exercicio 4')
+
+
+console.log('================================================================')
+console.log('exercicio 5')
+
+function aritmetica3(nota1,nota2,nota3){
+    var mediaPonderada = (((nota1 * 2) + (nota2 * 3) + (nota3 * 5)) / 10)
+    return mediaPonderada
+}
+console.log(aritmetica3(3.3,2.5,5))
+console.log('================================================================')
+console.log('exercicio 6')
+
+
+console.log('================================================================')
+console.log('exercicio 7')
+let algebra1 = (custoDeProducao) =>{
+    var percentualDoDistribuidor = (28/100)
+    var imposto = (45/100)
+    
+    var custoDeFabrica = (imposto * custoDeProducao) + custoDeProducao
+    var custoAoConsumidor = custoDeFabrica + (percentualDoDistribuidor * custoDeFabrica)
+    
+    return 'custo de fábrica:' + custoDeFabrica.toFixed(3) + ',' + 'custo ao consumidor:' + custoAoConsumidor.toFixed(3)
+}
+console.log(algebra1(1000))
+console.log('================================================================')
+console.log('exercicio 8')
+let algebra2 = () =>{
+    
+}
+console.log('================================================================')
+console.log('exercicio 9')
+let algebra3 = () =>{
+    
+}
+
+============================================================================================ 
+console.log('---------------------------------------matemática pura----------')
+console.log('url: https://www.inf.pucrs.br/~pinho/LaproI/Exercicios/SeqDecisao/lista1.htm')
+
+versão JAVA
+-----------------------exercicio 1-------------------------
+-----------------------exercicio 2-------------------------
+-----------------------exercicio 3-------------------------
+-----------------------exercicio 4-------------------------
+-----------------------exercicio 5-------------------------
+import java.util.*;
+
+public class Main {
+    
+    
+    
+    interface Media{
+        double ponderada(double a, double b, double c);
+    }
+    
+    public static void main(String[] args) throws Exception {
+        try{
+            
+                Aritmetica3 media = new Aritmetica3();
+                System.out.println("media:" + media.ponderada(4,3,5));
+            
+        }catch(Exception e){
+                System.out.println("Erro:" + e.getMessage());
+            }
+    }
+    
+    static class Aritmetica3 implements Media{
+        @Override
+        public double ponderada(double a, double b, double c){
+            double calculo = ((a * 2) + (b * 3)  + (c * 5)) / 10;
+            return calculo;
+        }
+    }
+    
+    
+}
+-----------------------exercicio 6-------------------------
+-----------------------exercicio 7-------------------------
+java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Algebra1 algebra1 = new Algebra1();
+        algebra1.calculo(3000.00);
+    }
+    
+   static class Algebra1{
+        double percentualDoDistribuidor = (28/100);
+        double imposto = (45/100);
+        double custoDeProducao = 0;
+        
+        void calculo(double custoDeProducao){
+            this.custoDeProducao =  custoDeProducao;
+            
+            double imposto = this.imposto;
+            double percentualDoDistribuidor = this.percentualDoDistribuidor;
+            
+            double custoDeFabrica = (imposto  * this.custoDeProducao) + this.custoDeProducao;
+            double custoAoConsumidor = custoDeFabrica + (percentualDoDistribuidor  * custoDeFabrica);
+            System.out.println(" custo de fabrica:" +  custoDeFabrica + ","+ "custo ao Consumidor:" + custoAoConsumidor);
+        }
+    }
+}
+-----------------------exercicio 8-------------------------
+-----------------------exercicio 9-------------------------
+
 
 ==========================================================================================
 
