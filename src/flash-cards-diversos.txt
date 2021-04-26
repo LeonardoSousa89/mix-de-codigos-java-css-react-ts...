@@ -4093,7 +4093,29 @@ loja = new Promise(produtos =>{
 				'com quantidade' 
 
 
+
+console.log('========================================================================')	
+loja = new Promise((mercearia)=>{
+    return mercearia([
+                {cod: 01300, item:'macarrão imperador',preco:1.36, qtde:150},
+                {cod: 01400, item:'sal do imalaia',preco:4.57, qtde:5},
+                {cod: 01700, item:'arroz bianco',preco:5.39, qtde:50},
+                {cod: 01900, item:'leite UAC',preco:9.37, qtde:100},
+                {cod: 01200, item:'sal',preco:1.35, qtde:10}
+        ])
+}).then(carrinho => carrinho.filter(compras => compras.preco < 4.99) )
+  .then(produtos => produtos.reduce((items,acumuladorDeItems)=>{
+      esteiraDeCompras = acumuladorDeItems.preco * acumuladorDeItems.qtde
+      totalAPagar      = items + esteiraDeCompras
+      return totalAPagar
+  },0))
+  .then(aPagar => console.log('total a pagar:' + aPagar.toFixed(2) + 'R$'))
+  .catch(err => console.log('erro:' + err))
+
+
 ==========================================================================================
+
+
 
 =====================================================
 arquivo para configuração de rota spa em deploy React
