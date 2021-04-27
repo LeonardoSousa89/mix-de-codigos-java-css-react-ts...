@@ -4257,12 +4257,47 @@ console.log('================================================================')
 console.log('exercicio 16')
 console.log('================================================================')
 console.log('exercicio 17')
+function aritmetica(altura,sexo){
+      if(sexo === 'm'|| sexo ==='M'){
+            peso = (72.7 * altura) - 58
+            return 'peso ideal:' + peso.toFixed(2)
+    } if(sexo === 'f'|| sexo ==='F'){
+            peso = (62.1 * altura) - 44.7
+            return 'peso ideal:' + peso.toFixed(2)
+    }
+}
+console.log(aritmetica(1.64,'m'))
 console.log('================================================================')
 console.log('exercicio 18')
 console.log('================================================================')
 console.log('exercicio 19')
 console.log('================================================================')
 console.log('exercicio 20')
+function aritmetica(codigo,qtde){
+    switch(codigo){
+        case 1001:
+            return 'total a pagar:' + qtde * 5.32
+            break
+        case 1324:
+            return 'total a pagar:' + qtde * 6.45
+            break
+        case 6548:
+            return 'total a pagar:' + qtde * 2.37
+            break
+        case 0987:
+            return 'total a pagar:' + qtde * 5.32
+            break
+        case 7623:
+            return 'total a pagar:' + qtde * 6.45
+            break
+        default:
+            return 'opção inválida!'
+    }
+}
+console.log(aritmetica(1324,3))
+console.log(aritmetica(1001,1))
+console.log(aritmetica(101,11))
+console.log(aritmetica(0987,5))
 console.log('================================================================')
 console.log('exercicio 21')
 console.log('================================================================')
@@ -4400,6 +4435,186 @@ public class Main {
 -----------------------exercicio 12-------------------------
 -----------------------exercicio 13-------------------------
 -----------------------exercicio 14-------------------------
+-----------------------exercicio 15-------------------------
+-----------------------exercicio 16-------------------------
+-----------------------exercicio 17-------------------------
+import java.util.*;
+
+public class Main {
+    
+    interface PesoIdeal{
+        void peso(double altura);
+    }
+    
+    public static void main(String[] args) throws Exception {
+        Mulher mulher = new Mulher();
+        mulher.peso(1.55);
+        
+        Homen homen = new Homen();
+        homen.peso(1.55);
+    }
+    
+    
+   static class Homen implements PesoIdeal{
+       @Override
+       public  void peso(double altura){
+          double pi = (72.7 * altura) - 58;
+          System.out.printf("peso ideal: %.2f \n",pi);
+       }
+    }
+    
+   static class Mulher implements PesoIdeal{
+       @Override
+       public  void peso(double altura){
+           double pi = (62.1 * altura) - 44.7;
+           System.out.printf("peso ideal: %.2f \n",pi);
+       }
+    }
+    
+    
+}
+
+-----------------------exercicio 18-------------------------
+-----------------------exercicio 19-------------------------
+-----------------------exercicio 20-------------------------
+import java.util.*;
+
+public class Main {
+    
+    interface Items{
+        void produtos(int codigo,int qtde);
+    }
+    
+    public static void main(String[] args) throws Exception {
+        Loja loja = new Loja();
+        loja.produtos(1001,3);
+        loja.produtos(101,3);
+        loja.produtos(9987,2);
+    }
+    
+    static class Loja implements Items{
+        @Override
+        public void produtos(int codigo,int qtde){
+            double totalAPagar;
+            switch(codigo){
+                case 1001:
+                    totalAPagar = qtde * 5.32;
+                    System.out.printf("total a pagar: %.2f \n",totalAPagar);
+                    break; 
+                  case 1324:
+                    totalAPagar = qtde * 6.45;
+                    System.out.printf("total a pagar: %.2f \n",totalAPagar);
+                    break; 
+                case 6548:
+                    totalAPagar = qtde * 2.37;
+                    System.out.printf("total a pagar: %.2f \n",totalAPagar);
+                    break; 
+                case 9987:
+                    totalAPagar = qtde * 5.32;
+                    System.out.printf("total a pagar: %.2f \n",totalAPagar);
+                    break; 
+                case 7623:
+                    totalAPagar = qtde * 6.45;
+                    System.out.printf("total a pagar: %.2f \n",totalAPagar);
+                    break; 
+                default:
+                    System.out.println("entrada inválida!");
+            }
+        }
+    }
+    
+    
+}
+-----------------------exercicio 21-------------------------
+-----------------------exercicio 22-------------------------
+-----------------------exercicio 23-------------------------
+-----------------------exercicio 24-------------------------
+-----------------------exercicio 25-------------------------
+-----------------------exercicio 26-------------------------
+-----------------------exercicio 27-------------------------
+-----------------------exercicio 28-------------------------
+-----------------------exercicio 29-------------------------
+-----------------------exercicio 30-------------------------
+
+
+============================================================================================ 
+print('---------------------------------------matemática pura----------')
+print('url: https://www.inf.pucrs.br/~pinho/LaproI/Exercicios/SeqDecisao/lista1.htm')
+
+versão python
+-----------------------exercicio 1-------------------------
+-----------------------exercicio 2-------------------------
+-----------------------exercicio 3-------------------------
+-----------------------exercicio 4-------------------------
+-----------------------exercicio 5-------------------------
+-----------------------exercicio 6-------------------------
+-----------------------exercicio 7-------------------------
+-----------------------exercicio 8-------------------------
+-----------------------exercicio 9-------------------------
+-----------------------exercicio 10-------------------------
+-----------------------exercicio 11-------------------------
+-----------------------exercicio 12-------------------------
+-----------------------exercicio 13-------------------------
+-----------------------exercicio 14-------------------------
+def media(nota1,nota2,nota3):
+    total = (nota1 + nota2 + nota3) / 3
+    if(total >= 6 and total <= 10):
+        return 'aluno aprovado! média:' , total
+    else:
+        return 'aluno reprovado! média:', total
+        
+        
+
+print(media(2,3,3))
+print(media(9,7,5))
+-----------------------exercicio 15-------------------------
+-----------------------exercicio 16-------------------------
+-----------------------exercicio 17-------------------------
+-----------------------exercicio 18-------------------------
+-----------------------exercicio 19-------------------------
+-----------------------exercicio 20-------------------------
+-----------------------exercicio 21-------------------------
+-----------------------exercicio 22-------------------------
+-----------------------exercicio 23-------------------------
+-----------------------exercicio 24-------------------------
+-----------------------exercicio 25-------------------------
+-----------------------exercicio 26-------------------------
+-----------------------exercicio 27-------------------------
+-----------------------exercicio 28-------------------------
+-----------------------exercicio 29-------------------------
+-----------------------exercicio 30-------------------------
+
+============================================================================================ 
+console.log('---------------------------------------matemática pura----------')
+console.log('url: https://www.inf.pucrs.br/~pinho/LaproI/Exercicios/SeqDecisao/lista1.htm')
+
+versão typescript
+-----------------------exercicio 1-------------------------
+-----------------------exercicio 2-------------------------
+-----------------------exercicio 3-------------------------
+-----------------------exercicio 4-------------------------
+-----------------------exercicio 5-------------------------
+-----------------------exercicio 6-------------------------
+-----------------------exercicio 7-------------------------
+-----------------------exercicio 8-------------------------
+-----------------------exercicio 9-------------------------
+-----------------------exercicio 10-------------------------
+-----------------------exercicio 11-------------------------
+-----------------------exercicio 12-------------------------
+-----------------------exercicio 13-------------------------
+-----------------------exercicio 14-------------------------
+function media(nota1 :number,nota2 :number,nota3 :number): void{
+    
+    let media = (nota1 + nota2 + nota3) / 3
+    
+    if(media >= 6 && media <= 10){
+        console.log('aluno aprovado, média:' + media.toFixed(2))
+    }else{
+        console.log('aluno reprovado, média:' + media.toFixed(2))
+    }
+}
+media(2,5,7)
+media(9,5,7)
 -----------------------exercicio 15-------------------------
 -----------------------exercicio 16-------------------------
 -----------------------exercicio 17-------------------------
