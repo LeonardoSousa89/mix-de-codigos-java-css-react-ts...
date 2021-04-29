@@ -4772,6 +4772,7 @@ alunos.media(alunos.nota1, alunos.nota2, alunos.nota3)
 ============================================================================================ 
 html/css/js:  (typescript)	
 
+
 console.log('union')
 
 function logDetails(uid :number| string, item: string) {
@@ -4780,6 +4781,9 @@ function logDetails(uid :number| string, item: string) {
 
 logDetails(123,'item')
 logDetails('123','item')
+
+
+
 
 
 
@@ -4797,6 +4801,8 @@ logDetails2('123','item')
 
 
 
+
+
 console.log('type alias with intersection')
 
 type AccountInfo = {
@@ -4810,7 +4816,102 @@ const account: AccountInfo = {
     name:'leonard'
 }
 
+type CharInfo = {
+    nickname: string;
+    level: number;
+}
+
+const char: CharInfo = {
+    nickname:'zatoichi',
+    level: 90
+}
+
+//intersection
+type PlayerInfo = AccountInfo & CharInfo
+
+
+const player: PlayerInfo = {
+    id:123,
+    name:'leonard',
+    email:'playerBR',
+    nickname:'zatoichi',
+    level:150
+}
+
+console.log(player)
+
+
+
+
+console.log('classes')
+
+console.log('example 1')
+class UserAccount {
+    name :string
+    age  :number
+
+    
+    constructor(name :string, age :number) {
+    this.name = name
+    this.age =  age
+    }
+    
+    logDetails(): void {
+        console.log(`the player ${this.name} is ${this.age} years old`)
+    }
+}
+
+const account = new UserAccount('Bruce',55)
 console.log(account)
+console.log(`age: ${account.age}`)
+
+account.logDetails()
+
+
+
+
+
+
+console.log('example 2')
+	
+class Player{
+    id :number | string
+    name :string
+    email :string
+
+    constructor(id :number | string, name :string, email :string ){
+        this.id = id
+        this.name = name
+        this.email = email
+    }
+    
+    playerDetails() :void {
+        console.log(`this player ${this.name} has a email: ${this.email} and id:${this.id}`)
+    }
+}
+
+class CharAccount extends Player{
+    nickname :string
+    level :number
+    
+     constructor( id :number | string, name :string, email :string, nickname :string, level :number ) {
+         super(id, name, email)
+         this.nickname = nickname
+         this.level    = level
+     }
+}
+
+let person  = new Player(12,'Mendes','mendes@gmail.com')
+let person1 = new Player('12','Mendes','mendes@gmail.com')
+let person2 = new  CharAccount(12,'Mendes','mendes@gmail.com','mendes_foo',150)
+console.log(person)
+console.log(person1)
+console.log(person2)
+person2. playerDetails() 	
+	
+	
+	
+	
 
 ==========================================================================================
 
