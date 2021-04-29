@@ -4770,7 +4770,7 @@ alunos.media(alunos.nota1, alunos.nota2, alunos.nota3)
 -----------------------exercicio 29-------------------------
 -----------------------exercicio 30-------------------------
 ============================================================================================ 
-console.log("typescript")
+html/css/js:  (typescript)	
 
 
 //union
