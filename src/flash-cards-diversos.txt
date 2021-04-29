@@ -4932,6 +4932,8 @@ console.log('example 3')
     }
     
 	//utiliza-se getters e setters para acessar atributos como o java
+	//https://www.typescripttutorial.net/typescript-tutorial/typescript-getters-setters/
+	//https://www.tutorialsteacher.com/typescript/abstract-class
 	
     playerDetails() :void {
         console.log(`this player ${this.name} has a email: ${this.email} and id:${this.id}`)
