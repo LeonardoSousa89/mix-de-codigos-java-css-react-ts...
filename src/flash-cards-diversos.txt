@@ -4843,6 +4843,8 @@ console.log(player)
 
 
 
+
+
 console.log('classes')
 
 console.log('example 1')
@@ -4866,6 +4868,7 @@ console.log(account)
 console.log(`age: ${account.age}`)
 
 account.logDetails()
+
 
 
 
@@ -4912,6 +4915,49 @@ person2. playerDetails()
 	
 	
 	
+
+
+
+console.log('example 3')
+
+ class Player{
+       private id :number | string //acesso restrito a classe (modificador de acesso)
+       protected name :string  //acesso restrito a classe  (modificador de acesso)
+       public email :string  //permitido acesso (modificador de acesso)
+
+    constructor(id :number | string, name :string, email :string ){
+        this.id = id
+        this.name = name
+        this.email = email
+    }
+    
+    playerDetails() :void {
+        console.log(`this player ${this.name} has a email: ${this.email} and id:${this.id}`)
+    }
+}
+
+class CharAccount extends Player{
+    readonly nickname :string  //somente leitura
+    level :number
+    
+     constructor( id :number | string, name :string, email :string, nickname :string, level :number ) {
+         super(id, name, email)
+         this.nickname = nickname
+         this.level    = level
+     }
+}
+
+let person  = new Player(12,'Mendes','mendes@gmail.com')
+let person1 = new Player('12','Mendes','mendes@gmail.com')
+let person2 = new  CharAccount(12,'Mendes','mendes@gmail.com','mendes_foo',150)
+console.log(person)
+console.log(person1)
+console.log(person2)
+person2. playerDetails() 
+
+
+
+
 
 ==========================================================================================
 
