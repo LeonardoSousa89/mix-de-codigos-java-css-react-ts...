@@ -4772,8 +4772,7 @@ alunos.media(alunos.nota1, alunos.nota2, alunos.nota3)
 ============================================================================================ 
 html/css/js:  (typescript)	
 
-
-//union
+console.log('union')
 
 function logDetails(uid :number| string, item: string) {
     console.log(uid,item)
@@ -4782,11 +4781,10 @@ function logDetails(uid :number| string, item: string) {
 logDetails(123,'item')
 logDetails('123','item')
 
-//union
 
 
 
-//type alias
+console.log('type alias')
 
 type uuid= number | string
 function logDetails2(uid :uuid, item: string) {
@@ -4796,7 +4794,23 @@ function logDetails2(uid :uuid, item: string) {
 logDetails2(123,'item')
 logDetails2('123','item')
 
-//type alias
+
+
+
+console.log('type alias with intersection')
+
+type AccountInfo = {
+    id: number;
+    name: string;
+    email?: string;
+}
+
+const account: AccountInfo = {
+    id: 123,
+    name:'leonard'
+}
+
+console.log(account)
 
 ==========================================================================================
 
