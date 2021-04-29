@@ -4769,6 +4769,35 @@ alunos.media(alunos.nota1, alunos.nota2, alunos.nota3)
 -----------------------exercicio 28-------------------------
 -----------------------exercicio 29-------------------------
 -----------------------exercicio 30-------------------------
+============================================================================================ 
+console.log("typescript")
+
+
+//union
+
+function logDetails(uid :number| string, item: string) {
+    console.log(uid,item)
+}
+
+logDetails(123,'item')
+logDetails('123','item')
+
+//union
+
+
+
+//type alias
+
+type uuid= number | string
+function logDetails2(uid :uuid, item: string) {
+    console.log(uid,item)
+}
+
+logDetails2(123,'item')
+logDetails2('123','item')
+
+//type alias
+
 ==========================================================================================
 
 
