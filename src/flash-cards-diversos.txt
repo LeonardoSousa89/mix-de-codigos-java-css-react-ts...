@@ -4931,6 +4931,8 @@ console.log('example 3')
         this.email = email
     }
     
+	//utiliza-se getters e setters para acessar atributos como o java
+	
     playerDetails() :void {
         console.log(`this player ${this.name} has a email: ${this.email} and id:${this.id}`)
     }
