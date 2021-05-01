@@ -4963,6 +4963,233 @@ person2. playerDetails()
 
 
 
+//Ts conteúdo de hoje:
+
+//Type alias ,
+//Interface  ,
+//Generics
+
+console.log('generics< version 1>')
+//not using generics
+function  useState( ) {
+        let state :number | string
+
+function getState( ) {
+        return state
+   }
+
+function setState( newState :number | string ) {
+      state = newState
+   }
+
+     return {   getState,    setState }
+}
+
+
+const newstate = useState( ) 
+
+newstate.setState(123)
+console.log(newstate.getState( ))
+
+
+
+
+
+console.log('generics< version 2>')
+//Using generics:
+// s => state
+// t => type
+// k => key
+// v => value
+// e => element 
+
+ function  useState<s>( ) {
+        let state :s
+
+function getState( ) {
+        return state
+   }
+
+function setState( newState :s ) {
+      state = newState
+   }
+
+     return {   getState,    setState }
+}
+
+
+const newstate = useState<number>( ) 
+
+newstate.setState(123)
+console.log(newstate.getState( ))
+
+
+
+
+
+console.log('generics< version 3>')
+//Using generics:
+// s => state
+// t => type
+// k => key
+// v => value
+// e => element 
+
+ function  useState<s>( ) {
+        let state :s
+
+function getState( ) {
+        return state
+   }
+
+function setState( newState :s ) {
+      state = newState
+   }
+
+     return {   getState,    setState }
+}
+
+
+const newstate = useState<string>( ) 
+
+newstate.setState(123)
+console.log(newstate.getState( ))
+
+
+
+
+
+
+console.log('generics< version 4>')
+//Using generics:
+// s => state
+// t => type
+// k => key
+// v => value
+// e => element 
+
+ function  useState<s extends number | string>( ) {
+        let state :s
+
+function getState( ) {
+        return state
+   }
+
+function setState( newState :s ) {
+      state = newState
+   }
+
+     return {   getState,    setState }
+}
+
+
+const newstate = useState<string>( ) 
+
+newstate.setState(123)
+console.log(newstate.getState( ))
+
+
+
+
+console.log('generics< version 5>')
+//Using generics:
+// s => state
+// t => type
+// k => key
+// v => value
+// e => element 
+
+ function  useState<s extends number | string>( ) {
+        let state :s
+
+function getState( ) {
+        return state
+   }
+
+function setState( newState :s ) {
+      state = newState
+   }
+
+     return {   getState,    setState }
+}
+
+
+const newstate = useState<number>( ) 
+
+newstate.setState(123)
+console.log(newstate.getState( ))
+
+
+
+
+
+console.log('generics< version 6>')
+//Using generics:
+// s => state
+// t => type
+// k => key
+// v => value
+// e => element 
+
+ function  useState<s extends number | string = string >( ) {
+        let state :s
+
+function getState( ) {
+        return state
+   }
+
+function setState( newState :s ) {
+      state = newState
+   }
+
+     return {   getState,    setState }
+}
+
+
+const newstate = useState< >( ) 
+
+newstate.setState(123)
+console.log(newstate.getState( ))
+
+
+
+
+console.log('generics< version 7>')
+//Using generics:
+// s => state
+// t => type
+// k => key
+// v => value
+// e => element 
+
+Type numOrString = number | string
+
+ function  useState<s extends numOrString = string >( ) {
+        let state :s
+
+function getState( ) {
+        return state
+   }
+
+function setState( newState :s ) {
+      state = newState
+   }
+
+     return {   getState,    setState }
+}
+
+
+const newstate = useState< >( ) 
+
+newstate.setState(123)
+console.log(newstate.getState( ))
+
+
+
+
+
+
+
 ==========================================================================================
 
 
