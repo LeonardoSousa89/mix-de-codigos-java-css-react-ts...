@@ -5190,6 +5190,118 @@ console.log(newstate.getState( ))
 
 
 
+
+
+
+console.log('================venda===============')
+class Clientes <s extends number | string = string>{
+    protected id :s;
+    protected nome :s;
+    
+    constructor(id :s, nome :s) {
+        this.id = id;
+        this.nome = nome;
+    }
+    
+}
+
+class Produtos  extends Clientes {
+    protected  id_produto :string
+    protected nome_produto :string
+    protected preco_produto :number
+    protected qtde_produto :number
+    
+    constructor( id :string,
+                 nome :string,
+                 id_produto :string,
+                 nome_produto :string, 
+                 preco_produto :number, 
+                 qtde_produto :number){
+        super(id, nome)
+        this.nome_produto = nome_produto;
+        this.preco_produto = preco_produto;
+        this.qtde_produto = qtde_produto;
+    }
+    
+    totalAPagar = (qtde_produto :number ,preco_produto :number) :void => {
+        this.qtde_produto = qtde_produto
+        this.preco_produto = preco_produto
+        let total :number = this.qtde_produto * this.preco_produto
+        
+        console.log('valor a pagar:' + total + 'R$')
+    }
+}
+
+
+let compra = new Produtos('3540','Ricardo','01001','samsumg galaxy g7',758.65,2) 
+console.log(compra)
+compra.totalAPagar(758.65,2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+console.log('compra')
+
+type Produtos = {
+    id_produto? :number | string;
+    nome_produto? :string;
+    preco_produto :number;
+    qtde_produto :number;
+    totalAPagar: (preco_produto :number, qtde_produto :number) => void; 
+} 
+
+type Clientes = {
+    id:number | string;
+    nome: string;
+    endereco :string;
+}
+
+type Venda = Clientes & Produtos
+
+
+let compra :Venda = {
+    id_produto: null,
+    nome_produto: null,
+    preco_produto: 0,
+    qtde_produto: 0,
+    id: 0,
+    nome: null,
+    endereco: null,
+    totalAPagar: (preco_produto :number, qtde_produto :number):void => {
+        if(preco_produto < 1 && qtde_produto < 1){
+            console.log('insira os valores de preço e quantidade!')
+        }
+        else {
+            let total :number = qtde_produto * preco_produto
+            console.log(`valor a pagar: ${total} R$`)
+        }
+    } 
+}
+
+
+console.log(compra)
+compra.id_produto = 154
+compra.nome_produto = 'pneu Pirelli'
+compra.preco_produto = 745.36
+compra.qtde_produto = 3
+compra.id = 1
+compra.nome = 'Ricardo Gomez'
+compra.endereco = 'avenida paulista, n° 654'
+console.log(compra)
+compra.totalAPagar(compra.preco_produto, compra.qtde_produto)
 ==========================================================================================
 
 
