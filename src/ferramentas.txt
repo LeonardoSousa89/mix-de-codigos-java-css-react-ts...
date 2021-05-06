@@ -1,0 +1,162 @@
+
+links:
+
+https://www.google.com/search?client=firefox-b-d&q=npx
+
+https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html
+
+https://spring.io/projects/spring-boot
+
+[teste]:
+	https://www.primecontrol.com.br/10-ferramentas-de-automacao-de-testes-mais-usadas/
+
+	https://www.selenium.dev/
+
+
+[repositório]:
+	https://git-scm.com/
+	
+	https://github.com/
+
+[ide]:
+	https://code.visualstudio.com/
+	
+	https://netbeans.apache.org/download/index.html
+	
+	https://www.eclipse.org/downloads/
+	
+	https://spring.io/tools
+	
+	https://notepad-plus-plus.org/downloads/
+	
+	https://www.sublimetext.com/3
+	
+	https://www.jetbrains.com/pycharm/
+	
+	https://www.jetbrains.com/go/
+	
+	https://developer.android.com/studio
+	
+	https://developer.apple.com/xcode/
+
+
+[design/engenharia/modelagem/planejamento]:
+	https://app.moqups.com/
+
+	https://www.figma.com/
+
+	https://app.diagrams.net/
+	
+	https://swagger.io/
+
+	https://trello.com/pt-BR
+	
+	https://www.bootdey.com/
+	
+	https://sparxsystems.com/
+
+
+[ui/ux | language-tools]:
+	https://material-ui.com/pt/
+
+	https://material.angular.io/
+	
+	https://bootswatch.com/
+	
+	https://getbootstrap.com/
+	
+	https://react-bootstrap.github.io/
+	
+	https://vuetifyjs.com/en/
+	
+	https://vuematerial.io/
+
+
+[games]:
+	https://junit.org/junit5/docs/current/user-guide/
+	
+	https://unity.com/pt
+
+
+[database/server/backend-api]
+	https://www.h2database.com/html/main.html
+
+	https://start.spring.io/
+
+	https://maven.apache.org/guides/
+	
+	https://www.apache.org/
+
+	https://docs.gradle.org/current/userguide/userguide.html
+	
+	https://firebase.google.com/
+
+	https://www.mysql.com/
+
+	https://www.postgresql.org/
+	
+	https://www.mongodb.com/
+
+	https://www.microsoft.com/pt-br/sql-server/sql-server-downloads
+	
+	https://mvnrepository.com/artifact/org.springframework.boot
+
+
+[devops]:
+	https://www.docker.com/
+
+	https://hub.docker.com/
+	
+	https://kubernetes.io/pt/
+	
+	https://www.heroku.com/
+	
+	https://www.netlify.com/
+	
+	https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
+	
+	https://kafka.apache.org/
+	
+	https://aws.amazon.com/pt/
+	
+	https://azure.microsoft.com/en-us/
+	
+	https://cloud.google.com/
+
+
+[documentation]:
+	https://docs.apigee.com/
+
+	https://nodejs.org/en/
+
+	https://expressjs.com/pt-br/
+	
+	https://cli.angular.io/
+
+	https://pt-br.reactjs.org/
+
+	https://angular.io/
+
+	https://vuejs.org/
+
+	https://www.ecma-international.org/
+
+	https://docs.oracle.com/en/java/
+
+	https://www.python.org/
+
+	https://www.typescriptlang.org/
+	
+	https://projectlombok.org/
+
+	https://projectlombok.org/all-versions
+
+
+[secuity/network]:
+https://br.norton.com/products?nortoncountry=br&om_sem_cid=hho_sem_sy:br:ggl:pt:e:br:kw0000004480:430075216000:c:google:58150642:1959815242:kwd-15050890&nortoncountry=BR&pgrid=1959815242&ptaid=kwd-15050890&gclid=CjwKCAjw6qqDBhB-EiwACBs6x9Sg-BJtILgWGAo17AfbiUgQf4BlYP7K4Dbft-vypPFDUOfW8LApVBoCBM4QAvD_BwE&gclsrc=aw.ds
+
+https://www.iana.org/
+
+https://www.ieee.org/
+
+https://archlinux.org/

@@ -4172,7 +4172,87 @@ console.log(loja(1,2))
 console.log(loja(3,3))
 console.log(loja(4,2))
 
-============================================================================================ 
+========================================================================================== 
+
+
+=====================================================
+arquivo para configuração de rota spa em deploy React
+=====================================================
+
+
+na pasta public crie o arquivo:
+_redirects
+
+e insira o conteudo:
+/*  /index.html  200
+
+==========================================================================================
+
+
+
+
+configuração de banco mySql(uma entre várias possibilidades)
+
+application.properties:
+==========================================================================================
+# Mysql configuration
+spring.datasource.url=jdbc:mysql://localhost:3306/employeemanager
+spring.datasource.username=root
+spring.datasource.password=123456
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+==========================================================================================
+
+
+
+
+config cors - java: postgres/h2
+==========================================================================================
+package com.employee.employee.config;
+
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+	private Environment env;
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
+			http.headers().frameOptions().disable();
+		}
+		
+		http.cors().and().csrf().disable();
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.authorizeRequests().anyRequest().permitAll();
+	}
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
+}
+==========================================================================================
+
 console.log('---------------------------------------matemática pura----------')
 console.log('url: https://www.inf.pucrs.br/~pinho/LaproI/Exercicios/SeqDecisao/lista1.htm')
 
@@ -5302,178 +5382,163 @@ compra.nome = 'Ricardo Gomez'
 compra.endereco = 'avenida paulista, n° 654'
 console.log(compra)
 compra.totalAPagar(compra.preco_produto, compra.qtde_produto)
-==========================================================================================
-
-
-
-=====================================================
-arquivo para configuração de rota spa em deploy React
-=====================================================
-
-
-na pasta public crie o arquivo:
-_redirects
-
-e insira o conteudo:
-/*  /index.html  200
-
-==========================================================================================
 
 
 
 
-configuração de banco mySql(uma entre várias possibilidades)
-
-application.properties:
-==========================================================================================
-# Mysql configuration
-spring.datasource.url=jdbc:mysql://localhost:3306/employeemanager
-spring.datasource.username=root
-spring.datasource.password=123456
-spring.jpa.show-sql=true
-spring.jpa.hibernate.ddl-auto=update
-==========================================================================================
 
 
 
 
-config cors - java: postgres/h2
-==========================================================================================
-package com.employee.employee.config;
 
-import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+===============================================================================================
+console.log('compra javascript')
 
-	@Autowired
-	private Environment env;
+let clientes = [
+    {
+        id:1,
+        nome:'mauricio',
+        endereco:'avenida paulista'
+    },{
+        id:2,
+        nome:'Erica Souza',
+        endereco:'Aliomar Baleeiro'
+    },{
+        id:3,
+        nome:'Marcia',
+        endereco:'itapuã'
+    }
+]
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
-			http.headers().frameOptions().disable();
-		}
-		
-		http.cors().and().csrf().disable();
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().anyRequest().permitAll();
-	}
+let produtos = [
+            {
+                id_produto:1,
+                nome_produto:'pão limiar',
+                preco: 10.36
+            },{
+                id_produto:2,
+                nome_produto:'arroz urbano',
+                preco: 6.36
+            },{
+                id_produto:3,
+                nome_produto:'açúcar demerara',
+                preco: 5.65
+            }
+    ]
 
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
-		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
-		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
-	}
+
+let carrinho = []
+
+buscaItem = (idProduto) => {
+     let mapea = produtos.filter(id => idProduto === id.id_produto)
+     return mapea
 }
+
+
+buscaCliente = (idCliente) => {
+     let mapea = clientes.filter(id => idCliente === id.id)
+     return mapea
+}
+
+console.log(buscaItem(1))
+console.log(buscaCliente(2))
+
+
+venda = (idCliente, idProduto) => {
+    let produto = produtos.filter(id => idProduto === id.id_produto)
+    let cliente = clientes.filter(id => idCliente === id.id)
+    
+    let insercao = carrinho.push(produto,cliente)
+    
+    return insercao
+}
+
+
+console.log(venda(1,3))
+console.log(venda(1,2))
+console.log(venda(1,1))
+console.log(...carrinho)
+
+
+
+
+
+
+
+
+
+
+===============================================================================================
+console.log('compra javascript')
+
+let clientes = [
+    {
+        id:1,
+        nome:'mauricio',
+        endereco:'avenida paulista'
+    },{
+        id:2,
+        nome:'Erica Souza',
+        endereco:'Aliomar Baleeiro'
+    },{
+        id:3,
+        nome:'Marcia',
+        endereco:'itapuã'
+    }
+]
+
+let produtos = [
+            {
+                id_produto:1,
+                nome_produto:'pão limiar',
+                preco: 10.36
+            },{
+                id_produto:2,
+                nome_produto:'arroz urbano',
+                preco: 6.36
+            },{
+                id_produto:3,
+                nome_produto:'açúcar demerara',
+                preco: 5.65
+            }
+    ]
+
+
+let carrinho = []
+
+buscaItem = (idProduto) => {
+     let mapea = produtos.filter(id => idProduto === id.id_produto)
+     return mapea
+}
+
+
+buscaCliente = (idCliente) => {
+     let mapea = clientes.filter(id => idCliente === id.id)
+     return mapea
+}
+
+console.log(buscaItem(1))
+console.log(buscaCliente(2))
+
+
+venda = (idCliente, idProduto) => {
+    let produto = produtos.filter(id => idProduto === id.id_produto)
+    let cliente = clientes.filter(id => idCliente === id.id)
+    
+    let insercao = carrinho.concat(produto,cliente)
+    
+    return insercao
+}
+
+
+console.log(venda(1,3))
+console.log(venda(1,2))
+console.log(venda(1,1))
+console.log()
+console.log()
+console.log()
+console.log(...carrinho)
 ==========================================================================================
 
-
-
-links:
-
-https://www.google.com/search?client=firefox-b-d&q=npx
-
-https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html
-
-https://spring.io/projects/spring-boot
-
-https://mvnrepository.com/artifact/org.springframework.boot
-
-https://projectlombok.org/
-
-https://projectlombok.org/all-versions
-
-https://material-ui.com/pt/
-
-https://material.angular.io/
-
-https://junit.org/junit5/docs/current/user-guide/
-
-https://www.h2database.com/html/main.html
-
-https://start.spring.io/
-
-https://maven.apache.org/guides/
-
-https://docs.gradle.org/current/userguide/userguide.html
-
-https://cli.angular.io/
-
-https://www.bootdey.com/
-
-https://getbootstrap.com/
-
-https://www.docker.com/
-
-https://kubernetes.io/pt/
-
-https://docs.apigee.com/
-
-https://www.apache.org/
-
-https://nodejs.org/en/
-
-https://swagger.io/
-
-https://trello.com/pt-BR
-
-https://www.heroku.com/
-
-https://expressjs.com/pt-br/
-
-https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
-
-https://bootswatch.com/
-
-https://unity.com/pt
-
-https://pt-br.reactjs.org/
-
-https://angular.io/
-
-https://vuejs.org/
-
-https://www.ecma-international.org/
-
-https://docs.oracle.com/en/java/
-
-https://www.python.org/
-
-https://www.typescriptlang.org/
-
-https://www.mongodb.com/
-
-https://firebase.google.com/
-
-https://www.mysql.com/
-
-https://www.postgresql.org/
-
-https://www.microsoft.com/pt-br/sql-server/sql-server-downloads
-
-https://br.norton.com/products?nortoncountry=br&om_sem_cid=hho_sem_sy:br:ggl:pt:e:br:kw0000004480:430075216000:c:google:58150642:1959815242:kwd-15050890&nortoncountry=BR&pgrid=1959815242&ptaid=kwd-15050890&gclid=CjwKCAjw6qqDBhB-EiwACBs6x9Sg-BJtILgWGAo17AfbiUgQf4BlYP7K4Dbft-vypPFDUOfW8LApVBoCBM4QAvD_BwE&gclsrc=aw.ds
-
-
-
-https://www.iana.org/
-
-https://www.ieee.org/
-
-https://archlinux.org/
