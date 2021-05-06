@@ -54,6 +54,34 @@ https://spring.io/projects/spring-boot
 	https://www.bootdey.com/
 	
 	https://sparxsystems.com/
+	
+	https://www.devmedia.com.br/quick-tips-case-studio-2-parte-i/16100
+
+	https://erwin.com/
+	
+	http://metriccs.com.br/
+	
+	https://www.microsoft.com/pt-br/microsoft-365/visio/flowchart-software
+	
+	https://www.scrum.org/professional-scrum-certifications
+	
+	https://www.scrumstudy.com/portuguese/scrum-fundamentals-certified
+	
+	https://www.microsoft.com/pt-br/microsoft-365/project/project-management-software
+	
+	https://www.atlassian.com/software/jira
+	
+	https://xmobots.com.br/softwares/xplanner/
+	
+	https://www.agilefant.com/
+	
+	https://www.atlassian.com/br/software/jira?&aceid=&adposition=&adgroup=104775122797&campaign=10596397434&creative=456338518008&device=c&keyword=%2Bscrum&matchtype=b&network=g&placement=&ds_kids=p55785302469&ds_e=GOOGLE&ds_eid=700000001550060&ds_e1=GOOGLE&gclid=CjwKCAjwhMmEBhBwEiwAXwFoEXHzFNQh8NB2I8ee_4LfXSZx5wZX10XBqzWgrfZVlJ3M5Tc-N5mBPhoCPaAQAvD_BwE&gclsrc=aw.ds
+	
+	https://www.lucidchart.com/pages/landing/visio-alternative?utm_source=google&utm_medium=cpc&utm_campaign=_en_tier2_desktop_search_nb_exact_&km_CPC_CampaignId=6444864612&km_CPC_AdGroupID=78651219964&km_CPC_Keyword=microsoft%20visio&km_CPC_MatchType=e&km_CPC_ExtensionID=&km_CPC_Network=g&km_CPC_AdPosition=&km_CPC_Creative=416926875756&km_CPC_TargetID=aud-552508845282:kwd-12451500&km_CPC_Country=1001533&km_CPC_Device=c&km_CPC_placement=&km_CPC_target=&mkwid=sQI8PmXTr_pcrid_416926875756_pkw_microsoft%20visio_pmt_e_pdv_c_slid__pgrid_78651219964_ptaid_aud-552508845282:kwd-12451500_&gclid=CjwKCAjwhMmEBhBwEiwAXwFoET8ow363aJhgipNTmWwSaaDHpuYm8vj1F0BoXf0U2_qeTPjxHqfI2BoC534QAvD_BwE
+
+
+[prototipação]:
+	https://www.axure.com/
 
 
 [ui/ux | language-tools]:
