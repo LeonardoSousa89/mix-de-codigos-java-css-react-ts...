@@ -46,6 +46,14 @@ https://spring.io/projects/spring-boot
 	https://www.figma.com/
 	
 	https://pixabay.com/pt/
+	
+	https://code.tutsplus.com/pt/articles/9-android-templates-to-inspire-your-next-project--cms-25412
+	
+	https://code.tutsplus.com/articles/best-ecommerce-android-app-templates--cms-31887
+	
+	https://www.sketchappsources.com/category/ui.html
+	
+	https://www.rocketwp.com.br/10-modelos-de-checkouts-em-html-e-css-gratis/
 
 	https://app.diagrams.net/
 	
@@ -182,6 +190,7 @@ https://spring.io/projects/spring-boot
 
 	https://projectlombok.org/all-versions
 
+	https://git-scm.com/doc
 
 [secuity/network]:
 https://br.norton.com/products?nortoncountry=br&om_sem_cid=hho_sem_sy:br:ggl:pt:e:br:kw0000004480:430075216000:c:google:58150642:1959815242:kwd-15050890&nortoncountry=BR&pgrid=1959815242&ptaid=kwd-15050890&gclid=CjwKCAjw6qqDBhB-EiwACBs6x9Sg-BJtILgWGAo17AfbiUgQf4BlYP7K4Dbft-vypPFDUOfW8LApVBoCBM4QAvD_BwE&gclsrc=aw.ds
