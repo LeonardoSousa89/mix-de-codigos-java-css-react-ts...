@@ -54,6 +54,10 @@ https://spring.io/projects/spring-boot
 	https://www.sketchappsources.com/category/ui.html
 	
 	https://www.rocketwp.com.br/10-modelos-de-checkouts-em-html-e-css-gratis/
+	
+	https://developer.android.com/guide/topics/ui/look-and-feel?hl=pt
+	
+	https://material.io/develop
 
 	https://app.diagrams.net/
 	
