@@ -5541,4 +5541,2093 @@ console.log()
 console.log()
 console.log(...carrinho)
 ==========================================================================================
+	
+package app.system.fileread;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+
+import app.system.error.PersonalException;
+
+public class LeitorDeArquivo {
+
+	public static void main(String[] args) {
+				
+				try {
+					
+					//insersor
+					OutputStream arquivo = new FileOutputStream("C:/Users/Mendes/Desktop/java/src/revisao/arquivo/arquivo.txt");
+					OutputStreamWriter escritor = new OutputStreamWriter(arquivo);
+					BufferedWriter codificador = new BufferedWriter(escritor);
+					
+					codificador.write("relatório");
+					
+					codificador.close();
+					
+					//leitor
+					InputStream leitor = new FileInputStream("C:/Users/Mendes/Desktop/java/src/revisao/arquivo/arquivo.txt");
+					InputStreamReader codificador2 = new InputStreamReader(leitor);
+					BufferedReader interpretador = new BufferedReader(codificador2);
+					
+					String resposta = interpretador.readLine();
+					
+					while(resposta != null) {
+						System.out.println(resposta);
+						resposta = interpretador.readLine();
+					}
+					
+					interpretador.close();
+					
+				}catch(PersonalException e) {
+					System.out.println("error" + e.getMessage());
+				}catch(Exception e) {
+					System.out.println("error" + e.getMessage());
+				}
+				
+		}
+}
+
+
+==========================================================================================
+
+
+
+
+
+
+
+
+==========================================================================================
+java
+
+(esta classe lê o arquivo.txt)
+''________________________________________________________________________________________
+
+package io.main;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import io.main.error.PersonalException;
+
+public class Principal {
+	public static void main(String [] args) {
+		
+		//erro descoberto excedido o uso de memória
+		/*
+		 *  java.lang.OutOfMemoryError: Java heap space
+		 *  
+		 *  arquivo de erro:  "C:/Users/Mendes/Desktop/java/src/i-o/arquivos/novoarquivos.txt"
+		 * */
+			
+			try {
+					
+				//String url = "C:/Users/Mendes/Desktop/java/src/i-o/arquivos/novoarquivos.txt";
+				String url = "C:/Users/Mendes/Desktop/java/src/i-o/arquivos/outroarquivo.txt";
+				
+				
+				//String url = "C:/Users/Mendes/Desktop/api/package.json";   
+				//String url = "C:/Users/Mendes/Desktop/api/knexfile.ts"; 
+				//String url = "C:/Users/Mendes/Desktop/api/src/database/migrations/00_create_locations.ts";
+				//String url = "C:/Users/Mendes/Desktop/cardinfo/frontend/web/loja.css";
+				//String url = "C:/Users/Mendes/Desktop/cardinfo/frontend/web/loja.html";
+				//String url = "C:/Users/Mendes/Desktop/cardinfo/frontend/web/loja.js";
+				//String url = "C:/Users/Mendes/Desktop/store/database/db.sql";
+				
+				InputStream saida = new FileInputStream(url);
+				InputStreamReader leitor = new InputStreamReader(saida);
+				BufferedReader codificador = new BufferedReader(leitor);
+				
+				String objeto = codificador.readLine();
+				
+				while(objeto != null) {
+					System.out.println(objeto);
+					objeto = codificador.readLine();
+				}
+				
+				codificador.close();
+				
+			}catch(PersonalException e) {
+				System.out.println("erro" + e.getMessage());
+			}
+			catch(Exception e) {
+				System.out.println("erro" + e.getMessage());
+			}
+	
+			
+	}
+}
+________________________________________________________________________________________''
+
+
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+java
+
+
+(esta classe lê a entrada pelo teclado e escreve no arquivo.txt)
+''________________________________________________________________________________________
+package io.main.hexatenario;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.Scanner;
+
+import io.main.error.PersonalException;
+
+public class PrincipalKeyboardModified {
+
+	public static void main(String[] args) {
+			
+		
+		try {
+				
+				char resp = 'n';
+				
+				String url = "C:/Users/Mendes/Desktop/java/src/i-o/arquivos/outroarquivo.txt";
+				
+				InputStream entrada = System.in;
+				InputStreamReader leitor = new InputStreamReader(entrada);
+				BufferedReader codificado = new BufferedReader(leitor);
+				
+				OutputStream saida = new FileOutputStream(url);
+				OutputStreamWriter escritor = new OutputStreamWriter(saida);
+				BufferedWriter codificador = new BufferedWriter(escritor);
+				
+				System.out.println("escreva:");
+				String leia = codificado.readLine();
+				
+				codificador.write(leia);
+				codificador.newLine();
+				 
+				System.out.println("deseja continuar?(s/n)");
+				Scanner responda = new Scanner(System.in);
+				char resposta = responda.next().charAt(0);
+				
+				while(resposta != resp) {
+					
+					System.out.println("escreva:");
+					leia = codificado.readLine();
+					
+					codificador.write(leia);
+					codificador.newLine();
+					
+					System.out.println("deseja continuar?(s/n)");
+					resposta = responda.next().charAt(0);
+				}
+				
+				codificado.close();
+				codificador.close();
+				
+				
+			}catch(PersonalException e) {
+				System.out.println("erro:" + e.getMessage());
+			}catch(Exception e) {
+				System.out.println("erro:" + e.getMessage());
+			}
+
+		
+	}
+}
+
+________________________________________________________________________________________''
+
+
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+java
+
+
+Principal(class)
+''________________________________________________________________________________________
+
+package relatorio;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import relatorio.erro.ExcessaoPessoal;
+
+//exemplo nivel de complexidade 1
+public class Principal {
+	public static void main(String [ ] args) {
+			
+		try {
+			
+			String url = "C:/Users/Mendes/Desktop/java/src/relatoriomodificado/repositorio/formulario2.txt";
+			
+			InputStream saida = new FileInputStream(url);
+			InputStreamReader leitor  = new InputStreamReader(saida);
+			BufferedReader codificado = new BufferedReader(leitor);
+			
+			String impressora = codificado.readLine();
+			
+			while(impressora != null) {
+				System.out.println(impressora);
+				impressora = codificado.readLine();
+			}
+			
+			codificado.close();
+			
+			}catch(ExcessaoPessoal e) {
+				System.out.println("erro: " + e.getMessage());
+			}catch(Exception e) {
+				System.out.println("erro: " + e.getMessage());
+			}
+		
+	}
+}
+
+
+________________________________________________________________________________________''
+
+
+
+
+PrincipalEntrada(class)
+''________________________________________________________________________________________
+
+
+package relatorio.livraria;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.Scanner;
+
+import relatorio.erro.ExcessaoPessoal;
+
+//exemplo nivel de complexidade 2
+public class PrincipalEntrada {
+	public static void main(String[] args) {
+		
+		try {
+			
+		
+		String url = "C:/Users/Mendes/Desktop/java/src/relatoriomodificado/repositorio/arqv5.txt";
+		
+		char resp = 'n';
+		char resposta = 's';
+		Scanner responda = new Scanner(System.in);
+		
+		InputStream entrada = System.in;
+		InputStreamReader leitor = new InputStreamReader(entrada);
+		BufferedReader codificador = new BufferedReader(leitor);
+		
+		OutputStream saida = new FileOutputStream(url);
+		OutputStreamWriter escrivao = new OutputStreamWriter(saida);
+		BufferedWriter codificado = new BufferedWriter(escrivao);
+		
+	
+		/*grava estes valores em 'String' no arquivo*/
+		codificado.write("===========================");
+		codificado.newLine();
+		codificado.write("|            		  |");
+		codificado.newLine();
+		codificado.write("|        Dados            |");
+		codificado.newLine();	
+		codificado.write("|            		  |");
+		codificado.newLine();
+		codificado.write("===========================");
+		
+		codificado.newLine();
+		codificado.newLine();
+		codificado.newLine();
+		
+		codificado.write("entrada:");
+		
+		//saida para o usuário
+		System.out.println("===========================");
+		System.out.println("|            		  |");
+		System.out.println("|        Dados            |");
+		System.out.println("|            		  |");
+		System.out.println("===========================");
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("entrada:");
+		
+		
+		//lê o que foi escrito através do teclado.
+		String leitorEmTempodeExecucao = codificador.readLine(); 
+		
+		//escreve no arquivo o que foi capturado a partir do teclado.
+		codificado.write(leitorEmTempodeExecucao); 
+		
+		//quebra uma linha
+		codificado.newLine(); 
+		
+		System.out.println("continuar a inserção de dados?(s/n)");
+		resposta = responda.next().charAt(0);		
+		
+		//laço para a reinserção de dados
+		while(resposta != resp) { 
+			
+			//saida para o usuário
+			System.out.println("entrada:"); 
+			
+			//quebra uma linha
+			codificado.newLine(); 
+			
+			//lê o que foi escrito através do teclado.
+			leitorEmTempodeExecucao = codificador.readLine(); 
+			
+			//escreve no arquivo o que foi capturado a partir do teclado.
+			codificado.write(leitorEmTempodeExecucao); 
+			
+			//quebra uma linha
+			codificado.newLine(); 
+			
+			System.out.println("continuar a inserção de dados?(s/n)");
+			resposta = responda.next().charAt(0);
+		}
+		
+		
+		codificador.close();
+		codificado.close();
+		
+		}catch(ExcessaoPessoal e) {
+			System.out.println("erro: " + e.getMessage());
+		}catch(Exception e) {
+			System.out.println("erro: " + e.getMessage());
+		}
+		
+	}
+}
+
+
+________________________________________________________________________________________''
+
+
+
+Pessoa(class)
+''________________________________________________________________________________________
+
+
+package relatorio.formulario;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.Scanner;
+
+import relatorio.erro.ExcessaoPessoal;
+
+//exemplo nivel de complexidade 3
+public class Pessoa {
+	public static void main(String[] args) {
+		
+		try {
+			
+			
+			String url = "C:/Users/Mendes/Desktop/java/src/relatoriomodificado/repositorio/formulario2.txt";
+			
+			char resp = 'n';
+			char resposta = 's';
+			Scanner responda = new Scanner(System.in);
+			
+			InputStream entrada = System.in;
+			InputStreamReader leitor = new InputStreamReader(entrada);
+			BufferedReader codificador = new BufferedReader(leitor);
+			
+			OutputStream saida = new FileOutputStream(url);
+			OutputStreamWriter escrivao = new OutputStreamWriter(saida);
+			BufferedWriter codificado = new BufferedWriter(escrivao);
+			
+		
+			/*grava estes valores em 'String' no arquivo*/
+			codificado.write("===========================");
+			codificado.newLine();
+			codificado.write("|            		  |");
+			codificado.newLine();
+			codificado.write("|        Dados            |");
+			codificado.newLine();	
+			codificado.write("|            		  |");
+			codificado.newLine();
+			codificado.write("===========================");
+			
+			codificado.newLine();
+			codificado.newLine();
+			codificado.newLine();
+			
+			codificado.write("entrada:");
+			
+			//saida para o usuário em tempo de execução
+			System.out.println("===========================");
+			System.out.println("|            		  |");
+			System.out.println("|        Dados            |");
+			System.out.println("|            		  |");
+			System.out.println("===========================");
+			
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			
+			//saida para o usuário em tempo de execução
+			System.out.println("entrada:");
+			//quebra uma linha
+			codificado.newLine(); 
+			
+			//saida para o usuário em tempo de execução
+			System.out.println("usuario:");
+			//inseri este campo no arquivo 
+			codificado.write("usuario:");
+			//lê o que foi escrito através do teclado.
+			String	leitorEmTempodeExecucao = codificador.readLine(); 
+			//escreve no arquivo o que foi capturado a partir do teclado.
+			codificado.write(leitorEmTempodeExecucao); 
+			//quebra uma linha
+			codificado.newLine();
+			
+			//saida para o usuário em tempo de execução
+			System.out.println("nome:");
+			//inseri este campo no arquivo 
+			codificado.write("nome:");
+			//lê o que foi escrito através do teclado.
+			leitorEmTempodeExecucao = codificador.readLine(); 
+			//escreve no arquivo o que foi capturado a partir do teclado.
+			codificado.write(leitorEmTempodeExecucao); 
+			//quebra uma linha
+			codificado.newLine(); 
+			
+			//saida para o usuário em tempo de execução
+			System.out.println("cep:");
+			//inseri este campo no arquivo 
+			codificado.write("cep:");
+			//lê o que foi escrito através do teclado.
+			leitorEmTempodeExecucao = codificador.readLine(); 
+			//escreve no arquivo o que foi capturado a partir do teclado.
+			codificado.write(leitorEmTempodeExecucao); 
+			//quebra uma linha
+			codificado.newLine(); 
+			
+			//saida para o usuário em tempo de execução
+			System.out.println("telefone:");
+			//inseri este campo no arquivo 
+			codificado.write("telefone:");
+			//lê o que foi escrito através do teclado.
+			leitorEmTempodeExecucao = codificador.readLine(); 
+			//escreve no arquivo o que foi capturado a partir do teclado.
+			codificado.write(leitorEmTempodeExecucao); 
+			//quebra uma linha
+			codificado.newLine(); 
+			
+			//saida para o usuário em tempo de execução
+			System.out.println("email:");
+			//inseri este campo no arquivo 
+			codificado.write("email:");
+			//lê o que foi escrito através do teclado.
+			leitorEmTempodeExecucao = codificador.readLine(); 
+			//escreve no arquivo o que foi capturado a partir do teclado.
+			codificado.write(leitorEmTempodeExecucao); 
+			//quebra uma linha
+			codificado.newLine(); 
+			
+			//saida para o usuário em tempo de execução
+			System.out.println("senha:");
+			//inseri este campo no arquivo 
+			codificado.write("senha:");
+			//lê o que foi escrito através do teclado.
+			leitorEmTempodeExecucao = codificador.readLine(); 
+			//escreve no arquivo o que foi capturado a partir do teclado.
+			codificado.write(leitorEmTempodeExecucao); 
+			//quebra uma linha
+			codificado.newLine(); 
+			
+			//quebra uma linha
+			codificado.newLine(); 
+			
+			//saida para o usuário em tempo de execução
+			System.out.println("tecnologias:");
+			//inseri este campo no arquivo 
+			codificado.write("tecnologias:");
+			//lê o que foi escrito através do teclado.
+			leitorEmTempodeExecucao = codificador.readLine(); 
+			//escreve no arquivo o que foi capturado a partir do teclado.
+			codificado.write(leitorEmTempodeExecucao); 
+			//quebra uma linha
+			codificado.newLine(); 
+			
+			System.out.println("inserir um novo usuário?(s/n)");
+			resposta = responda.next().charAt(0);		
+			
+			
+			
+			//laço para a reinserção de dados
+			while(resposta != resp) { 
+				
+				//saida para o usuário em tempo de execução
+				System.out.println("entrada:");
+				//quebra uma linha
+				codificado.newLine(); 
+				
+				//saida para o usuário em tempo de execução
+				System.out.println("usuario:");
+				//inseri este campo no arquivo 
+				codificado.write("usuario:");
+				//lê o que foi escrito através do teclado.
+				leitorEmTempodeExecucao = codificador.readLine(); 
+				//escreve no arquivo o que foi capturado a partir do teclado.
+				codificado.write(leitorEmTempodeExecucao); 
+				//quebra uma linha
+				codificado.newLine();
+				
+				//saida para o usuário em tempo de execução
+				System.out.println("nome:");
+				//inseri este campo no arquivo 
+				codificado.write("nome:");
+				//lê o que foi escrito através do teclado.
+				leitorEmTempodeExecucao = codificador.readLine(); 
+				//escreve no arquivo o que foi capturado a partir do teclado.
+				codificado.write(leitorEmTempodeExecucao); 
+				//quebra uma linha
+				codificado.newLine(); 
+				
+				//saida para o usuário em tempo de execução
+				System.out.println("cep:");
+				//inseri este campo no arquivo 
+				codificado.write("cep:");
+				//lê o que foi escrito através do teclado.
+				leitorEmTempodeExecucao = codificador.readLine(); 
+				//escreve no arquivo o que foi capturado a partir do teclado.
+				codificado.write(leitorEmTempodeExecucao); 
+				//quebra uma linha
+				codificado.newLine(); 
+				
+				//saida para o usuário em tempo de execução
+				System.out.println("telefone:");
+				//inseri este campo no arquivo 
+				codificado.write("telefone:");
+				//lê o que foi escrito através do teclado.
+				leitorEmTempodeExecucao = codificador.readLine(); 
+				//escreve no arquivo o que foi capturado a partir do teclado.
+				codificado.write(leitorEmTempodeExecucao); 
+				//quebra uma linha
+				codificado.newLine(); 
+				
+				//saida para o usuário em tempo de execução
+				System.out.println("email:");
+				//inseri este campo no arquivo 
+				codificado.write("email:");
+				//lê o que foi escrito através do teclado.
+				leitorEmTempodeExecucao = codificador.readLine(); 
+				//escreve no arquivo o que foi capturado a partir do teclado.
+				codificado.write(leitorEmTempodeExecucao); 
+				//quebra uma linha
+				codificado.newLine(); 
+				
+				//saida para o usuário em tempo de execução
+				System.out.println("senha:");
+				//inseri este campo no arquivo 
+				codificado.write("senha:");
+				//lê o que foi escrito através do teclado.
+				leitorEmTempodeExecucao = codificador.readLine(); 
+				//escreve no arquivo o que foi capturado a partir do teclado.
+				codificado.write(leitorEmTempodeExecucao); 
+				//quebra uma linha
+				codificado.newLine(); 
+				
+				//quebra uma linha
+				codificado.newLine(); 
+				
+				//saida para o usuário em tempo de execução
+				System.out.println("tecnologias:");
+				//inseri este campo no arquivo 
+				codificado.write("tecnologias:");
+				//lê o que foi escrito através do teclado.
+				leitorEmTempodeExecucao = codificador.readLine(); 
+				//escreve no arquivo o que foi capturado a partir do teclado.
+				codificado.write(leitorEmTempodeExecucao); 
+				//quebra uma linha
+				codificado.newLine(); 
+				
+				System.out.println("inserir um novo usuário?(s/n)");
+				resposta = responda.next().charAt(0);
+			}
+			
+			codificado.newLine(); 
+			codificado.newLine(); 
+			codificado.write("programa escrito e desenvolvido por Leonardo sousa proprietário de C.O.A.V tecnologies INC.");
+			
+			codificador.close();
+			codificado.close();
+			
+			}catch(ExcessaoPessoal e) {
+				System.out.println("erro: " + e.getMessage());
+			}catch(Exception e) {
+				System.out.println("erro: " + e.getMessage());
+			}
+		
+	}
+}
+
+
+________________________________________________________________________________________''
+
+
+
+ExcessaoPessoal(class)
+''________________________________________________________________________________________
+
+
+package relatorio.erro;
+
+public class ExcessaoPessoal extends RuntimeException{
+	public ExcessaoPessoal(String msg) {
+		super(msg);
+	}
+}
+
+
+________________________________________________________________________________________''
+
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+java
+
+
+Principal(class)
+''________________________________________________________________________________________
+
+package thread.main;
+
+import thread.main.linha.LinhaA;
+import thread.main.linha.LinhaB;
+import thread.main.thrd.LinhaC;
+import thread.main.thrd.LinhaD;
+
+public class Principal {
+	public static void main(String[] args) {
+		
+		
+		LinhaA linhaa = new LinhaA();
+		Thread exibicaoa = new Thread(linhaa);
+		exibicaoa.start();
+		
+		LinhaB linhab = new LinhaB();
+		Thread exibicaob = new Thread(linhab);
+		exibicaob.start();
+		
+		LinhaC linhac = new LinhaC();
+		Thread exibicaoc = new Thread(linhac);
+		exibicaoc.start();
+		
+		LinhaD linhad = new LinhaD();
+		Thread exibicaod = new Thread(linhad);
+		exibicaod.start();
+		
+		
+		
+	}
+}
+
+
+________________________________________________________________________________________''
+
+
+LinhaA(class)
+''________________________________________________________________________________________
+
+package thread.main.linha;
+
+public class LinhaA extends Thread{
+	public void run() {
+		for(int i = 0; i <= 10000000; i++) {
+			System.out.println(i + "\t \t " + "linha - A");
+		}
+	}
+}
+
+
+________________________________________________________________________________________''
+
+
+LinhaB(class)
+''________________________________________________________________________________________
+
+
+package thread.main.linha;
+
+public class LinhaB extends Thread{
+	public void run() {
+		for(int i = 0; i <= 10000000; i++) {
+			System.out.println(i + "\t \t" + "linha - B");
+		}
+	}
+}
+
+
+________________________________________________________________________________________''
+
+
+LinhaC(class)
+''________________________________________________________________________________________
+
+package thread.main.thrd;
+
+public class LinhaC extends Thread{
+	
+	public void run() {
+		for(int i = 0; i < 10000000; i++) {
+			System.out.println(i + "\t \t" + "Linha - C");
+		}
+	}
+}
+
+
+________________________________________________________________________________________''
+
+
+LinhaD(class)
+''________________________________________________________________________________________
+
+package thread.main.thrd;
+
+public class LinhaD extends Thread{
+	
+	public void run() {
+		for(int i = 0; i < 10000000; i++) {
+			System.out.println(i + "\t  \t" + "Linha - D");
+		}
+	}
+}
+
+________________________________________________________________________________________''
+
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+java
+
+Principal(class)
+''________________________________________________________________________________________
+
+
+package arrow;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public class Principal {
+	public static void main(String [] args) {
+	 	try {
+	 		System.out.println("generics String <List>");
+	 		System.out.println();
+	 		
+			List<String> elas = new ArrayList<>();
+			elas.add("Melanie");
+			elas.add("Sophia");
+			elas.add("Katia");
+			elas.add("Kula");
+			elas.add("Kyiama");
+			elas.add("Rebeca");
+			elas.add("Rosilda");
+			elas.add("Bruna");
+			elas.add("Sara");
+			elas.add("Edjane");
+			System.out.println();
+			for(String mocas : elas) {
+				System.out.println(mocas);
+			}
+			System.out.println();
+			elas.removeIf(x -> x.charAt(0) == 'J' || x.charAt(0) == 'S' || x.charAt(0) == 'K');
+			
+			for(String mocas : elas) {
+				System.out.println(mocas);
+			}
+			
+		}catch(Exception e) {
+			System.out.println("erro:" + e.getMessage());
+		}
+		
+	 	
+		
+	 	
+	 	
+	 	
+	 	
+	 	System.out.println();
+	 	
+	try {
+		System.out.println("generics Integer <Map>");
+		System.out.println();
+		Map<Integer, Integer> numeros = new HashMap<>();
+		numeros.put(1, 10);
+		numeros.put(11, 12);
+		numeros.put(4, 6);
+		numeros.put(7, 3);
+		System.out.println(numeros);
+		
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+		
+	
+	
+	
+	
+	System.out.println();
+	
+	try {
+		System.out.println("generics Integer <Set>");
+		System.out.println();
+		Set<Integer> numeros = new HashSet<>();
+		numeros.add(1);
+		numeros.add(10);
+		numeros.add(100);
+		numeros.add(40);
+		numeros.add(5);
+		numeros.add(9);
+		numeros.add(27);
+		System.out.println(numeros);
+		
+		System.out.println();
+		
+		numeros.removeIf(x -> x >= 40);
+		System.out.println(numeros);
+		
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+		
+	
+	
+	
+System.out.println();
+	
+	try {
+		System.out.println("generics Integer <List>");
+		System.out.println();
+		List<Double> numeros = new LinkedList<>();
+		numeros.add(1.1);
+		numeros.add(10.6);
+		numeros.add(100.10);
+		numeros.add(40.1);
+		numeros.add(5.5);
+		numeros.add(9.27);
+		numeros.add(27.0);
+		System.out.println(numeros);
+		
+		System.out.println();
+		
+		numeros.removeIf(x -> x < 40);
+		System.out.println(numeros);
+		
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+	
+	
+System.out.println();
+	
+	try {
+		System.out.println("generics Integer <List>");
+		System.out.println();
+		List<Double> numeros = new LinkedList<>();
+		numeros.add(1.1);
+		numeros.add(10.6);
+		numeros.add(100.10);
+		numeros.add(40.1);
+		numeros.add(5.5);
+		numeros.add(9.27);
+		numeros.add(27.0);
+		System.out.println(numeros);
+		
+		System.out.println();
+		
+		numeros.removeIf(x -> x < 40);
+		System.out.println(numeros);
+		
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+	
+	
+	
+	System.out.println();
+	
+	try {
+			System.out.println("generics Integer <List>");
+			System.out.println();
+			Elements cliente = new Elements();
+			
+			cliente.setCodigo(356);	
+			cliente.setName("Waldir Andrade");
+			cliente.setEndereco("rua Aliomar Baleeiro, São Cristovão, Salvador-BA");
+			
+			List<Elements> el = new ArrayList<>();
+			
+			//possibilidade 1
+			el.add(new Elements(cliente.getCodigo(), cliente.getName(), cliente.getEndereco()));
+			
+			//possibilidade 2
+			el.add(new Elements(189,"Luana Teixeira", "rua Pedro Cachoeira, São Cristovão, Salvador-BA"));
+			el.add(new Elements(154,"Walter Rodrigues", "rua Oswaldo Gordilho, São Cristovão, Salvador-BA"));
+			
+			for(Elements dados :el) {
+				System.out.println(dados.toString());
+			}
+			
+			System.out.println();
+			
+			for(Elements dados :el) {
+				el.removeIf(y -> y.getCodigo() > 155);
+				System.out.println(Arrays.asList(dados).toString());
+			}
+			
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+	
+	
+	
+	
+	
+	System.out.println();
+	
+	try {
+		System.out.println("generics Integer <Set>");
+		System.out.println();
+		
+		Set<Elements> el = new HashSet<>();
+		
+		el.add(new Elements(1, "Valdez", "Brasil"));
+		el.add(new Elements(1, "Valdez", "Brasil"));
+		el.add(new Elements(2, "Joulez", "França"));
+		el.add(new Elements(3, "May Lee", "Coréia"));
+		el.add(new Elements(3, "May Lee", "Coréia"));
+		el.add(new Elements(3, "May Lee", "Coréia"));
+		
+		for(Elements dados :el) {
+			System.out.println(dados);
+		}
+		
+		
+		System.out.println();
+		el.removeIf(x -> x.getEndereco() == "Coréia");
+		
+		for(Elements dados :el) {
+			System.out.println(dados);
+		}
+		
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+	
+	}
+}
+
+
+________________________________________________________________________________________''
+
+
+Elements(class)
+''________________________________________________________________________________________
+
+
+package arrow;
+
+public class Elements {
+		
+	 	protected int codigo;
+		protected String name;
+		protected String endereco;
+		
+		public Elements() {}
+
+		public Elements(int codigo, String name, String endereco) {
+			super();
+			this.codigo = codigo;
+			this.name = name;
+			this.endereco = endereco;
+		}
+
+		public int getCodigo() {
+			return codigo;
+		}
+
+		public void setCodigo(int codigo) {
+			this.codigo = codigo;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getEndereco() {
+			return endereco;
+		}
+
+		public void setEndereco(String endereco) {
+			this.endereco = endereco;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + codigo;
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Elements other = (Elements) obj;
+			if (codigo != other.codigo)
+				return false;
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "dados:"
+					+ "codigo:" 
+					+ codigo 
+					+ ", name:" 
+					+ name 
+					+ ", endereco:" 
+					+ endereco;
+		}
+		
+		
+}
+
+
+________________________________________________________________________________________''
+
+
+PrincipalComponentizado(class)
+''________________________________________________________________________________________
+
+package arrow.componente;
+
+public class PrincipalComponentizado {
+	public static void main (String []args) {
+		Impressao imprima = new Impressao();
+		imprima.impressao();
+	}
+}
+
+________________________________________________________________________________________''
+
+
+
+Impressao(class)
+''________________________________________________________________________________________
+
+
+package arrow.componente;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Impressao {
+	
+	final String url = "C:/Users/Mendes/Desktop/java/src/i-o/arquivos/outroarquivo.txt";
+	
+	public Impressao() {}
+
+	
+	 void impressao()	{
+		 try {
+			 InputStream entrada = new FileInputStream(url);
+			 InputStreamReader leitor = new InputStreamReader(entrada);
+			 BufferedReader codificador = new BufferedReader(leitor);
+			 
+			 String dados = "dados";
+			 
+			 while(dados != null) {
+				 	dados = codificador.readLine();
+				 	List<String> leitura = new ArrayList<>();
+				 	leitura.add(dados);
+				 	
+				 	System.out.println(Arrays.asList(leitura).toString());
+			 }
+			 
+			 codificador.close();
+		 }catch(IOException e) {
+			 e.printStackTrace();
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 
+		 
+	 }
+}
+
+
+________________________________________________________________________________________''
+
+==========================================================================================
+
+
+
+
+
+
+==========================================================================================
+java
+
+
+
+Principal(class)
+''________________________________________________________________________________________
+
+package datas;
+
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+import datas.erro.Excessao;
+import datas.file.Datas;
+import datas.view.Tela;
+
+public class Principal {
+	public static void main(String [] args) {
+		
+		try {
+					
+
+			Scanner entrada = new Scanner(System.in);
+			Set<Datas> informacao  = new HashSet<>();
+			char resp = 'n';
+			char resposta = 's';
+			
+			Tela espere = new Tela();
+			espere.tela1();
+			espere.temporizador();
+			espere.temporizador2();
+			
+			espere.tela3();
+			Long id = entrada.nextLong();
+			espere.tela3a();
+			
+			espere.tela4();
+			String nome = entrada.next();
+			espere.tela4a();
+			
+			espere.tela5();
+			String cargo = entrada.next();
+			espere.tela5a();
+			
+			espere.tela6();
+			Datas momento = new Datas();
+			espere.tela6a();
+			
+						System.out.println();
+						System.out.println("gostaria de inserir novos dados? (s/n):");
+						resposta = entrada.next().charAt(0);
+						
+						while(resposta != resp) {
+							espere.tela3();
+							id = entrada.nextLong();
+							espere.tela3a();
+							
+							espere.tela4();
+							nome = entrada.next();
+							espere.tela4a();
+							
+							espere.tela5();
+							cargo = entrada.next();
+							espere.tela5a();
+							
+							espere.tela6();
+							momento = new Datas();
+							espere.tela6a();
+							
+							informacao.add(new Datas(id, nome, cargo));
+							
+							System.out.println();
+							System.out.println("gostaria de inserir novos dados? (s/n):");
+							resposta = entrada.next().charAt(0);
+						}
+						
+			informacao.add(new Datas(id, nome, cargo));
+			
+			for(Datas valores :informacao) {
+					System.out.print(valores.toString() + momento.getMomento().now());
+			}
+			
+			
+			espere.tela7();
+			
+			
+		}catch(Excessao e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}	
+				
+	}
+}
+
+
+___________________________________________________________________________________''
+
+
+
+
+Datas(class)
+''________________________________________________________________________________________
+
+
+package datas.file;
+
+import java.time.Instant;
+
+public class Datas {
+	
+	protected Long id;
+	protected String nome;
+	protected String cargo;
+	Instant momento;
+	
+	public Instant getMomento() {
+		return momento;
+	}
+
+	public void setMomento(Instant momento) {
+		this.momento = momento;
+	}
+
+	public Datas() {}
+
+	public Datas(Long id, String nome, String cargo) {
+		this.id = id;
+		this.nome = nome;
+		this.cargo = cargo;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cargo == null) ? 0 : cargo.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Datas other = (Datas) obj;
+		if (cargo == null) {
+			if (other.cargo != null)
+				return false;
+		} else if (!cargo.equals(other.cargo))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "dados do cliente \n id:" 
+				+ id 
+				+ ", nome:" 
+				+ nome 
+				+ ", cargo:" 
+				+ cargo 
+				+ ", data:" ;
+	}
+}
+
+
+___________________________________________________________________________________''
+
+
+
+
+Tela(class)
+''________________________________________________________________________________________
+
+
+package datas.view;
+
+public class Tela {
+	
+	public Tela() {}
+	
+	
+	
+	public void tela1() {
+		System.out.println("-------------------------------------------------------------");
+		System.out.println("    			sistema");
+		System.out.println("-------------------------------------------------------------");
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+	}
+	
+	
+	
+	public Double temporizador() {
+		 Double tempoFinal = 500000000.00 ;
+		 Double tempoInicial = 1.1;
+		 Double newTempo = 0.0;
+		 
+		  	while(tempoInicial < tempoFinal) {
+		  		newTempo = tempoInicial++;
+		  		
+		  		 if(tempoInicial < tempoFinal) {
+			  			
+			  		}else {
+			  			System.out.println("carregamento do sistema finalizado!");
+			  		}
+		  };
+		
+		tela2();
+		return newTempo;
+	}
+	
+	
+	
+	
+	public Double tela2() {
+		
+		System.out.println();
+		System.out.println("    			Seja bem vindo!   ;)");
+
+		return 0.0;
+	}
+
+	
+	public Double temporizador2() {
+		 Double tempoFinal = 500000000.00 ;
+		 Double tempoInicial = 1.1;
+		 Double newTempo = 0.0;
+		 
+		  	while(tempoInicial < tempoFinal) {
+		  		newTempo = tempoInicial++;
+		  		
+		  		 if(tempoInicial < tempoFinal) {
+			  			
+			  		}else {
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println("----------------------------formulário---------------------------");
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  			System.out.println();
+			  		}
+		  };
+		
+		return newTempo;
+	}
+	
+	
+	public void tela3() {
+		System.out.println("id:");
+	}
+	
+	public void tela3a() {
+		System.out.println("---");
+	}
+	
+	public void tela4() {
+		System.out.println("nome:");
+	}
+	
+	public void tela4a() {
+		System.out.println("------------------------------");
+	}
+	
+	public void tela5() {
+		System.out.println("cargo:");
+	}
+	
+	public void tela5a() {
+		System.out.println("------------------------------");
+	}
+	
+	public void tela6() {
+		System.out.println("data:");
+	}
+	
+	public void tela6a() {
+		System.out.println("-------------------");
+	}
+	
+	public void tela7() {
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println("-------------------------------------------------------------");
+			System.out.println("sistema desenvolvido por COAV.INC .");
+			System.out.println("-------------------------------------------------------------");
+	}
+}
+
+
+___________________________________________________________________________________''
+
+
+
+
+Excesso(class)
+''________________________________________________________________________________________
+
+
+package datas.erro;
+
+public class Excessao extends RuntimeException{
+	public Excessao(String msg) {
+		super(msg);
+	}
+}
+
+
+___________________________________________________________________________________''
+
+
+==========================================================================================
+
+
+
+
+
+
+
+
+
+==========================================================================================
+java
+
+package graphicinterface.main;
+
+import javax.swing.JOptionPane;
+
+public class SimpleDialogue1 {
+	public static void main(String [] args) {
+		
+	String entrada;
+		entrada = JOptionPane.showInputDialog("who you're?");
+	String nova_entrada;
+		nova_entrada = JOptionPane.showInputDialog("what's old you're?");
+	System.out.println(entrada + "," + nova_entrada);
+	}
+}
+
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+java
+
+
+
+package simplegui.console;
+
+import javax.swing.JOptionPane;
+
+public class SimpleDialogue2 {
+	public static void main(String[] args) {
+		
+		try {
+			System.out.println("==========================================");
+			System.out.println("simple calculator");
+			System.out.println("==========================================");
+			
+			String value1;
+				value1 = JOptionPane.showInputDialog("value - 1");
+			 String value2;
+			 	value2 = JOptionPane.showInputDialog("value - 2");
+			 String operation;
+			 	operation = JOptionPane.showInputDialog("choose a option (sum : 00.0 /  div : 01.0 / mult : 02.0 / sub : 03.0 )");
+			 
+			 double number1 = Double.parseDouble(value1);
+			 double number2 = Double.parseDouble(value2);
+			 double choose  = Double.parseDouble(operation);
+			 
+			 double sum  = 00.0;
+			 double div  = 01.0;
+			 double mult = 02.0; 
+			 double sub  = 03.0;
+			 
+			 if( choose == sum) {
+				 double sumOp = number1 + number2; 
+				 
+				 System.out.println();
+				 System.out.println("result:" + sumOp);
+				 JOptionPane.showMessageDialog(null, sumOp);
+			 }else if( choose == div) {
+				 double divOp = number1 / number2; 
+				 
+				 System.out.println();
+				 System.out.println("result:" + divOp);
+				 JOptionPane.showMessageDialog(null, divOp);
+			 }else if( choose == mult) {
+				 double multOp = number1 * number2; 
+				 
+				 System.out.println();
+				 System.out.println("result:" + multOp);
+				 JOptionPane.showMessageDialog(null, multOp);
+			 }else if( choose == sub) {
+				 double subOp = number1 - number2; 
+				 
+				 System.out.println();
+				 System.out.println("result:" + subOp);
+				 JOptionPane.showMessageDialog(null, subOp);
+			 }else {
+				 System.out.println();
+				 System.out.println("inválid choose input");
+				 JOptionPane.showMessageDialog(null, "inválid choose input");
+			 }
+			 
+			
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			
+			System.out.println("thank fo use our systems!");
+			JOptionPane.showMessageDialog(null, "thank fo use our systems!");
+			
+			System.out.println();
+			System.out.println();
+			
+			System.out.println("system created by C.O.A.V tecnologies inc.");
+				JOptionPane.showMessageDialog(null, "system created by C.O.A.V tecnologies inc.");
+		
+		}catch(Exception e) {
+			System.out.println("system failure: \t" + e.getMessage());
+		}
+		
+	}
+}
+
+
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+java
+
+
+
+SimpleDialogue3(class)
+''________________________________________________________________________________________
+
+package graphicinterface.main.console.panel;
+
+import javax.swing.JFrame;
+
+public class SimpleDialogue3 {
+
+	public static void main(String[] args) {
+		
+		Screen tela = new Screen();
+		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tela.setSize(300, 300);
+		tela.setVisible(true);
+	}
+}
+
+___________________________________________________________________________________''
+
+
+ Screen(class)
+''________________________________________________________________________________________
+
+package graphicinterface.main.console.panel;
+
+import java.awt.FlowLayout;
+import java.awt.GraphicsConfiguration;
+import java.awt.HeadlessException;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+public class Screen extends JFrame{
+		private static final long serialVersionUID = 1L;
+			
+		private final JLabel screen1;
+		private final JLabel screen2;
+		
+		public Screen() {
+			super("COAV");
+			setLayout(new FlowLayout());
+			
+			screen1 = new JLabel("Welcome!");
+			screen1.setToolTipText("Coav tecnologies INC .");
+			//screen1.setText("Coav tecnologies INC .");
+			add(screen1);
+			
+			screen2 = new JLabel(" Get to success with us!");
+			screen2.setToolTipText(" your success is here!");
+			screen2.setBackground(getBackground().MAGENTA);
+			screen2.isFontSet();
+			add(screen2);
+						
+			
+		}
+}
+
+
+___________________________________________________________________________________''
+
+==========================================================================================
+
+==========================================================================================
+java
+
+
+
+ Principal(class)
+''________________________________________________________________________________________
+
+
+package data.main;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
+
+import javax.swing.JOptionPane;
+
+import data.main.products.Products;
+
+public class Principal {
+	public static void main(String[] args) {
+		
+		Set<Products> all = new HashSet<>();
+		all.add(new Products(3,"iphone 5s",1354.65,55));
+		all.add(new Products(7,"mouse",3.65,150));
+		all.add(new Products(5, "keyboard gamer", 55.35, 200));
+		all.add(new Products(9, "tv samsumg 90'", 1003.57, 50));
+		all.add(new Products(15, "refrigerator ge", 521.99, 30));
+		all.add(new Products(1, "pc gamer asus", 1356.29, 10));
+		all.add(new Products(30, "mac book pro", 3556.68, 5));
+		all.add(new Products(17, "home - theater lg", 5656.98, 1));
+		
+		
+		System.out.println("query System INC .");
+		JOptionPane.showMessageDialog(null, "query System INC .");
+		
+		JOptionPane.showMessageDialog(null, "we're inside the system!");
+		
+		System.out.println();
+		String find = JOptionPane.showInputDialog("query data items: [all: 0] [less than 1000$: 1] [less than 2000$: 2] [more than 3000$: 3] [more than 4000$: 4] ");
+		
+		try {
+			int optionQuery = Integer.parseInt(find);
+			if(optionQuery == 0) {
+				for(Products pts :all) {
+					System.out.println(pts.toString());
+				}
+			}else if(optionQuery == 1) {
+					Stream<Products> lessthan1000 = all.stream().filter(x -> x.getPrice() <= 1000);
+					System.out.println(Arrays.toString(lessthan1000.toArray()));
+			}else if(optionQuery == 2) {
+					Stream<Products> lessthan2000 = all.stream().filter(x -> x.getPrice() <= 2000);
+					System.out.println(Arrays.toString(lessthan2000.toArray()));
+			}else if(optionQuery == 3) {
+					Stream<Products> lessthan3000 = all.stream().filter(x -> x.getPrice() >= 3000);
+					System.out.println(Arrays.toString(lessthan3000.toArray()));
+			}else if(optionQuery == 4) {
+					Stream<Products> lessthan4000 = all.stream().filter(x -> x.getPrice() >= 4000);
+					System.out.println(Arrays.toString(lessthan4000.toArray()));
+			}
+			
+			System.out.println();
+			System.out.println();
+			System.out.println("if would you like to do a new query!");
+			System.out.println("choose 1 to yes or 0 to no");
+			JOptionPane.showMessageDialog(null, "if would you like to do a new query!");
+			JOptionPane.showMessageDialog(null, "choose 1 to yes or 0 to no");
+			String resp = JOptionPane.showInputDialog("choose");
+				int response = Integer.parseInt(resp); 
+			String zero = "0";
+				int new_resp = Integer.parseInt(zero);
+				
+				
+				while(response != new_resp) {
+					System.out.println("query:");
+					System.out.println();
+					find = JOptionPane.showInputDialog("query data items: [all: 0] [less than 1000$: 1] [less than 2000$: 2] [more than 3000$: 3] [more than 4000$: 4] ");
+						
+					try {
+						optionQuery = Integer.parseInt(find);
+						if(optionQuery == 0) {
+							for(Products pts :all) {
+								System.out.println(pts.toString());
+							}
+						}else if(optionQuery == 1) {
+								Stream<Products> lessthan1000 = all.stream().filter(x -> x.getPrice() <= 1000);
+								System.out.println(Arrays.toString(lessthan1000.toArray()));
+						}else if(optionQuery == 2) {
+								Stream<Products> lessthan2000 = all.stream().filter(x -> x.getPrice() <= 2000);
+								System.out.println(Arrays.toString(lessthan2000.toArray()));
+						}else if(optionQuery == 3) {
+								Stream<Products> lessthan3000 = all.stream().filter(x -> x.getPrice() >= 3000);
+								System.out.println(Arrays.toString(lessthan3000.toArray()));
+						}else if(optionQuery == 4) {
+								Stream<Products> lessthan4000 = all.stream().filter(x -> x.getPrice() >= 4000);
+								System.out.println(Arrays.toString(lessthan4000.toArray()));
+						}
+						
+						System.out.println();
+						System.out.println();
+						System.out.println("if would you like to do a new query!");
+						System.out.println("choose 1 to yes or 0 to no");
+						JOptionPane.showMessageDialog(null, "if would you like to do a new query!");
+						JOptionPane.showMessageDialog(null, "choose 1 to yes or 0 to no");
+						resp = JOptionPane.showInputDialog("choose");
+						response = Integer.parseInt(resp);
+						
+					}catch (Exception e) {
+						System.out.println("error:" + e.getMessage());
+					}	
+				}
+			
+			
+		}catch(Exception e) {
+			System.out.println("error:" + e.getMessage());
+		}
+		
+		JOptionPane.showMessageDialog(null, "Thanks for use our system!");
+		JOptionPane.showMessageDialog(null, "Coav tecnologies INC .");
+		
+		System.out.println();
+		System.out.println();
+		System.out.println( "Thanks for use our system!");
+		System.out.println( "Coav tecnologies INC .");
+		
+	}
+}
+
+
+___________________________________________________________________________________''
+
+
+
+Products(class)
+''________________________________________________________________________________________
+
+
+package data.main.products;
+
+public class Products {
+	
+	private int id;
+	private String item;
+	private double price;
+	private int qtd;
+	
+	public Products() {}
+
+	public Products(int id, String item, double price, int qtd) {
+		this.id = id;
+		this.item = item;
+		this.price = price;
+		this.qtd = qtd;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getQtd() {
+		return qtd;
+	}
+
+	public void setQtd(int qtd) {
+		this.qtd = qtd;
+	}
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((item == null) ? 0 : item.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(price);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + qtd;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Products other = (Products) obj;
+		if (id != other.id)
+			return false;
+		if (item == null) {
+			if (other.item != null)
+				return false;
+		} else if (!item.equals(other.item))
+			return false;
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+			return false;
+		if (qtd != other.qtd)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Products: "
+				+ "id:" 
+				+ id 
+				+ ", item:" 
+				+ item 
+				+ ", price:" 
+				+ price 
+				+ ", qtd:" 
+				+ qtd;
+	}
+
+}
+
+___________________________________________________________________________________''
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+==========================================================================================
+
+
+
+
+
+
+
+
+==========================================================================================
+
+==========================================================================================
