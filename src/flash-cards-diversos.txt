@@ -7754,6 +7754,7 @@ namespace Hello_world
 
 
 
+
 ==========================================================================================
 C#
 
@@ -7770,6 +7771,11 @@ namespace Test{ //classe
     } 
 }
 ==========================================================================================
+
+
+
+
+
 
 
 
@@ -7874,6 +7880,55 @@ namespace funcao{
 }
 
 ==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+C#
+
+
+using System;
+
+namespace funcao{
+    public static class Funcao{
+        public static void Main(){
+            
+           test();
+           Console.WriteLine();
+           Console.WriteLine( soma(1,3) );
+           Console.WriteLine(fala());
+           Console.WriteLine(zero());
+        }
+        
+        static void test() {
+                Console.WriteLine("funções");
+        }
+        
+        static int soma(int num1,int num2) {
+            return num1 + num2;    
+        }
+        
+        public static String fala() {
+            return "oi";
+        } 
+        
+         
+         private static float zero() {
+             return (float) 0.0; 
+         }
+         
+    }
+}
+==========================================================================================
+
 
 
 
