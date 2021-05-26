@@ -82,6 +82,7 @@ git push -A
 git reset --hard [main] caso branch main
 git reset --hard [master] caso branch master
 git remote show origin
+git push -f origin main
 
 
 heroku:
