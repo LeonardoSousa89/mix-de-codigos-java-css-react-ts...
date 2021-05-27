@@ -1,0 +1,69 @@
+28/05/2021
+	
+		doc tools
+		---------
+
+languages:
+C# doc:
+https://docs.microsoft.com/en-us/dotnet/csharp/
+
+java doc:
+https://docs.oracle.com/en/java/
+
+ts doc:
+https://www.typescriptlang.org/docs/
+
+js doc:
+https://262.ecma-international.org/6.0/
+
+vb doc:
+https://docs.microsoft.com/en-us/dotnet/visual-basic/
+
+python3 doc:
+https://docs.python.org/3/
+
+
+
+
+
+
+
+frameworks:
+js
+---
+
+vue doc:
+https://vuejs.org/v2/guide/
+
+react doc:
+https://reactjs.org/docs/getting-started.html
+
+react-native doc:
+https://reactnative.dev/docs/getting-started
+
+angular doc:
+https://angular.io/docs
+
+
+
+
+
+
+java
+----
+
+spring doc:
+https://docs.spring.io/spring-framework/docs/current/reference/html/
+
+jsf doc:
+https://www.oracle.com/java/technologies/javaserverfaces.html
+
+jsp doc:
+https://docs.oracle.com/javaee/5/tutorial/doc/bnajo.html
+
+jboss doc:
+https://docs.jboss.org/author/display/AS71/Documentation.html
+
+javaFx doc:
+https://openjfx.io/
+
