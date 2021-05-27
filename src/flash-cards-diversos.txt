@@ -8010,6 +8010,76 @@ namespace funcao{
 
 
 
+
+
+
+==========================================================================================
+C#
+
+
+using System;
+using System.Collections.Generic;
+
+namespace funcao{
+    public static class Programa{
+        public static void Main(){
+          
+            Simples lista = new Simples();
+            lista.numero = 2;
+            Console.WriteLine(lista.numero);
+        }
+    }
+}  
+   
+
+class Simples {
+    public int numero{get; set;}    
+    public Simples() {}
+}
 ==========================================================================================
 
+
+
+
+
+
+
+
+==========================================================================================
+C#
+
+//http://www.macoratti.net/17/04/cshp_collec1.htm
+
+using System;
+using System.Collections.Generic;
+
+namespace funcao{
+    public static class Programa{
+        public static void Main(){
+          
+          Array ar = new Array();
+          ar.msg1 = "A linguagem C#";
+          ar.msg2 = "é muito dinamica";
+          ar.msg3 = "e flexivel";
+          
+          string[] mensagems = new string[]{
+              ar.msg1,
+              ar.msg2,
+              ar.msg3
+          };
+          
+          Console.WriteLine(mensagems[0] + "," + mensagems[1] + " " + mensagems[2]);
+          foreach(dynamic msgs in  mensagems) {
+              Console.WriteLine(msgs);
+          }    
+            
+        }
+    }
+}  
+
+class Array {
+    public dynamic msg1{get; set;}
+     public dynamic msg2{get; set;}
+      public dynamic msg3{get; set;}
+}   
 ==========================================================================================
