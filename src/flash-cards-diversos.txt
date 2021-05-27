@@ -7951,16 +7951,14 @@ namespace funcao{
         public static void Main(){
             People person = new People();
                     People2 person2 = new People2();
-					
-					
+                    
             person.cod = 3014;
-            Console.WriteLine(person.cod);
-            person2 .setName2("Mendes");
-            Console.WriteLine(person2.getName2());
+            Console.WriteLine("código:" + person.cod);
+            person2.setName2("Mendes");
+            Console.WriteLine("nome:" + person2.getName2());
             person2.setAge2(22);
-            Console.WriteLine(person2.getAge2());
-			
-			
+            Console.WriteLine("idade:" + person2.getAge2());
+        
         }
     }
     
