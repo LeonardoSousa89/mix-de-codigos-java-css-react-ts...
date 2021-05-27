@@ -7937,6 +7937,81 @@ namespace funcao{
 
 
 
+
+
+==========================================================================================
+C#
+
+
+
+using System;
+
+namespace funcao{
+    public static class Funcao{
+        public static void Main(){
+            People person = new People();
+                    People2 person2 = new People2();
+					
+					
+            person.cod = 3014;
+            Console.WriteLine(person.cod);
+            person2 .setName2("Mendes");
+            Console.WriteLine(person2.getName2());
+            person2.setAge2(22);
+            Console.WriteLine(person2.getAge2());
+			
+			
+        }
+    }
+    
+    class People{
+        public dynamic cod;
+        public People() {} 
+    }
+    
+}
+
+
+
+
+
+
+
+ class People2{
+        protected string name2;
+        private int age2;
+        
+        public People2() {}
+        
+        public People2(String name2, int age2) {
+            this.name2 = name2;
+            this.age2 = age2;
+        }
+        
+             
+        public void setName2(String name2) {
+            this.name2 = name2;
+        }
+        
+         public string getName2() {
+            return this.name2;
+        }
+        
+        public void setAge2(int age2) {
+            this.age2 = age2;
+        }
+        
+         public int getAge2() {
+            return this.age2;
+        }
+        
+    } 
+==========================================================================================
+
+
+
+
+
 ==========================================================================================
 
 ==========================================================================================
