@@ -8506,5 +8506,84 @@ class Estagiario : Imposto{
 
 
 
+
+
+
+
+
+
+
+
+
+==========================================================================================
+C#
+
+
+using System;
+using System.Collections.Generic;
+
+namespace listas{
+    public class Listas{
+        public static void Main(){
+        
+            List<int> numeros = new List<int>();
+            
+         }
+    }
+}
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+C#
+
+
+using System;
+using System.Collections.Generic;
+
+namespace listas{
+    public class Listas{
+        public static void Main(){
+        
+            List<int> numeros = new List<int>();
+            
+            //adiciona
+            numeros.add(1);
+            numeros.add(100);
+            numeros.add(101);
+            
+            
+            //capacity
+            Console.WriteLine(numeros.capacity);
+            
+            //contagem
+            Console.WriteLine(numeros.Count);
+            
+            
+            foreach(int inteiros in numeros) {
+                Console.WriteLine(inteiros);
+            }
+            
+            
+            Console.ReadKey();
+         }
+    }
+}
+==========================================================================================
 ==========================================================================================
 ==========================================================================================
