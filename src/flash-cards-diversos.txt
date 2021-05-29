@@ -8231,8 +8231,204 @@ public class programa
 
 
 
+
+
+
+
+
+
+
+
+
 ==========================================================================================
+C#
+
+
+
+using System;
+
+public class Array{
+    public static void Main(){
+       
+       int[] numb = new int[3];
+       numb[0] = 77;
+        numb[1] = 7;
+         numb[2] = 707;
+         
+         foreach(int values in numb) {
+             Console.WriteLine(values);
+         }
+       
+    }
+}
 ==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+C#
+
+
+
+
+using System;
+
+namespace store{ 
+    public class Client{
+        public static void Main(){
+            Person people = new Person();
+            people.Name = "Ralph";
+            Console.WriteLine(people.Name);
+        }
+    }    
+}
+
+
+
+class Person {
+    
+    private string name;
+    
+    public Person() {}
+    
+      public Person(string name) {
+          this.name = name;
+      }
+        
+    public string Name{
+        
+         get{ 
+                return name;
+        }
+    
+        set{ 
+            name = value; 
+        
+        }
+        
+    }
+    
+}
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+C#
+
+
+
+
+
+using System;
+
+namespace heranca{ 
+    public class Client{
+        public static void Main(){
+            Colaborator cl = new Colaborator("Mendes",33,3541.21);
+        }
+    }    
+}
+
+
+
+class Person {
+    
+    protected string name;
+    protected int age;
+    
+    public Person() {}
+    
+      public Person(string name, int age) {
+          this.name = name;
+          this.age  = age;
+      }
+        
+    public string Name{
+        
+         get{ 
+                return name;
+        }
+    
+        set{ 
+            name = value; 
+        
+        }
+        
+    }
+    
+    
+    public int Age{
+        get{
+            return age;
+        }
+        set{
+            age = value;
+        }
+    }
+    
+       public void msgPerson() {    
+    
+        Console.WriteLine("person:" + name + "," + "age:" + age);
+    }
+    
+}
+
+
+
+
+class Colaborator : Person {
+    private double salary;
+    
+    public Colaborator() {}
+    
+     public Colaborator(string name, int age, double salary) {
+         this.name = name;
+         this.age = age;
+         this.salary = salary;
+         
+         msgPerson();
+         msgColaborator();
+     }
+    
+    private void msgColaborator() {    
+    
+        Console.WriteLine("salary:" + salary);
+    }
+}
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
