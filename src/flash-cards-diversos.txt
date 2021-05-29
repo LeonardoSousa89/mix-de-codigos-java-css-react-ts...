@@ -8083,3 +8083,165 @@ class Array {
       public dynamic msg3{get; set;}
 }   
 ==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+C#
+
+
+using System;
+
+public class Hello{
+    public static void Main(){
+       
+       
+      Console.WriteLine("estrutura de dados lista:");
+       
+       string[] items = new string[10];
+       int[] quantidade = new int[10];
+       
+       items[0] = "molho";
+       items[1] = "suco";
+       items[2] = "manteiga";
+       items[3] = "leite";
+       items[4] = "café";
+       items[5] = "queijo";
+       items[6] = "salame";
+       items[7] = "pão";
+       items[8] = "açúcar";
+       items[9] = "geléia";
+           
+       quantidade[0] = 2;
+       quantidade[1] = 5;
+       quantidade[2] = 8;
+       quantidade[3] = 1;
+       quantidade[4] = 6;
+       quantidade[5] = 8;
+       quantidade[6] = 2;
+       quantidade[7] = 1;
+       quantidade[8] = 4;
+       quantidade[9] = 3;              
+               
+
+     for(int i = 0; i < 10; i++){
+         Console.WriteLine("indice:" + i + "," + "quantidade:" + quantidade[i] + "," +  "items:" + items[i]);
+     }
+            
+               
+               
+    }
+}
+
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+C#
+
+
+using System;
+
+public class programa
+{
+    
+    enum Cor {Azul, Verde, Amarelo, Vermelho}
+    enum Opcao {PreenchimentoDeIndice, Criar, Deletar, Editar, Listar, Atualizar}
+    //esta opção resolve o problema de indexação iniciando todos a partir do indice 1
+    //enum Opcao {Criar = 1, Deletar, Editar, Listar, Atualizar}
+    
+    
+    public static void Main(){
+       
+       Console.WriteLine("Selecione uma das opções abaixo:");
+       Console.WriteLine("\n 1-Criar\n 2-Deletar\n 3-Editar\n 4-Listar\n 5-Atualizar\n");
+       int index = int.Parse(Console.ReadLine());
+       Opcao opcaoSelecionada = (Opcao) index;
+       
+       switch(opcaoSelecionada) {
+           
+           case Opcao.Criar:
+                Console.WriteLine("opção de criação!");
+           break;
+           
+           case Opcao.Deletar:
+                Console.WriteLine("opção de deleção!");
+           break;
+           
+           case Opcao.Editar:
+                Console.WriteLine("opção de edição!");
+           break;
+           
+           case Opcao.Listar:
+                Console.WriteLine("opção de listagem!");
+           break;
+           
+           case Opcao.Atualizar:
+                Console.WriteLine("opção de atualização!");
+           break;
+           
+           default:
+                Console.WriteLine("opção inválida!");
+           break;
+           
+       }
+       
+       Console.ReadLine();
+       
+       
+            
+               
+               
+    }
+}
+==========================================================================================
+
+
+
+
+
+
+
+==========================================================================================
+==========================================================================================
+
+
+
+
+==========================================================================================
+==========================================================================================
+
+
+
+
+==========================================================================================
+==========================================================================================
