@@ -8434,6 +8434,73 @@ class Colaborator : Person {
 
 
 ==========================================================================================
+C#
+
+
+
+
+using System;
+
+namespace polimorfismo { 
+    public class Programa{
+        public static void Main(){
+            //estagiário
+           Imposto objetoE = new Estagiario();
+           Console.WriteLine("===============================");
+           Console.WriteLine("          Estagiário");
+           objetoE.valeAlimentacao(1000);
+           objetoE.valeTransporte(1000);
+           Console.WriteLine("===============================");
+           
+           
+           
+             //gerente
+           Imposto objetoG = new Gerente();
+           Console.WriteLine("===============================");
+           Console.WriteLine("          Gerente");
+           objetoG.valeAlimentacao(5000);
+           objetoG.valeTransporte(5000);
+           Console.WriteLine("===============================");
+           
+           
+           
+               //atendente
+           Imposto objetoA = new Atendente();
+           Console.WriteLine("===============================");
+           Console.WriteLine("          Atendente");
+           objetoA.valeAlimentacao(2000);
+           objetoA.valeTransporte(2000);
+           Console.WriteLine("===============================");
+        }
+    }
+}
+
+
+class Imposto {
+    //o virtual permite sobrescrição
+    public virtual void valeAlimentacao(double salario) {
+        Console.WriteLine("Desconto padrão do vale alimentação R$" + (salario * 0.1));
+    }
+     public virtual void valeTransporte(double salario) {
+        Console.WriteLine("Desconto padrão do vale transporte R$" + (salario * 0.6));
+    }
+}
+
+class Gerente : Imposto{
+     public override void valeAlimentacao(double salario) {
+        Console.WriteLine("Desconto do gerente do beneficio de vale alimentação R$" + (salario * 0.15));
+    }
+}
+
+class Atendente : Imposto{
+     public override void valeAlimentacao(double salario) {
+        Console.WriteLine("Desconto do(a) atendente do beneficio de vale alimentação R$" + (salario * 0.12));
+    }
+}
+
+class Estagiario : Imposto{
+
+}
 ==========================================================================================
 
 
