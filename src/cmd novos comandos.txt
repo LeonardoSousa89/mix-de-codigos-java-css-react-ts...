@@ -98,7 +98,7 @@ echo /?
 cls /?
 edit /?
 regedit
-
+wf.msc  (firewall)
 
 externos:
 

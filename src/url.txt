@@ -1,0 +1,96 @@
+proxy:
+	https://pt.proxyservers.pro/
+
+
+
+sites(design para front-end):
+entretenimento:
+	https://disney.com.br
+	https://www.warnerbros.com.br
+	https://www.20thcenturystudios.com
+	https://www.paramountplus.com/br/
+	https://www.sonypictures.com.br
+	https://www.mgm.com
+	https://www.universalstudios.com
+	https://www.dreamworks.com
+	https://www.umusicstore.com
+	http://www.warnermusic.com.br
+	https://www.sonymusic.com.br
+	https://www.marvel.com
+	https://www.dccomics.com
+	https://www.cinemark.com.br
+	https://www.cinepolis.com.br
+	https://www.bandainamcoent.com/pt-br/
+	https://www.nintendo.com/pt_BR/
+	https://www.sega.com
+	https://www.ea.com/pt-br
+	https://www.ubisoft.com/pt-br/
+	https://na.leagueoflegends.com/pt-br/
+
+	https://www.eveonline.com/?utm_source=google&utm_medium=cpc&utm_campaign=ohm_plt:search_sem:brand_tg:ssa_cntr:ww_lan:por_t:exact&utm_term=cid-12655486923,agi-120230006797,adi-523989747264,tid-kwd-95031975,dev-c,reg-1001533&gclid=Cj0KCQjwktKFBhCkARIsAJeDT0joa7_qeJxgCv_hXDTVJ3FIrhfrWUmpCWguvm7QQVl32B_Kd3c1GtUaAo5KEALw_wcB
+moda:
+	https://www.coccomiami.com.br/steve-madden
+	https://www.stevemadden.com
+	https://www.usehis.com.br
+	https://www.lojasrenner.com.br
+	https://www.zipnautica.com.br
+	https://www.cea.com.br
+	https://www.dolcegabbana.com/en/
+noticias:
+	https://www.cnnbrasil.com.br
+	https://www.wsj.com
+	https://www.nytimes.com
+	https://www.globo.com
+	https://www.r7.com
+comércio(geral):
+	https://www.americanas.com.br
+	https://www.atacadao.com.br
+	https://atakarejo.com.br
+	https://www.assai.com.br
+	https://www.carrefour.com.br
+	https://www.amazon.com.br
+	https://www.mercadolivre.com.br	
+	https://www.bompreco.com.br/?gclid=Cj0KCQjwktKFBhCkARIsAJeDT0hoVC1YJ6UMFb3I4DmhXbN96HpHUpDBOs8MQVrPhTDFbMD5AHIOYKsaApi4EALw_wcB
+serviços alimenticios & faxt-food:
+	https://www.mcdonalds.com.br
+	https://www.bobs.com.br
+	https://www.ifood.com.br
+	https://acasadoporco.com.br
+	https://www.vivagula.com.br
+redes sociais:
+	https://www.facebook.com
+	https://www.instagram.com
+	https://twitter.com/login?lang=pt
+	https://myspace.com
+tecnologia:
+	https://github.com
+	https://www.microsoft.com/pt-br
+	https://www.apple.com/br/
+	https://solutis.com.br
+veiculos:
+	https://www.bmw.com.br/pt/index.html
+	https://www.astonmartin.com/en-us/
+	https://www.lamborghini.com/en-en
+	https://www.alfaromeo.com
+	https://www.chevrolet.com.br
+serviços(viagens):
+	https://www.boeing.com.br
+serviços(banco):
+	https://www.business.hsbc.com.br
+	https://banco.bradesco/html/classic/index.shtm
+	https://www.santander.com.br
+serviços(universidade):
+	https://www.harvard.edu
+	https://www.mit.edu
+	https://www5.usp.br
+	https://www.ufba.br
+	https://www.unifacs.br
+	https://www.kyoto-u.ac.jp/en
+	https://www.ox.ac.uk
+
+
+
+
+
+
+
