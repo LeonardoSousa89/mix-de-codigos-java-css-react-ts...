@@ -168,11 +168,17 @@ https://spring.io/projects/spring-boot
 
 
 [documentation]:
+	https://developer.android.com
+	
+	https://gradle.org
+	
 	https://docs.apigee.com/
 
 	https://nodejs.org/en/
 
 	https://expressjs.com/pt-br/
+	
+	https://www.jboss.org
 	
 	https://cli.angular.io/
 
