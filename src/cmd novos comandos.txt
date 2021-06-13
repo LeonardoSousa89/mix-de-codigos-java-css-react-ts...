@@ -99,9 +99,12 @@ cls /?
 edit /?
 regedit
 wf.msc  (firewall)
+tasklist
 
 externos:
 
 npm /?
 javac
+javac -help
+java -help
 
