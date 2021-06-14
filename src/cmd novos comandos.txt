@@ -97,6 +97,7 @@ ren /?
 echo /?
 cls /?
 edit /?
+if /?
 regedit
 wf.msc  (firewall)
 tasklist
