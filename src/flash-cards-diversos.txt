@@ -8651,3 +8651,67 @@ fetch(url,{
 .then((data) => console.log(data))
 .catch(err => console.log('error:' + err))
 ==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+(javascript)
+
+
+/*1*/
+//criando elemento
+localStorage.setItem('_CHAVE-TEST','test')
+//obtendo elemento
+localStorage.getItem('_CHAVE-TEST')
+//removendo elemento
+localStorage.removeItem('_CHAVE-TEST')
+
+
+/*2*/
+localStorage.setItem('valor',[1,2,3,5])
+localStorage.getItem('valor')
+localStorage.removeItem('valor')
+
+/*3*/
+localStorage.setItem('chave',{})
+localStorage.chave
+var chave = localStorage.chave
+document.write(chave)
+localStorage.removeItem('chave')
+
+/*4*/
+localStorage.setItem('chave',{nome :'Leo'})
+let chave = localStorage.chave
+document.write(chave)
+localStorage.removeItem('chave')
+
+
+
+==========================================================================================
+
+
+
+
+==========================================================================================
+==========================================================================================
+
+==========================================================================================
+==========================================================================================
+
+==========================================================================================
+==========================================================================================
