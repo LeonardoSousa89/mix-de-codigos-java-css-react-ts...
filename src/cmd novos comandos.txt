@@ -98,6 +98,7 @@ echo /?
 cls /?
 edit /?
 if /?
+rem /?
 regedit
 wf.msc  (firewall)
 tasklist
