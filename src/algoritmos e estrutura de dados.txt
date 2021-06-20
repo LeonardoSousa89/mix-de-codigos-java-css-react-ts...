@@ -1,0 +1,86 @@
+/*algoritmos para simulação de sistema 
+de mensageria simples a partir de notificação
+de pedido via rotina de um sistema*/
+
+
+var msg = '----------------------------------------------programa----------------------------------------------'
+
+function mensagem() {
+    return msg
+}
+function pulalinha() {
+    console.log()
+}
+console.log(mensagem())
+pulalinha()
+pulalinha()
+
+//recebimento dos pedidos
+let pedidos = []
+
+//operação de comunicação a partir de pedido recebido
+function pedido(e) {
+    pedidos.push(e)
+    let mensagemAoSistema = mensageria()
+    if(pedidos.length > 1 || e){
+        return  `pedido n°${e}, ${mensagemAoSistema} ${e}`
+    }
+   else{
+       return []
+   }
+}
+
+//remove pedidos a partir do último inserido
+function removerPedido() {
+   let remove = pedidos.pop()
+   return remove
+}
+
+//algoritmo de simulação de operação de mensagem a um circuito interno delegando a operação 
+function mensageria() {
+        let mensagemAoSistema = 'comunicação dns/ipv4 via protocolo http://localhost:3001'
+        let mensagemAoCliente = `gerar registro de log de pedido n°`
+        return   mensagemAoSistema + ',' +  mensagemAoCliente  
+}
+
+//registro de logs de pedidos gerados a partir de pedidos registrados no programa/rotina dentro do software
+function registroDepedidos() {
+    if(pedidos.length > 0) {
+        for(let i = 0; i < pedidos.length; i++)
+         console.log('pedido n°' + pedidos[i])
+    }else {
+        console.log('sem registros no sistema!')
+    }
+}
+
+
+//exemplo de saida em tela de servidor
+console.log(pedido(3))
+console.log(pedido(5) + ',' + pedido(7) + ',' + pedido(11))
+console.log(pedido(33))
+console.log(pedido(54))
+console.log(pedido(65))
+console.log(pedido(104))
+removerPedido()
+removerPedido()
+
+
+pulalinha()
+pulalinha()
+console.log('----------------------------------------------registro de logs----------------------------------------------')
+pulalinha()
+pulalinha()
+registroDepedidos()
+
+
+
+/*algoritmos para simulação de sistema 
+de mensageria simples a partir de notificação
+de pedido via rotina de um sistema*/
+
+
+
+
+
+
+
