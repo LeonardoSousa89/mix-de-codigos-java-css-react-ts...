@@ -81,6 +81,138 @@ de pedido via rotina de um sistema*/
 
 
 
+//------------------------------------------------------------------------------------------------------------------------------
 
 
 
+
+
+function next() {
+    console.log('')
+}
+
+console.log('           transactions Example Algorithm')
+next()
+next()
+next()
+next()
+console.log('---------------------- hsbc ----------------------')
+next()
+next()
+console.log('choice your operation:')
+next()
+next()
+table()
+
+
+
+var addValue = []
+addValue.push(100)
+
+var network = {
+
+    error :false
+    
+}
+
+
+function choices(opt, cash){
+    
+    const { error } = network
+    
+    switch(opt) {
+        case 1:
+               
+            
+                if(error != true) {
+                    
+                    value = addValue.push(cash) 
+                    return 'value to insert:' + cash + ',00 R$' 
+                    
+                }else{
+                    
+                   return addValue[0]
+                }
+                
+            break;
+        case 2:
+            
+                if(error === true) {
+                    
+                    return addValue[0]
+                    
+                }else{
+                    
+                   return 'value to debt:' + debtValue(cash) + ',00 R$'
+                    
+                }
+            
+            break;
+        default:
+            return 'unknown option!'
+            break;
+    }
+    
+}
+
+
+
+
+function debtValue(cash) {
+    let valor = addValue.reduce((values, incremented) => {
+        return values + incremented
+    }, 0)
+    
+    if(valor >= cash){
+        
+                let withdraw = valor - cash 
+                return withdraw
+        
+    }else{
+         return 'value less than choiced to debt!'
+    }
+    
+    return 'total:' +  valor + ',00 R$'
+}
+
+
+
+
+function money() {
+    console.log(addValue)
+}
+
+
+
+
+function table() {
+    console.log('-------------------------------------')
+    console.log('|                                   |')
+    console.log('| add values in your account    - 1 |')
+    console.log('|                                   |')
+    console.log('| remove values in your account - 2 |')
+    console.log('|                                   |')
+    console.log('|                                   |')
+    console.log('|                                   |')
+    console.log('| @hsbc Inc 2021.                   |')
+    console.log('-------------------------------------')
+}
+
+
+
+
+console.log(choices(1,10))
+console.log(choices(1,50))
+console.log(choices(1,90))
+
+console.log(choices(2,25))
+
+console.log(choices(1,300))
+
+
+console.log(choices(2,250))
+money()
+
+
+
+//------------------------------------------------------------------------------------------------------------------------------
