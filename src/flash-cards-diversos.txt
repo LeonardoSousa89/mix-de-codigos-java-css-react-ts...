@@ -8615,6 +8615,19 @@ fetch(url,{
 
 
 
+get:
+
+url = 'http://localhost:8080/exemplo
+
+fetch(url,{
+	method :'GET'
+	}
+})
+.then((response) => response.json())
+.then(response => console.log(response))
+.catch(err => console.log('error:' + err))
+
+
 
 put:
 
@@ -8637,18 +8650,14 @@ fetch(url,{
 
 delete:
 
-url = 'http://localhost:8080/exemplo
+url = 'http://localhost:8080/2
 
 fetch(url,{
-	method :'Post',
-	body :JSON.stringfy({fakedata :1}),
-    	headers :{
-		'Content-type' :'application/json'
+	method :'DELETE'
 	}
 })
-.then(
-	(response) => response.json())
-.then((data) => console.log(data))
+.then((response) => response.json())
+.then(_ => _)
 .catch(err => console.log('error:' + err))
 ==========================================================================================
 
@@ -8705,6 +8714,776 @@ localStorage.removeItem('chave')
 ==========================================================================================
 
 
+
+
+==========================================================================================
+(javascript)
+
+/*1*/
+//criando elemento
+localStorage.setItem('_CHAVE-TEST','test')
+//obtendo elemento
+localStorage.getItem('_CHAVE-TEST')
+//removendo elemento
+localStorage.removeItem('_CHAVE-TEST')
+
+
+/*2*/
+localStorage.setItem('valor',[1,2,3,5])
+localStorage.getItem('valor')
+localStorage.removeItem('valor')
+
+/*3*/
+localStorage.setItem('chave',{})
+localStorage.chave
+var chave = localStorage.chave
+document.write(chave)
+localStorage.removeItem('chave')
+
+/*4*/
+localStorage.setItem('chave',{nome :'Leo'})
+let chave = localStorage.chave
+document.write(chave)
+localStorage.removeItem('chave')
+
+==========================================================================================
+
+
+/*utilize para frameworks, vue, react e angular
+o display GRID e torne-o layout semalhante a display FLEX usando o 
+próprio grid se necessário,é a melhor forma de construir os layouts 
+destes frameworks.*/
+
+==========================================================================================
+(java) spring-boot
+
+crud class service
+
+''________________________________________________________________________________________
+
+package com.card.card.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.card.card.entities.Card;
+import com.card.card.repository.CardRepository;
+
+@Service
+public class CardService {
+
+	@Autowired
+	CardRepository repository;
+			
+		/*CRUD*/
+	
+	/*ready*/
+	@Transactional
+	public List<Card> getData(){
+		List<Card> card = repository.findAll();
+		return card;
+	}
+	/*ready*/
+	
+	/*create*/
+	@Transactional
+	public Card insert(Card obj) {
+		return repository.save(obj); 
+	}
+	/*create*/
+	
+	/*delete*/
+	@Transactional
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
+	/*delete*/
+	
+	/*update*/
+	// faz parte do metodo update
+	//o metodo get one monitora o objeto pelo 
+	//jpa para após realizar uma transação com este objeto.
+	@Transactional
+	public Card update(Long id, Card obj) {
+		Card entity = repository.getOne(id);
+		updateData(entity, obj);
+		return repository.save(entity);
+	}
+
+	// faz parte do metodo update
+	private void updateData(Card entity, Card obj) {
+		entity.setTitulo(obj.getTitulo());
+		entity.setdescricao(obj.getdescricao());
+		entity.setPreco(obj.getPreco());
+	}
+	/*update*/
+}
+
+
+________________________________________________________________________________________''
+
+
+
+
+crud class controller/resources
+''________________________________________________________________________________________
+
+	
+package com.card.card.Controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.card.card.entities.Card;
+import com.card.card.service.CardService;
+
+@RestController
+@RequestMapping(value="/card")
+public class CardController {
+	
+	@Autowired
+	CardService service;
+	
+		/*CRUD*/
+	
+	   /*ready*/
+		@GetMapping
+		public ResponseEntity<List<Card>> getCard(){
+			List<Card> card = service.getData();
+			return ResponseEntity.ok().body(card);
+		}
+		/*ready*/
+		
+		/*create*/
+		@PostMapping(value="/insert")
+		public ResponseEntity<Card>insert(@RequestBody Card obj){
+			Card card = service.insert(obj);
+			return ResponseEntity.ok().body(card);
+		}
+		/*create*/
+		
+		/*delete*/
+		@DeleteMapping(value="/delete/{id}")
+		public ResponseEntity<Void> delete(@PathVariable Long id) {
+			service.delete(id);
+			return ResponseEntity.noContent().build();
+		}
+		/*delete*/
+		
+		/*update*/
+		@PutMapping(value="/update/{id}")
+		public ResponseEntity<Card> update(@PathVariable Long id, @RequestBody Card obj){
+			Card card = service.update(id, obj);
+			return ResponseEntity.ok().body(card);
+		}
+		/*update*/
+			
+}
+
+
+________________________________________________________________________________________''
+
+==========================================================================================
+(html) javascript,scss
+
+
+''________________________________________________________________________________________
+Simple cli example:
+
+
+
+const cli = {
+   open :'-u open data',
+   close :'-p close data'
+}
+
+function comand(e) {
+   const {open,close} = cli
+   
+   if(e === open){
+      console.log('data systema opened!')
+   }else if(e === close){
+     console.log('data system closed!')
+   }else{
+    console.log('unknown expression')
+   }
+}
+
+comand('-u open data')
+
+comand('-p close data')
+
+________________________________________________________________________________________''
+
+
+
+
+
+
+
+
+principios de design pattern em javascript
+
+''________________________________________________________________________________________
+ (function(e){
+    primeiro = e
+   segundo = 1
+   terceiro = 0
+   
+   if(primeiro > 0){
+       segundo += primeiro
+   }
+   
+   terceiro = segundo
+   
+   if(terceiro > 1){
+         var i = 0
+          while(i < terceiro){
+               i += 1
+               console.log(i)
+          }
+       }
+   
+ 
+})(7)
+ (function () {
+ var valor = 3
+ for(var i = 1; i<= valor; i++)
+ console.log(i)
+})()
+ function pilha() {
+  
+  
+   var empilha = function() {
+       for(var i = 0; i <= 3; i++){
+        console.log('empilha')
+        console.log(i)
+        console.log()
+        console.log()
+ }
+}
+  
+   
+   empilha()
+}
+
+function desempilha() {
+  
+  
+   var pilha = function() {
+       for(var i = 3; i >= 0; i--){
+        console.log('desempilha')
+        console.log(i)
+        console.log()
+        console.log()
+ }
+}
+  
+   
+   pilha()
+}
+
+var topoEmpilha = setInterval(function(){
+        return pilha()
+   },6000)
+   
+   
+ 
+var topoEmpilha = setInterval(function(){
+        return desempilha()
+   },9000)
+ function pilha() {
+  
+  
+   var empilha = function() {
+       for(var i = 0; i <= 3; i++){
+        console.log('empilha')
+        console.log(i)
+        
+ }
+}
+  
+   
+   empilha()
+}
+
+function desempilha() {
+  
+  
+   var pilha = function() {
+       for(var i = 3; i >= 0; i--){
+        console.log('desempilha')
+        console.log(i)
+ }
+}
+  
+   
+   pilha()
+}
+
+var topoEmpilha = setInterval(function(){
+        return pilha()
+   },6000)
+   
+   
+ 
+var topoEmpilha = setInterval(function(){
+        return desempilha()
+   },9000)
+function texto() {
+   console.log('programa')
+   console.log('')
+   console.log('')
+}
+texto()
+
+var el = []
+
+function listaInsere(item) {
+   el.push(item)
+}
+
+function listaObtem(){
+   console.log(el)
+}
+
+function listaRemove(item) {
+   var percorre = el.filter( (e) => {
+      e === item ? e.item : 'erro: item não encontrado!'
+  })
+  
+  el.splice(percorre,1)
+ }
+
+
+listaInsere(1)
+listaInsere(2)
+listaInsere(3)
+
+listaObtem()
+
+listaRemove(1)
+
+listaObtem()
+ function textoLista() {
+   console.log('programa')
+   console.log('')
+   console.log('')
+   
+   console.log('')
+   console.log('')
+   console.log('lista')
+   
+   console.log('')
+   console.log('')
+}
+textoLista()
+
+var el = []
+
+function listaInsere(item) {
+   el.push(item)
+}
+
+function listaObtem(){
+   console.log(el)
+}
+
+function listaRemove(indice) {
+   var percorre = el.filter( (e) => {
+      return e === indice
+  })
+  
+  el.splice(percorre,1)
+ }
+
+
+listaInsere(1)
+listaInsere(2)
+listaInsere(3)
+
+
+listaObtem()
+
+listaRemove(2)
+
+listaObtem()
+
+
+listaInsere(9)
+listaInsere(23)
+listaInsere(25)
+listaInsere(33)
+
+listaRemove(4)
+listaRemove(5)
+
+listaObtem()
+
+
+function next = () => {
+    console.log('')
+    console.log('')
+    console.log('')
+}
+
+
+function textoPilha() {
+   console.log('pilha')
+   console.log('')
+   console.log('')
+}
+function textoLista() {
+   console.log('programa')
+   
+   console.log('lista')
+}
+textoLista()
+
+var el = []
+
+function listaInsere(item) {
+   el.push(item)
+}
+
+function listaObtem(){
+   console.log(el)
+}
+
+function listaRemove(indice) {
+   var percorre = el.filter( (e) => {
+      return e === indice
+  })
+  
+  el.splice(percorre,1)
+ }
+
+
+listaInsere(1)
+listaInsere(2)
+listaInsere(3)
+
+
+listaObtem()
+
+listaRemove(2)
+
+listaObtem()
+
+
+listaInsere(9)
+listaInsere(23)
+listaInsere(25)
+listaInsere(33)
+
+listaRemove(4)
+listaRemove(5)
+
+listaObtem()
+
+
+
+
+
+
+
+
+
+
+function textoPilha() {
+   console.log('pilha')
+}
+
+textoPilha()
+
+var novoEl = []
+
+function pilhaInseri(item) {
+  return novoEl.push(item)
+}
+
+function pilhaObtem() {
+  console.log(novoEl)
+}
+
+function pilhaRemove() {
+  return novoEl.pop()
+}
+
+
+pilhaInseri(5)
+pilhaInseri(13)
+pilhaInseri(49)
+pilhaInseri(64)
+pilhaInseri(72)
+pilhaInseri(81)
+pilhaInseri(100)
+
+pilhaObtem()
+
+pilhaRemove()
+pilhaRemove()
+
+Forwarded message
+Leonardo novo
+pilhaObtem()
+
+function pilha() {
+  
+  
+   var empilha = function() {
+       for(var i = 0; i <= 3; i++){
+        console.log('empilha')
+        console.log(i)
+        console.log()
+        console.log()
+ }
+}
+  
+   
+   empilha()
+}
+
+function desempilha() {
+  
+  
+   var pilha = function() {
+       for(var i = 3; i >= 0; i--){
+        console.log('desempilha')
+        console.log(i)
+        console.log()
+        console.log()
+ }
+}
+  
+   
+   pilha()
+}
+
+var topoEmpilha = setInterval(function(){
+        return pilha()
+   },6000)
+   
+   
+ 
+var topoEmpilha = setInterval(function(){
+        return desempilha()
+   },9000)
+(function(){
+ console.log('tipo')
+})()
+(function (){
+  var array = []
+  array.push(['k','y',001,true,8.09])
+  console.log(array)
+})()
+(function(x){
+   var fx = x + x*2
+   console.log('f(x) =' + fx)
+})(5)
+(function (e){
+   let cubico = Math.pow(3,3)
+   let soma = 4 + e
+   let divisao = soma / 3
+   let prioridade = (cubico + Math.pow(1,2) * (divisao))
+   
+   console.log('total:' + prioridade.toFixed(3))
+})(3)
+(function(e){
+   var iteracao = [e]
+   iteracao.forEach(e =>{
+        while(e > 0){
+           var decre = e--
+         var fatorial = e
+         fatorial = fatorial * decre
+           console.log(fatorial)
+        }
+   })
+
+})(6)
+(function(a1,p1,a2,p2,a3,p3){
+    var equacaoGeometrica = ((a1 * p1) + (a2 * p2) + (a3 * p3)) / (p1 + p2 + p3)
+    var total = equacaoGeometrica
+    console.log('total = ' + total.toFixed(1))
+})(3,0.2,3,0.4,4,1)
+(function(a1,a2,a3){
+    var equacaoAritmetica = a1 + a2 + a3/3
+    var total = equacaoAritmetica
+    console.log('total = ' + total.toFixed(1))
+})(3,3,4)
+(function(e){
+  console.log(Math.sqrt(e))
+})(81)
+(function(e,p){
+  console.log(Math.pow(e,p))
+})(2,3)
+
+(function(v1){
+  console.log('este valor é primo ?(true/false)')
+  if(v1 % v1 == 0 && v1 % 1 == 0 && v1 % 2 == 0){
+     var primoNao = false
+     console.log(primoNao)
+  }
+  else if (v1 % v1 == 0 && v1 % 1 == 0) {
+     primoSim = true
+     console.log(primoSim)
+  }
+  else if(v1 === 2){
+      console.log(primoSim)
+  }
+})(2)
+
+(function(n){
+  console.log('3 desenvolvedores constroem um sistema em 3 meses, n desenvoldores constroem em quanto tempo?')
+  
+  //n esta para 3 desenvolvedores
+  //t está para 3 meses
+  // em x n/3 = t/3
+var t = 0
+var nEsta = n/3
+var tEsta = 3
+
+ t = 3 / nEsta
+ 
+console.log(${n} desenvolvedor(s) fazem em ${t} mese(s))
+
+})(2)
+
+(function(divisor, dividendo, taxa_de_proporcao){
+ 
+  console.log('valor proporcional')
+  
+  
+   var razaoEProporcaoDivisor = divisor * taxa_de_proporcao
+   
+  var razaoEProporcaoDividendo = dividendo * taxa_de_proporcao
+  
+  console.log(${divisor} / ${dividendo} = ${razaoEProporcaoDivisor} / ${razaoEProporcaoDividendo})
+})(5,9,3)
+
+ function fabric(pais,nome,lingua,moeda){
+    
+ if(pais == 'brasil') {
+       brasileiro(nome, lingua, moeda)
+   }else if(pais == 'inglaterra'){
+        ingles(nome, lingua, moeda)
+   }else if(pais == 'mexico'){
+        espanhol(nome, lingua, moeda)
+   }
+}
+
+
+
+function brasileiro(a,b,c){
+ console.log(nacionalidade: brasileiro, nome: ${a}, idioma: ${b}, dinheiro: ${c},00 R$)
+  }
+  
+  
+function ingles(a,b,c){
+ console.log(nacionality: british, name:  ${a}, idiome: ${b}, cash: ${c},00 $)
+  }
+
+function espanhol(a,b,c){
+ console.log(nacionalidade:  mexicano, nombre: ${a}, idioma: ${b}, diñero: ${c},00 €)
+}
+
+fabric('inglaterra','Michael Kane','english UK', 56)
+fabric('brasil','Romario','português PT', 122)
+fabric('mexico','Juán Alvarez','spañol MX', 67)
+
+________________________________________________________________________________________''
+
+
+
+
+
+
+
+
+
+Sass
+
+''________________________________________________________________________________________
+
+
+
+
+
+$facebook: darkblue;
+$youtube: darkred;
+$desktop: 1024px;
+$tablet: 850px;
+$mobile: 650px;
+$conteiner: 1000px;
+$max-display: 100vh;
+
+@mixin design{
+    background:$facebook;
+    color:$youtube;
+}
+
+@if  ($conteiner >= $desktop){
+      body{
+         display:grid;
+          &:first-child{
+              font-weight:bold;
+          }
+     }
+}@else if ($conteiner <= $desktop){
+    @if ($conteiner == $tablet){
+        body{
+             display:flex;
+             .conteiner{
+                  @extend design;
+           }
+        }
+    }
+}@else{
+    body{
+        .second-area{
+            display:none;
+        }
+    }
+}
+
+@function calculation($max-display) {
+    @return (($max-display/2) * 3);
+}
+
+.page{
+    height: calculation($max-display);
+}
+
+
+________________________________________________________________________________________''
+
+
+
+
+
+
+
+
+==========================================================================================
+==========================================================================================
+
+==========================================================================================
+==========================================================================================
 
 
 ==========================================================================================
