@@ -12,6 +12,8 @@ https://spring.io/projects/spring-boot
 
 	https://www.selenium.dev/
 
+[otimização de código]:
+	https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
 
 [repositório]:
 	https://git-scm.com/
@@ -56,6 +58,21 @@ https://spring.io/projects/spring-boot
 	https://www.rocketwp.com.br/10-modelos-de-checkouts-em-html-e-css-gratis/
 	
 	https://developer.android.com/guide/topics/ui/look-and-feel?hl=pt
+
+	https://themeforest.net/category/site-templates
+	
+	https://themeforest.net/category/ecommerce
+	
+	https://themes.getbootstrap.com/
+
+	https://dribbble.com/shots/3829284-Dipnet-login-page
+
+	https://colorlib.com/wp/html5-and-css3-login-forms/
+
+	https://pt.squarespace.com/templates/navegar/topica/designs-populares/tipo/associacoes&Loja-on-line
+	https://www.canva.com/pt_br/
+
+	https://color.adobe.com/pt/explore/
 	
 	https://material.io/develop
 
