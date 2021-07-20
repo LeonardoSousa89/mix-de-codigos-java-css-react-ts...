@@ -1,0 +1,5 @@
+					comandos terminal ubuntu
+
+sudo -s  		     {força o usuário root}
+sudo service apache2 status  {verifica o status do servidor apache}
+sudo service MySql status  {verifica o status do banco mysql}
