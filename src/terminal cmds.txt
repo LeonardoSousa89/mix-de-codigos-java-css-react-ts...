@@ -1,5 +1,97 @@
 					comandos terminal ubuntu
 
+	  incerto { ? }
+          a navegação no
+	  ubuntu server em entrada
+	  de comandos de edição
+	  se dá por ctrl + letra ou numero
+
+	exemplo:
+		comando de exemplo para 
+		area de edição de usuárioi chroot:
+			sudo nano vsftpd.chroot_list
+		sair:
+			ctrl + x
+		linha seguinte:
+			ctrl + n
+
 sudo -s  		     {força o usuário root}
 sudo service apache2 status  {verifica o status do servidor apache}
-sudo service MySql status  {verifica o status do banco mysql}
+sudo service MySql status    {verifica o status do banco mysql}
+cd [caminho]                 {percorre diretórios}
+wget [url]                   {faz download}
+ls			     {lista os diretórios}
+tar [caminho do arquivo]     {descompressor de arquivos}
+make install                 {instala programa}
+apt-get 		     {faz download e instalação}
+nano                         {?}
+
+
+
+
+
+
+
+
+					
+						(( curso de servidores web ))
+url:
+		
+						comandos usados o curso
+
+sudo -s
+sudo service apache2 status
+sudo service MySql status 
+cd /usr/local/src [este é o caminho para o desktop ubuntu]
+wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+ls
+tar xzf noip-duc-linux.tar.gz
+cd noip-2.1.9-1
+make install
+sudo apt-get install make
+sudo apt-get install gcc
+sudo apt-get install build-essential
+sudo make install
+cd /usr/local/bin
+ls
+sudo noip2
+sudo noip2
+sudo nano /etc/network/interfaces
+
+ctrl + x
+
+sudo /etc/init.d/networking restart
+sudo /etc/init.d/networking restart
+sudo apt-get install vsftpd
+cd /etc
+ls
+sudo nano vsftpd.conf
+
+ctrl + w
+digite: chroot
+
+ctrl + x
+
+sudo nano vsftpd.chroot_list
+
+sudo apt-get install ssh
+sudo nano /etc/ssh/sshd_config
+
+ctrl + x
+
+sudo service ssh restart
+clear
+
+groupadd ftp
+useradd -d /var/www/html usuario1
+usermod -aG ftp usuario1
+cd /var/www
+ls
+ls html
+chown -R usuario1:usuario1 /var/www/html/*
+passwd usuario1
+clear
+sudo nano /etc/vsftpd.conf
+
+
+não anotei os últimos 3 minutos da aula
