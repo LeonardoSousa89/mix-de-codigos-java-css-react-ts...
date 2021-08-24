@@ -95,3 +95,9 @@ sudo nano /etc/vsftpd.conf
 
 
 não anotei os últimos 3 minutos da aula
+
+
+links:
+
+https://terminaldeinformacao.com/2013/09/03/manipulando-arquivos-texto-no-terminal-linux/
+https://pt.wikihow.com/Criar-e-Editar-um-Arquivo-de-Texto-no-Linux-Usando-o-Terminal

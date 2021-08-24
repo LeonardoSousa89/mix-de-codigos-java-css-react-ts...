@@ -1,7 +1,10 @@
 docker --help							ajuda
 docker comando --help						ajuda para o comando docker
+docker <comando> && <comando>					executa vários comandos
+docker <comando> --force 					obriga a execução do comando
 docker images							mostra as imagems na máquina
 docker pull <imagem>  						download de imagem
+docker pull <imagem> && docker pull <imagem>  	  		download de imagems simultâneas
 docker run <image>    						execução de imagem
 docker run -p <porta-de-entrada>:<porta-de-saida> <imagem> 	execução de imagem em porta http
 docker run -d -p <porta-de-entrada>:<porta-de-saida> <imagem>   execução de imagem em ... alternada
@@ -19,7 +22,11 @@ ctrl + d							sai do container em interação
 
 links: 
 
+https://training.play-with-docker.com/ops-stage1/
 https://www.mundodocker.com.br/docker-exec/
 https://cursos.alura.com.br/forum/topico-e-possivel-sair-de-um-container-sem-parar-ele-89514
+https://terminaldeinformacao.com/2013/09/03/manipulando-arquivos-texto-no-terminal-linux/
+https://pt.wikihow.com/Criar-e-Editar-um-Arquivo-de-Texto-no-Linux-Usando-o-Terminal
+https://www.edivaldobrito.com.br/node-js-no-linux/
 
  
