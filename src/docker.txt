@@ -1,0 +1,25 @@
+docker --help							ajuda
+docker comando --help						ajuda para o comando docker
+docker images							mostra as imagems na máquina
+docker pull <imagem>  						download de imagem
+docker run <image>    						execução de imagem
+docker run -p <porta-de-entrada>:<porta-de-saida> <imagem> 	execução de imagem em porta http
+docker run -d -p <porta-de-entrada>:<porta-de-saida> <imagem>   execução de imagem em ... alternada
+docker ps	      						vizualização de container em execução
+docker ps -a          						vizualização de container executado
+docker rmi <imagem>						remove imagem
+docker rm <container>						remove container
+docker run --name=<apelido> <imagem>				nomeia um conteiner de imagem
+docker exec <apelido>						executa container com apelido
+docker run -it -d <image> /bin/bash				acessa containers de OS linux
+docker run -i <image(OS)> <comando-interno-da-imagem>           interage acessando a imagem do OS 
+docker run -i <image(OS)> <comando-interno-da-imagem> /bin/bash interage acessando a imagem do OS 
+ctrl + d							sai do container em interação             
+
+
+links: 
+
+https://www.mundodocker.com.br/docker-exec/
+https://cursos.alura.com.br/forum/topico-e-possivel-sair-de-um-container-sem-parar-ele-89514
+
+ 
