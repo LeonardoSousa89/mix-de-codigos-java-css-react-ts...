@@ -1,5 +1,5 @@
 docker --help							ajuda
-docker comando --help						ajuda para o comando docker
+docker <comando> --help						ajuda para o comando docker
 docker <comando> && <comando>					executa vários comandos
 docker <comando> --force 					obriga a execução do comando
 docker images							mostra as imagems na máquina
