@@ -41,6 +41,18 @@ https://spring.io/projects/spring-boot
 	
 	https://developer.apple.com/xcode/
 
+[métricas]
+	https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fapp-pizzaria.netlify.app%2F&tab=desktop
+	
+	https://gtmetrix.com/reports/app-pizzaria.netlify.app/sIFbrYrQ/
+
+	https://www.loadview-testing.com/pt-br/
+
+	https://jmeter.apache.org/
+	
+	https://k6.io/
+	
+	https://blog.lahar.com.br/seo/o-que-e-seo/
 
 [design/engenharia/modelagem/planejamento]:
 	https://app.moqups.com/
