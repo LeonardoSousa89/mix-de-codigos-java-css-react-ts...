@@ -1,15 +1,15 @@
 docker --help							ajuda
 docker <comando> --help						ajuda para o comando docker
-docker <comando> && <comando>					executa v·rios comandos
-docker <comando> --force 					obriga a execuÁ„o do comando
-docker images							mostra as imagems na m·quina
+docker <comando> && <comando>					executa v√°rios comandos
+docker <comando> --force 					obriga a execu√ß√£o do comando
+docker images							mostra as imagems na m√°quina
 docker pull <imagem>  						download de imagem
-docker pull <imagem> && docker pull <imagem>  	  		download de imagems simult‚neas
-docker run <image>    						execuÁ„o de imagem
-docker run -p <porta-de-entrada>:<porta-de-saida> <imagem> 	execuÁ„o de imagem em porta http
-docker run -d -p <porta-de-entrada>:<porta-de-saida> <imagem>   execuÁ„o de imagem em ... alternada
-docker ps	      						vizualizaÁ„o de container em execuÁ„o
-docker ps -a          						vizualizaÁ„o de container executado
+docker pull <imagem> && docker pull <imagem>  	  		download de imagems simult√¢neas
+docker run <image>    						execu√ß√£o de imagem
+docker run -p <porta-de-entrada>:<porta-de-saida> <imagem> 	execu√ß√£o de imagem em porta http
+docker run -d -p <porta-de-entrada>:<porta-de-saida> <imagem>   execu√ß√£o de imagem em ... alternada
+docker ps	      						vizualiza√ß√£o de container em execu√ß√£o
+docker ps -a          						vizualiza√ß√£o de container executado
 docker rmi <imagem>						remove imagem
 docker rm <container>						remove container
 docker run --name=<apelido> <imagem>				nomeia um conteiner de imagem
@@ -17,8 +17,24 @@ docker exec <apelido>						executa container com apelido
 docker run -it -d <image> /bin/bash				acessa containers de OS linux
 docker run -i <image(OS)> <comando-interno-da-imagem>           interage acessando a imagem do OS 
 docker run -i <image(OS)> <comando-interno-da-imagem> /bin/bash interage acessando a imagem do OS 
-ctrl + d							sai do container em interaÁ„o             
+ctrl + d							sai do container em intera√ß√£o             
 
+//comandos adicionados a partir de 08/01
+
+docker container run <options> <image:tag>
+docker container run -p	
+docker container ls
+docker container ls -a
+docker container --help 
+docker container stop  <container:id>
+docker container start <container:id>	 
+docker container rm    <container:id>    
+docker container rm -f <container:id>    
+docker image ls
+docker volume --help
+docker network ls
+docker container run -p <porta>:<porta> <image:tag>
+docker container run -d -p <porta>:<porta> <image:tag>
 
 links: 
 
