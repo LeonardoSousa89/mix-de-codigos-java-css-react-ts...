@@ -46,11 +46,10 @@ docker container inspect <name:container>
 
 links: 
 
+https://labs.play-with-docker.com/
 https://training.play-with-docker.com/ops-stage1/
 https://www.mundodocker.com.br/docker-exec/
 https://cursos.alura.com.br/forum/topico-e-possivel-sair-de-um-container-sem-parar-ele-89514
 https://terminaldeinformacao.com/2013/09/03/manipulando-arquivos-texto-no-terminal-linux/
 https://pt.wikihow.com/Criar-e-Editar-um-Arquivo-de-Texto-no-Linux-Usando-o-Terminal
 https://www.edivaldobrito.com.br/node-js-no-linux/
-
- 
