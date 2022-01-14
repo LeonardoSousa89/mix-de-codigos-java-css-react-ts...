@@ -35,6 +35,14 @@ docker volume --help
 docker network ls
 docker container run -p <porta>:<porta> <image:tag>
 docker container run -d -p <porta>:<porta> <image:tag>
+docker container run -d -p <porta>:<porta> --name <name:container> <image:tag>
+docker container logs <name:container>
+docker container logs -f <name:container>
+docker container top <name:container>
+docker container stats
+docker container stats <name:container>
+docker container inspect <name:container>
+
 
 links: 
 
