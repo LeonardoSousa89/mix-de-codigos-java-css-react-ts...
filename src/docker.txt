@@ -57,3 +57,155 @@ https://cursos.alura.com.br/forum/topico-e-possivel-sair-de-um-container-sem-par
 https://terminaldeinformacao.com/2013/09/03/manipulando-arquivos-texto-no-terminal-linux/
 https://pt.wikihow.com/Criar-e-Editar-um-Arquivo-de-Texto-no-Linux-Usando-o-Terminal
 https://www.edivaldobrito.com.br/node-js-no-linux/
+
+
+atualização 09/09/2022 com base nos dados do curso de docker para desenvolvedores UDEMY:
+
+repositório do curso: https://github.com/matheusbattisti/curso_docker
+
+link blog docker: https://www.horadecodar.com.br/category/docker/
+
+laboratório docker online: https://labs.play-with-docker.com/
+
+imagens docker: https://hub.docker.com/search?image_filter=official&q=
+
+minha imagem: docker pull leozin89/node_image
+	      docker run -d -p 3003:3003 --name minha_imagem leozin89/node_image
+
+[comandos-usados-no-curso]						[*parametros]
+	
+									
+			
+docker run docker/whalesay cowsay Hello_World 
+docker run ubuntu
+docker -it run ubuntu
+docker ps
+docker ps -a
+docker container ls
+docker container ls -a
+docker run -it node
+docker run nginx
+docker run -d nginx
+docker run -d -p 80:80 nginx
+docker stop distracted_maxwell						     [*name]
+docker stop 7b347f91e9f5 						             [*id]
+docker start 36af61f1d574						            [*id]
+docker run -d -p 80:80 --name nginx_pp nginx	
+docker logs nginx_app
+docker logs -f 	nginx_app
+docker -rm flamboyant_mccarthy						[*name]
+docker -rm 68d								[*id]
+docker -rm nginx_app -f							[*name]
+
+construindo imagens
+*obs: O build é criado na pasta onde se encontra o Dockerfile, neste exemplo foi a pasta raíz onde geralmente,
+encontramos o index.js, o package.json e outros arquivos de configuração.
+imagem1:
+	Dockerfile:
+
+		FROM node     
+		WORKDIR /app
+		COPY package*.json . 	 
+		RUN npm install
+		COPY . .
+		EXPOSE 3000
+		CMD ["node","app.js"]	 
+
+	docker build .
+	docker run  -d -p 3000:3000 --name meu_node be6e802c3311	[*id-da-imagem-criada-pelo-build]
+
+
+imagem2
+	Dockerfile:
+
+		FROM node:14     
+		WORKDIR /src
+		COPY package*.json . 	 
+		RUN npm install
+		COPY ..
+		EXPOSE 3001
+		CMD ["node","app.js"]	
+
+	docker build .
+
+docker pull python
+docker run --help
+docker images
+docker images --help	
+docker tag bbdf84c33bf3 minhaimagem					[*id]
+docker tag bbdf84c33bf3 minhaimagem:minhatag				[*id]
+docker build -t meunode_diferente .
+docker build -t meunode_diferente:minhatag_diferente .
+docker start -i nervous_haibt						[*name]
+docker rmi 254d4a8a8f31							[*id]
+docker rmi meunode_diferente:minhatag_diferente
+docker system prune --help
+docker system prune
+docker run -d -p 3000:3000 --name node_diferente --rm meunode_diferente [*name]
+docker stop 07c5
+docker cp node_diferente2:/app/app.js ./copia/				
+docker top trusting_stonebreaker					[*name]
+docker inspect node_diferente2
+docker stats
+docker login
+docker logout
+
+imagem(propria) no dockerhub:
+	docker build -t matheusbatisti/nodeteste .			[*usuario]/[rerpositorio-dockerhub]
+	docker push matheusbatisti/nodeteste 				[*usuario]/[rerpositorio-dockerhub]
+	docker pull matheusbatisti/nodeteste 				[*usuario]/[rerpositorio-dockerhub]
+
+	docker build -t matheusbatisti/nodeteste:novaversao .		[*usuario]/[rerpositorio-dockerhub]
+	docker push matheusbatisti/nodeteste:novaversao 		[*usuario]/[rerpositorio-dockerhub]
+
+	docker pull matheusbatisti/nodeteste:novaversao 
+	docker run --name testando_imagem -p 3000:3000 -d matheusbatisti/nodeteste:novaversao 
+
+
+imagem3
+	Dockerfile:
+
+		FROM php:8-apache    
+ 
+		WORKDIR /var/www/html
+ 
+		COPY . .
+
+		EXPOSE 80
+
+		RUN chown -R www-data:www-data /var/www
+	
+	docker build phpmessages .
+
+volumes:
+	anônimo:
+		docker run -d -p 80:80 --name phpmessages_container --rm -v /data phpmessages
+		docker volume ls
+
+	nomeado:
+		docker run -d -p 80:80 --name phpmessages_container -v phpvolume:/var/www/html/messages --rm phpmessages
+		docker volume ls
+		docker inspect phpmessages
+
+	bind mounts:
+		docker run -d -p 80:80 --name phpmessages_container -v H:\20_DOCKER\arquivos\2_volumes\messages:/var/www/html/messages --rm phpmessages
+
+
+
+	docker volume create volumeteste
+	docker volume ls
+	docker run -d -p 80:80 --name phpmessages_container -v volumeteste:/var/www/html/messages --rm phpmessages
+
+
+	docker volume inspect phpvolume
+
+
+	docker volume rm volumeteste
+	docker volume rm 630898e79aa
+	docker volume prune
+
+	
+	docker run -d -p 80:80 --name phpmessages_container -v volumeleitura :/var/www/html:ro --rm phpmessages
+
+	
+		
